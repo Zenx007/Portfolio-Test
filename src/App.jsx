@@ -3,15 +3,114 @@ import './App.css'
 import architectAvatar from './assets/architect-avatar.svg'
 
 const navItems = [
-  { id: 'projects', label: 'Projects', href: '#projects' },
-  { id: 'experience', label: 'Experience', href: '#experience' },
-  { id: 'stack', label: 'Stack', href: '#stack' },
-  { id: 'contact', label: 'Contact', href: '#contact' },
+  { id: 'projects', labelKey: 'projects', href: '#projects' },
+  { id: 'experience', labelKey: 'experience', href: '#experience' },
+  { id: 'stack', labelKey: 'stack', href: '#stack' },
+  { id: 'contact', labelKey: 'contact', href: '#contact' },
 ]
 
 const heroTags = ['.NET', 'NestJS', 'AWS', 'Kubernetes']
 const languageTags = ['C#', 'TypeScript', 'Go', 'SQL']
 const frameworkTags = ['.NET 8', 'NestJS', 'React', 'Entity Framework']
+
+const copy = {
+  en: {
+    nav: {
+      projects: 'Projects',
+      experience: 'Experience',
+      stack: 'Stack',
+      contact: 'Contact',
+    },
+    resume: 'Resume',
+    languageSelector: 'Language selector',
+    heroRole: 'SYSTEM ARCHITECT',
+    heroTitle: 'Building High-Performance Distributed Systems',
+    heroParagraph1:
+      'Specializing in robust backend architectures and scalable cloud solutions.',
+    heroParagraph2: 'Expertly navigating the intersection of .NET, NestJS, and AWS.',
+    trajectory: 'Professional Trajectory',
+    roleTitle: 'Senior Software Engineer',
+    roleCompany: 'Second Mind',
+    rolePeriod: '2021 - PRESENT',
+    roleDescription:
+      'Leading core infrastructure development for enterprise-scale distributed systems, focusing on performance optimization and reliable data pipelines.',
+    metricLatency: 'LATENCY REDUCTION',
+    metricUsers: 'CONCURRENT USERS',
+    arsenalTitle: 'Technical Arsenal',
+    arsenalSubtitle: 'Engineered with modern standards and best practices.',
+    stackLanguages: 'Languages',
+    stackFrameworks: 'Frameworks',
+    stackCloud: 'Cloud & DevOps',
+    stackCloudDescription:
+      'Architecting resilient infrastructure on AWS using modern IaC tools.',
+    educationLabel: 'Academic Foundation',
+    educationTitle: 'Bachelor of Science in Software Engineering',
+    educationUniversity: 'Technical University of Architecture',
+    educationDescription:
+      'Rigorous focus on algorithmic complexity, data structures, and software design patterns. Specialized in distributed systems and high-concurrency environments during the final thesis project.',
+    contactHeadingPrefix: "Let's build something ",
+    contactHeadingHighlight: 'scalable',
+    contactHeadingSuffix: ' together',
+    contactDescription:
+      'Currently available for senior architectural roles or specialized consulting. Fluent in English (C1 Proficiency).',
+    contactBtnPrimary: 'Contact Me',
+    contactBtnSecondary: 'View Documentation',
+    contactLanguage: 'ENGLISH: C1 ADVANCED',
+    contactLocation: 'REMOTE / GLOBAL',
+    footerCopy: '© 2026 SYSTEM ARCHITECT. BUILT WITH PRECISION.',
+    footerGithub: 'GITHUB',
+    footerLinkedin: 'LINKEDIN',
+    footerTerminal: 'TERMINAL',
+  },
+  pt: {
+    nav: {
+      projects: 'Projetos',
+      experience: 'Experiência',
+      stack: 'Stack',
+      contact: 'Contato',
+    },
+    resume: 'Currículo',
+    languageSelector: 'Seletor de idioma',
+    heroRole: 'ARQUITETO DE SISTEMAS',
+    heroTitle: 'Construindo Sistemas Distribuídos de Alta Performance',
+    heroParagraph1:
+      'Especializado em arquiteturas robustas de backend e soluções cloud escaláveis.',
+    heroParagraph2: 'Atuando na interseção entre .NET, NestJS e AWS.',
+    trajectory: 'Trajetória Profissional',
+    roleTitle: 'Engenheiro de Software Sênior',
+    roleCompany: 'Second Mind',
+    rolePeriod: '2021 - PRESENTE',
+    roleDescription:
+      'Liderando o desenvolvimento da infraestrutura central para sistemas distribuídos em escala empresarial, com foco em otimização de performance e pipelines de dados confiáveis.',
+    metricLatency: 'REDUÇÃO DE LATÊNCIA',
+    metricUsers: 'USUÁRIOS CONCORRENTES',
+    arsenalTitle: 'Arsenal Técnico',
+    arsenalSubtitle: 'Projetado com padrões modernos e boas práticas.',
+    stackLanguages: 'Linguagens',
+    stackFrameworks: 'Frameworks',
+    stackCloud: 'Cloud & DevOps',
+    stackCloudDescription:
+      'Arquitetando infraestrutura resiliente em AWS com ferramentas modernas de IaC.',
+    educationLabel: 'Formação Acadêmica',
+    educationTitle: 'Bacharelado em Engenharia de Software',
+    educationUniversity: 'Universidade Técnica de Arquitetura',
+    educationDescription:
+      'Foco rigoroso em complexidade algorítmica, estruturas de dados e padrões de design de software. Especialização em sistemas distribuídos e ambientes de alta concorrência no projeto final.',
+    contactHeadingPrefix: 'Vamos construir algo ',
+    contactHeadingHighlight: 'escalável',
+    contactHeadingSuffix: ' juntos',
+    contactDescription:
+      'Disponível para posições seniores de arquitetura e consultoria especializada. Fluente em inglês (proficiência C1).',
+    contactBtnPrimary: 'Fale Comigo',
+    contactBtnSecondary: 'Ver Documentação',
+    contactLanguage: 'INGLÊS: C1 AVANÇADO',
+    contactLocation: 'REMOTO / GLOBAL',
+    footerCopy: '© 2026 ARQUITETO DE SISTEMAS. CONSTRUÍDO COM PRECISÃO.',
+    footerGithub: 'GITHUB',
+    footerLinkedin: 'LINKEDIN',
+    footerTerminal: 'TERMINAL',
+  },
+}
 
 function GearIcon() {
   return (
@@ -84,6 +183,8 @@ function ClusterIcon() {
 
 function App() {
   const [activeSection, setActiveSection] = useState('projects')
+  const [language, setLanguage] = useState('en')
+  const t = copy[language]
 
   useEffect(() => {
     const ids = navItems.map((item) => item.id)
@@ -117,6 +218,10 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
+  }, [language])
+
   return (
     <div className="page-shell">
       <header className="topbar">
@@ -134,14 +239,33 @@ function App() {
                 aria-current={activeSection === item.id ? 'page' : undefined}
                 onClick={() => setActiveSection(item.id)}
               >
-                {item.label}
+                {t.nav[item.labelKey]}
               </a>
             ))}
           </nav>
 
-          <a className="resume-btn" href="#contact">
-            Resume
-          </a>
+          <div className="topbar-actions">
+            <div className="lang-switch" role="group" aria-label={t.languageSelector}>
+              <button
+                type="button"
+                className={language === 'en' ? 'lang-btn is-active' : 'lang-btn'}
+                onClick={() => setLanguage('en')}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                className={language === 'pt' ? 'lang-btn is-active' : 'lang-btn'}
+                onClick={() => setLanguage('pt')}
+              >
+                PT
+              </button>
+            </div>
+
+            <a className="resume-btn" href="#contact">
+              {t.resume}
+            </a>
+          </div>
         </div>
       </header>
 
@@ -149,15 +273,10 @@ function App() {
         <section className="hero section" id="projects">
           <div className="section-inner hero-grid">
             <div className="hero-copy">
-              <span className="pill">SYSTEM ARCHITECT</span>
-              <p className="hero-title">Building High-Performance Distributed Systems</p>
-              <p className="hero-paragraph">
-                Specializing in robust backend architectures and scalable cloud
-                solutions.
-              </p>
-              <p className="hero-paragraph">
-                Expertly navigating the intersection of .NET, NestJS, and AWS.
-              </p>
+              <span className="pill">{t.heroRole}</span>
+              <p className="hero-title">{t.heroTitle}</p>
+              <p className="hero-paragraph">{t.heroParagraph1}</p>
+              <p className="hero-paragraph">{t.heroParagraph2}</p>
 
               <div className="chip-row" aria-label="Core technologies">
                 {heroTags.map((tag) => (
@@ -183,7 +302,7 @@ function App() {
 
         <section className="trajectory section" id="experience">
           <div className="section-inner">
-            <p className="section-label">Professional Trajectory</p>
+            <p className="section-label">{t.trajectory}</p>
             <div className="section-divider" aria-hidden="true"></div>
 
             <article className="job-card">
@@ -193,27 +312,23 @@ function App() {
                     <GearIcon />
                   </div>
                   <div>
-                    <h2>Senior Software Engineer</h2>
-                    <p className="job-company">Second Mind</p>
+                    <h2>{t.roleTitle}</h2>
+                    <p className="job-company">{t.roleCompany}</p>
                   </div>
                 </div>
-                <p className="job-period">2021 - PRESENT</p>
+                <p className="job-period">{t.rolePeriod}</p>
               </div>
 
-              <p className="job-description">
-                Leading core infrastructure development for enterprise-scale
-                distributed systems, focusing on performance optimization and
-                reliable data pipelines.
-              </p>
+              <p className="job-description">{t.roleDescription}</p>
 
               <div className="metrics-grid">
                 <article className="metric-card">
                   <p className="metric-value">50%</p>
-                  <p className="metric-label">LATENCY REDUCTION</p>
+                  <p className="metric-label">{t.metricLatency}</p>
                 </article>
                 <article className="metric-card">
                   <p className="metric-value">10k+</p>
-                  <p className="metric-label">CONCURRENT USERS</p>
+                  <p className="metric-label">{t.metricUsers}</p>
                 </article>
               </div>
             </article>
@@ -223,13 +338,13 @@ function App() {
         <section className="stack section" id="stack">
           <div className="section-inner">
             <div className="stack-heading">
-              <h2>Technical Arsenal</h2>
-              <p>Engineered with modern standards and best practices.</p>
+              <h2>{t.arsenalTitle}</h2>
+              <p>{t.arsenalSubtitle}</p>
             </div>
 
             <div className="stack-grid">
               <article className="stack-card">
-                <p className="stack-title">Languages</p>
+                <p className="stack-title">{t.stackLanguages}</p>
                 <div className="chip-row">
                   {languageTags.map((tag) => (
                     <span key={tag} className="chip">
@@ -240,7 +355,7 @@ function App() {
               </article>
 
               <article className="stack-card">
-                <p className="stack-title">Frameworks</p>
+                <p className="stack-title">{t.stackFrameworks}</p>
                 <div className="chip-row">
                   {frameworkTags.map((tag) => (
                     <span key={tag} className="chip">
@@ -252,11 +367,8 @@ function App() {
 
               <article className="stack-card stack-card-wide">
                 <div>
-                  <p className="stack-title">Cloud &amp; DevOps</p>
-                  <p className="stack-copy">
-                    Architecting resilient infrastructure on AWS using modern
-                    IaC tools.
-                  </p>
+                  <p className="stack-title">{t.stackCloud}</p>
+                  <p className="stack-copy">{t.stackCloudDescription}</p>
                 </div>
 
                 <div className="devops-icons" aria-hidden="true">
@@ -288,14 +400,10 @@ function App() {
           <div className="section-inner">
             <article className="education-card">
               <div>
-                <p className="section-label section-label-muted">Academic Foundation</p>
-                <h2>Bachelor of Science in Software Engineering</h2>
-                <p className="job-company">Technical University of Architecture</p>
-                <p className="education-copy">
-                  Rigorous focus on algorithmic complexity, data structures, and
-                  software design patterns. Specialized in distributed systems and
-                  high-concurrency environments during the final thesis project.
-                </p>
+                <p className="section-label section-label-muted">{t.educationLabel}</p>
+                <h2>{t.educationTitle}</h2>
+                <p className="job-company">{t.educationUniversity}</p>
+                <p className="education-copy">{t.educationDescription}</p>
               </div>
 
               <div className="education-mark" aria-hidden="true">
@@ -310,32 +418,31 @@ function App() {
           <div className="section-inner">
             <article className="contact-card">
               <h2>
-                Let&apos;s build something <span>scalable</span> together
+                {t.contactHeadingPrefix}
+                <span>{t.contactHeadingHighlight}</span>
+                {t.contactHeadingSuffix}
               </h2>
-              <p>
-                Currently available for senior architectural roles or specialized
-                consulting. Fluent in English (C1 Proficiency).
-              </p>
+              <p>{t.contactDescription}</p>
 
               <div className="contact-actions">
                 <a className="btn btn-primary" href="mailto:architect@engineercore.dev">
                   <MailIcon />
-                  Contact Me
+                  {t.contactBtnPrimary}
                 </a>
                 <a className="btn btn-outline" href="#projects">
                   <DocIcon />
-                  View Documentation
+                  {t.contactBtnSecondary}
                 </a>
               </div>
 
               <div className="contact-meta">
                 <p>
                   <LanguageIcon />
-                  ENGLISH: C1 ADVANCED
+                  {t.contactLanguage}
                 </p>
                 <p>
                   <PinIcon />
-                  REMOTE / GLOBAL
+                  {t.contactLocation}
                 </p>
               </div>
             </article>
@@ -346,19 +453,19 @@ function App() {
       <footer className="site-footer">
         <div className="section-inner footer-inner">
           <p className="brand">ENGINEER_CORE</p>
-          <p>&copy; 2026 SYSTEM ARCHITECT. BUILT WITH PRECISION.</p>
+          <p>{t.footerCopy}</p>
           <nav aria-label="External links">
             <a href="https://github.com/Zenx007" target="_blank" rel="noopener noreferrer">
-              GITHUB
+              {t.footerGithub}
             </a>
             <a
               href="https://www.linkedin.com/in/jo%C3%A3o-victor-218b26315"
               target="_blank"
               rel="noopener noreferrer"
             >
-              LINKEDIN
+              {t.footerLinkedin}
             </a>
-            <a href="#contact">TERMINAL</a>
+            <a href="#contact">{t.footerTerminal}</a>
           </nav>
         </div>
       </footer>

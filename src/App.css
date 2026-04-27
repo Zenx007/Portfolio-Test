@@ -56,6 +56,13 @@ main {
   gap: clamp(1.1rem, 1.9vw, 2rem);
 }
 
+.topbar-actions {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.52rem;
+}
+
 .nav-link {
   text-decoration: none;
   color: rgba(206, 225, 241, 0.82);
@@ -77,7 +84,6 @@ main {
 }
 
 .resume-btn {
-  justify-self: end;
   min-width: 122px;
   height: 38px;
   border-radius: 2px;
@@ -92,6 +98,37 @@ main {
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lang-switch {
+  height: 38px;
+  border-radius: 2px;
+  border: 1px solid rgba(87, 165, 206, 0.68);
+  overflow: hidden;
+  display: inline-flex;
+  background: rgba(8, 36, 56, 0.66);
+}
+
+.lang-btn {
+  min-width: 2.2rem;
+  padding-inline: 0.45rem;
+  border: 0;
+  background: transparent;
+  color: rgba(203, 223, 238, 0.88);
+  font-family: var(--font-title);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.lang-btn + .lang-btn {
+  border-left: 1px solid rgba(87, 165, 206, 0.45);
+}
+
+.lang-btn.is-active {
+  background: rgba(16, 208, 247, 0.2);
+  color: var(--accent);
 }
 
 .resume-btn:hover {
@@ -753,7 +790,7 @@ main {
 
 @media (max-width: 860px) {
   .page-shell {
-    --topbar-height: 166px;
+    --topbar-height: 186px;
   }
 
   .topbar-inner {
@@ -766,12 +803,19 @@ main {
   }
 
   .brand,
-  .resume-btn {
+  .topbar-actions {
     justify-self: center;
   }
 
-  .resume-btn {
+  .topbar-actions {
     width: min(14rem, 100%);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+  }
+
+  .resume-btn {
+    width: 100%;
   }
 
   .hero {
