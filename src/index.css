@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+:root {
+  --bg-root: #031528;
+  --text-main: #dcebf6;
+  --accent: #19e3ff;
+  --panel-line: rgba(64, 142, 179, 0.35);
+
+  --font-body: 'Sora', 'Segoe UI', sans-serif;
+  --font-title: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+
+  font-family: var(--font-body);
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--text-main);
+  background: var(--bg-root);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-root);
+}
+
+a {
+  color: inherit;
+}
