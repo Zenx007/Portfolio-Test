@@ -273,11 +273,9 @@ function App() {
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,229,255,0.1),transparent_70%)]" />
             <div
-              className="absolute h-full w-full opacity-20"
+              className="hero-mesh-layer absolute h-full w-full"
               style={{
                 backgroundImage: `url('${heroTextureUrl}')`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
               }}
             />
             <div aria-hidden="true" className="hero-wave-field">
