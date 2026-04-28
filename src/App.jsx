@@ -244,7 +244,7 @@ function App() {
 
       <footer className="footer">
         <div className="container footer-inner">
-          <a className="brand" href="#projects">
+          <a className="brand footer-brand" href="#projects">
             ENGINEER_CORE
           </a>
 

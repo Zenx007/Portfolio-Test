@@ -613,6 +613,12 @@
   padding: 48px 0;
 }
 
+.footer .footer-brand {
+  color: var(--primary-container);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
 .footer-inner {
   display: flex;
   align-items: center;
