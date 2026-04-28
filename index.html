@@ -1,10 +1,109 @@
 <!doctype html>
-<html lang="en">
+<html class="dark" lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ENGINEER_CORE | Portfolio</title>
+    <title>ENGINEER.OS | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'primary-container': '#00e5ff',
+              'on-primary-fixed': '#001f24',
+              'outline-variant': '#3b494c',
+              'on-primary-container': '#00626e',
+              'inverse-surface': '#d4e4fa',
+              'on-tertiary-container': '#58585f',
+              'surface-container-lowest': '#010f1f',
+              'on-secondary-container': '#abb5cb',
+              'secondary-fixed-dim': '#bdc7dc',
+              'surface-variant': '#273647',
+              'on-secondary-fixed': '#121c2c',
+              'surface-bright': '#2c3a4c',
+              'on-tertiary-fixed': '#1a1b21',
+              'tertiary-fixed': '#e3e1e9',
+              'on-tertiary': '#2f3036',
+              surface: '#051424',
+              'on-secondary-fixed-variant': '#3d4759',
+              'secondary-fixed': '#d9e3f9',
+              secondary: '#bdc7dc',
+              'on-error-container': '#ffdad6',
+              'tertiary-container': '#d1cfd7',
+              'on-secondary': '#273141',
+              'on-tertiary-fixed-variant': '#46464c',
+              'tertiary-fixed-dim': '#c7c6cd',
+              outline: '#849396',
+              'surface-container-highest': '#273647',
+              'inverse-on-surface': '#233143',
+              'surface-tint': '#00daf3',
+              'surface-dim': '#051424',
+              'surface-container': '#122131',
+              'on-error': '#690005',
+              'primary-fixed': '#9cf0ff',
+              'on-primary': '#00363d',
+              'surface-container-low': '#0d1c2d',
+              'on-background': '#d4e4fa',
+              background: '#051424',
+              'inverse-primary': '#006875',
+              'surface-container-high': '#1c2b3c',
+              'on-primary-fixed-variant': '#004f58',
+              primary: '#c3f5ff',
+              'on-surface-variant': '#bac9cc',
+              tertiary: '#edebf3',
+              'error-container': '#93000a',
+              'on-surface': '#d4e4fa',
+              'primary-fixed-dim': '#00daf3',
+              'secondary-container': '#3d4759',
+              error: '#ffb4ab',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              gutter: '24px',
+              'stack-sm': '8px',
+              'container-max': '1280px',
+              base: '4px',
+              'section-padding': '80px',
+              'stack-md': '16px',
+              'stack-lg': '32px',
+            },
+            fontFamily: {
+              h2: ['Inter'],
+              'code-snippet': ['Space Grotesk'],
+              'body-md': ['Inter'],
+              h1: ['Inter'],
+              'body-lg': ['Inter'],
+              'label-caps': ['Space Grotesk'],
+              inter: ['Inter'],
+            },
+            fontSize: {
+              h2: ['32px', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '600' }],
+              'code-snippet': ['14px', { lineHeight: '1.5', fontWeight: '400' }],
+              'body-md': ['16px', { lineHeight: '1.6', fontWeight: '400' }],
+              h1: ['48px', { lineHeight: '1.1', letterSpacing: '-0.02em', fontWeight: '700' }],
+              'body-lg': ['18px', { lineHeight: '1.6', fontWeight: '400' }],
+              'label-caps': ['12px', { lineHeight: '1', letterSpacing: '0.1em', fontWeight: '600' }],
+            },
+          },
+        },
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
