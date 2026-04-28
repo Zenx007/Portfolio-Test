@@ -1,10 +1,222 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
 const heroTextureUrl =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBN5x0omsxTH1DGIyaHqqMRoZ_JBzlueM1To7EguutK_rkE0GOaCdRl9fBblP87SV4pZgcgjsHCSju_ClTBnfrVxE8FDFhMNXGIYuFFwvi7bx-HmzitMsCiGkFqzNkwzl0T5_JkOzJQihn-YiRPUeBoZam1rLR3_9DnvOuOne5-h2cCtNBdKcflNap5pDqzxDTbR07eBDr3JQ-sK_pJx7kovi7bGq_Lw1ArE2xWF1gcgb1B5-oI6OXuH3fpu28b7VCQGVlB3DifVu8'
 
+const LANGUAGE_STORAGE_KEY = 'portfolio-language'
+
+const translations = {
+  en: {
+    nav: {
+      stack: 'Arsenal',
+      projects: 'Projects',
+      experience: 'Experience',
+      contact: 'Contact',
+      resume: 'Resume.pdf',
+    },
+    language: {
+      english: 'English',
+      portuguese: 'Portugues',
+    },
+    hero: {
+      badge: 'SYSTEM ARCHITECT',
+      titleStart: 'Building High-Performance',
+      titleHighlight: 'Distributed Systems',
+      description:
+        'Seasoned systems architect specialized in crafting robust backend infrastructures and high-performance APIs. I architect scalable cloud solutions across the .NET, NestJS, and AWS ecosystems, focusing on mission-critical stability and extreme throughput for enterprise platforms.',
+      profileAlt: 'Profile photo',
+    },
+    experience: {
+      title: 'Professional Trajectory',
+      primaryRole: 'Systems Analyst',
+      primaryDate: 'FEB 2026 - PRESENT',
+      primaryDescription:
+        'Leading technical architecture for high-scale distributed systems. Responsibility for system integrity, cloud migration strategies, and cross-team architectural alignment on AWS.',
+      uptimeLabel: 'UPTIME ARCHITECTURE',
+      latencyLabel: 'LATENCY REDUCTION',
+      secondaryRole: 'Software Developer',
+      secondaryDate: 'MAY 2025 - FEB 2026',
+      secondaryDescription:
+        'Developed core features for enterprise data pipelines using NestJS and .NET. Contributed to microservices scalability and performance monitoring improvements.',
+    },
+    projects: {
+      title: 'Technical Labs',
+      description: 'Experimental architectures and core engineering prototypes.',
+      architectures: 'ARCHITECTURES',
+      components: 'COMPONENTS',
+      github: 'GITHUB',
+      demo: 'DEMO',
+      firstAlt: 'Cloud Infrastructure Project',
+      firstTitle: 'Zero-Trust Cloud Mesh',
+      firstDescription:
+        'Automated multi-region infrastructure deployment with service mesh integration and strict identity-based security policies.',
+      secondAlt: 'High Performance API',
+      secondTitle: 'High-Throughput Gateway',
+      secondDescription:
+        'A custom API gateway implementation optimized for low-latency gRPC to REST translation and dynamic request routing.',
+      thirdAlt: 'Realtime Data',
+      thirdTitle: 'Event Streaming Hub',
+      thirdDescription:
+        'Scalable pub/sub architecture handling 50k+ events/sec with guaranteed delivery and persistent audit trails.',
+    },
+    stack: {
+      title: 'Technical Arsenal',
+      description: 'Engineered with modern standards and best practices.',
+      backendTitle: 'Backend Mastery',
+      backendDescription:
+        'Architecting high-throughput services and robust data pipelines with enterprise-grade reliability.',
+      frontendTitle: 'Frontend Excellence',
+      frontendDescription:
+        'Crafting responsive, accessible, and performant user interfaces with modern web technologies.',
+    },
+    education: {
+      title: 'Academic Foundation',
+      degree: 'Bachelor of Science in Software Engineering',
+      university: 'Technical University of Architecture',
+      description:
+        'Rigorous focus on algorithmic complexity, data structures, and software design patterns. Specialized in distributed systems and high-concurrency environments during the final thesis project.',
+    },
+    contact: {
+      titleStart: "Let's build something",
+      titleHighlight: 'scalable',
+      titleEnd: 'together',
+      description:
+        'Currently available for senior architectural roles or specialized consulting. Fluent in English (C1 Proficiency).',
+      primaryButton: 'Contact Me',
+      secondaryButton: 'View Documentation',
+      languageLevel: 'ENGLISH: C1 ADVANCED',
+      availability: 'REMOTE / GLOBAL',
+    },
+    footer: {
+      status: 'System Status',
+      documentation: 'Documentation',
+      privacy: 'Privacy',
+    },
+  },
+  pt: {
+    nav: {
+      stack: 'Arsenal',
+      projects: 'Projetos',
+      experience: 'Experiencia',
+      contact: 'Contato',
+      resume: 'Curriculo.pdf',
+    },
+    language: {
+      english: 'Ingles',
+      portuguese: 'Portugues',
+    },
+    hero: {
+      badge: 'ARQUITETO DE SISTEMAS',
+      titleStart: 'Construindo',
+      titleHighlight: 'Sistemas Distribuidos de Alta Performance',
+      description:
+        'Arquiteto de sistemas com experiencia na construcao de infraestruturas de backend robustas e APIs de alta performance. Projeto solucoes em nuvem escalaveis nos ecossistemas .NET, NestJS e AWS, com foco em estabilidade critica e alta vazao para plataformas corporativas.',
+      profileAlt: 'Foto de perfil',
+    },
+    experience: {
+      title: 'Trajetoria Profissional',
+      primaryRole: 'Analista de Sistemas',
+      primaryDate: 'FEV 2026 - ATUAL',
+      primaryDescription:
+        'Liderando a arquitetura tecnica de sistemas distribuidos em larga escala. Responsavel pela integridade do sistema, estrategias de migracao para nuvem e alinhamento arquitetural entre equipes na AWS.',
+      uptimeLabel: 'ARQUITETURA DE UPTIME',
+      latencyLabel: 'REDUCAO DE LATENCIA',
+      secondaryRole: 'Desenvolvedor de Software',
+      secondaryDate: 'MAI 2025 - FEV 2026',
+      secondaryDescription:
+        'Desenvolvimento de funcionalidades centrais para pipelines de dados corporativos com NestJS e .NET. Contribuicao para escalabilidade de microservicos e melhoria de monitoramento de performance.',
+    },
+    projects: {
+      title: 'Laboratorios Tecnicos',
+      description: 'Arquiteturas experimentais e prototipos de engenharia de software.',
+      architectures: 'ARQUITETURAS',
+      components: 'COMPONENTES',
+      github: 'GITHUB',
+      demo: 'DEMO',
+      firstAlt: 'Projeto de Infraestrutura em Nuvem',
+      firstTitle: 'Malha Cloud Zero-Trust',
+      firstDescription:
+        'Implantacao automatizada de infraestrutura multi-regiao com integracao de service mesh e politicas rigorosas de seguranca baseadas em identidade.',
+      secondAlt: 'API de Alta Performance',
+      secondTitle: 'Gateway de Alto Throughput',
+      secondDescription:
+        'Implementacao de gateway de API otimizada para traducao de gRPC para REST com baixa latencia e roteamento dinamico de requisicoes.',
+      thirdAlt: 'Dados em Tempo Real',
+      thirdTitle: 'Hub de Streaming de Eventos',
+      thirdDescription:
+        'Arquitetura pub/sub escalavel processando 50k+ eventos/seg com entrega garantida e trilhas de auditoria persistentes.',
+    },
+    stack: {
+      title: 'Arsenal Tecnico',
+      description: 'Projetado com padroes modernos e boas praticas.',
+      backendTitle: 'Dominio de Backend',
+      backendDescription:
+        'Arquitetando servicos de alto throughput e pipelines de dados robustos com confiabilidade de nivel corporativo.',
+      frontendTitle: 'Excelencia em Frontend',
+      frontendDescription:
+        'Criando interfaces responsivas, acessiveis e performaticas com tecnologias web modernas.',
+    },
+    education: {
+      title: 'Base Academica',
+      degree: 'Bacharelado em Engenharia de Software',
+      university: 'Universidade Tecnica de Arquitetura',
+      description:
+        'Foco rigoroso em complexidade algoritmica, estruturas de dados e padroes de design de software. Especializacao em sistemas distribuidos e ambientes de alta concorrencia no projeto final de tese.',
+    },
+    contact: {
+      titleStart: 'Vamos construir algo',
+      titleHighlight: 'escalavel',
+      titleEnd: 'juntos',
+      description:
+        'Disponivel para posicoes seniores de arquitetura ou consultoria especializada. Ingles fluente (C1).',
+      primaryButton: 'Falar Comigo',
+      secondaryButton: 'Ver Documentacao',
+      languageLevel: 'INGLES: C1 AVANCADO',
+      availability: 'REMOTO / GLOBAL',
+    },
+    footer: {
+      status: 'Status do Sistema',
+      documentation: 'Documentacao',
+      privacy: 'Privacidade',
+    },
+  },
+}
+
+const resolveInitialLanguage = () => {
+  if (typeof window === 'undefined') {
+    return 'en'
+  }
+
+  const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
+  if (savedLanguage === 'en' || savedLanguage === 'pt') {
+    return savedLanguage
+  }
+
+  return window.navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en'
+}
+
 function App() {
+  const [language, setLanguage] = useState(resolveInitialLanguage)
+  const copy = translations[language]
+
+  useEffect(() => {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
+    document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
+  }, [language])
+
+  const getLanguageButtonClass = (targetLanguage) => {
+    const baseClass =
+      'flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-slate-800 text-sm transition-all'
+
+    if (language === targetLanguage) {
+      return `${baseClass} border border-white/20 opacity-100 ring-2 ring-primary-container/50`
+    }
+
+    return `${baseClass} border border-white/10 opacity-50 hover:opacity-100`
+  }
+
   return (
     <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-fixed">
       <nav className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-cyan-500/20 bg-slate-900/60 px-6 py-4 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl">
@@ -12,31 +224,35 @@ function App() {
 
         <div className="hidden items-center gap-8 font-inter tracking-tight md:flex">
           <a className="text-slate-400 transition-colors hover:text-slate-100" href="#stack">
-            Arsenal
+            {copy.nav.stack}
           </a>
           <a className="border-b-2 border-cyan-400 pb-1 font-semibold text-cyan-400" href="#projects">
-            Projects
+            {copy.nav.projects}
           </a>
           <a className="text-slate-400 transition-colors hover:text-slate-100" href="#experience">
-            Experience
+            {copy.nav.experience}
           </a>
           <a className="text-slate-400 transition-colors hover:text-slate-100" href="#contact">
-            Contact
+            {copy.nav.contact}
           </a>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="mr-4 flex items-center gap-2 rounded-full border border-white/5 bg-black/20 p-1.5">
             <button
-              className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-slate-800 text-sm opacity-100 ring-2 ring-primary-container/50"
-              title="English"
+              aria-pressed={language === 'en'}
+              className={getLanguageButtonClass('en')}
+              onClick={() => setLanguage('en')}
+              title={copy.language.english}
               type="button"
             >
               🇺🇸
             </button>
             <button
-              className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-800 text-sm opacity-50 transition-opacity hover:opacity-100"
-              title="Português"
+              aria-pressed={language === 'pt'}
+              className={getLanguageButtonClass('pt')}
+              onClick={() => setLanguage('pt')}
+              title={copy.language.portuguese}
               type="button"
             >
               🇧🇷
@@ -47,7 +263,7 @@ function App() {
             className="rounded bg-primary-container px-6 py-2 font-bold text-on-primary-fixed transition-all duration-300 hover:scale-95 hover:opacity-80"
             type="button"
           >
-            Resume.pdf
+            {copy.nav.resume}
           </button>
         </div>
       </nav>
@@ -69,18 +285,14 @@ function App() {
           <div className="container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-stack-md">
               <span className="rounded-full bg-primary-container/10 px-3 py-1 font-label-caps text-primary-container">
-                SYSTEM ARCHITECT
+                {copy.hero.badge}
               </span>
 
               <h1 className="max-w-2xl font-h1 text-on-background">
-                Building High-Performance <span className="text-primary-container">Distributed Systems</span>
+                {copy.hero.titleStart} <span className="text-primary-container">{copy.hero.titleHighlight}</span>
               </h1>
 
-              <p className="max-w-xl font-body-lg leading-relaxed text-on-surface-variant">
-                Seasoned systems architect specialized in crafting robust backend infrastructures and
-                high-performance APIs. I architect scalable cloud solutions across the .NET, NestJS, and AWS
-                ecosystems, focusing on mission-critical stability and extreme throughput for enterprise platforms.
-              </p>
+              <p className="max-w-xl font-body-lg leading-relaxed text-on-surface-variant">{copy.hero.description}</p>
 
               <div className="flex flex-wrap gap-stack-sm pt-stack-sm">
                 <span className="glass-card rounded-full px-4 py-1.5 font-code-snippet text-primary-container">.NET</span>
@@ -100,7 +312,7 @@ function App() {
 
                 <div className="ambient-glow glass-card relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur-xl">
                   <img
-                    alt="Foto de perfil"
+                    alt={copy.hero.profileAlt}
                     className="h-full w-full object-cover"
                     src={profilePhoto}
                   />
@@ -113,7 +325,7 @@ function App() {
         <section className="bg-surface-container-low py-section-padding" id="experience">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg">
-              <h2 className="font-h2 text-on-background">Professional Trajectory</h2>
+              <h2 className="font-h2 text-on-background">{copy.experience.title}</h2>
               <div className="mt-4 h-1 w-24 bg-primary-container" />
             </div>
 
@@ -137,28 +349,25 @@ function App() {
                   <div className="flex-grow">
                     <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
                       <div>
-                        <h3 className="text-2xl font-bold text-white">Systems Analyst</h3>
+                        <h3 className="text-2xl font-bold text-white">{copy.experience.primaryRole}</h3>
                         <p className="font-medium text-primary-container">Second Mind</p>
                       </div>
                       <span className="rounded bg-primary-container/5 px-3 py-1 font-code-snippet text-primary-container">
-                        FEB 2026 — PRESENT
+                        {copy.experience.primaryDate}
                       </span>
                     </div>
 
-                    <p className="mb-6 max-w-3xl font-body-md text-on-surface-variant">
-                      Leading technical architecture for high-scale distributed systems. Responsibility for system
-                      integrity, cloud migration strategies, and cross-team architectural alignment on AWS.
-                    </p>
+                    <p className="mb-6 max-w-3xl font-body-md text-on-surface-variant">{copy.experience.primaryDescription}</p>
 
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="border-l-2 border-primary-container bg-surface-container p-4">
                         <div className="mb-1 text-3xl font-bold text-white">99.99%</div>
-                        <div className="font-label-caps text-sm text-slate-400">UPTIME ARCHITECTURE</div>
+                        <div className="font-label-caps text-sm text-slate-400">{copy.experience.uptimeLabel}</div>
                       </div>
 
                       <div className="border-l-2 border-primary-container bg-surface-container p-4">
                         <div className="mb-1 text-3xl font-bold text-white">50%</div>
-                        <div className="font-label-caps text-sm text-slate-400">LATENCY REDUCTION</div>
+                        <div className="font-label-caps text-sm text-slate-400">{copy.experience.latencyLabel}</div>
                       </div>
                     </div>
                   </div>
@@ -182,16 +391,13 @@ function App() {
                   <div className="flex-grow">
                     <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
                       <div>
-                        <h3 className="text-xl font-bold text-white">Software Developer</h3>
+                        <h3 className="text-xl font-bold text-white">{copy.experience.secondaryRole}</h3>
                         <p className="font-medium text-slate-400">Second Mind</p>
                       </div>
-                      <span className="font-code-snippet text-slate-400">MAY 2025 — FEB 2026</span>
+                      <span className="font-code-snippet text-slate-400">{copy.experience.secondaryDate}</span>
                     </div>
 
-                    <p className="max-w-3xl font-body-md text-on-surface-variant">
-                      Developed core features for enterprise data pipelines using NestJS and .NET. Contributed to
-                      microservices scalability and performance monitoring improvements.
-                    </p>
+                    <p className="max-w-3xl font-body-md text-on-surface-variant">{copy.experience.secondaryDescription}</p>
                   </div>
                 </div>
               </div>
@@ -203,16 +409,16 @@ function App() {
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg flex flex-col items-end justify-between gap-4 md:flex-row">
               <div>
-                <h2 className="font-h2 text-on-background">Technical Labs</h2>
-                <p className="mt-2 text-on-surface-variant">Experimental architectures and core engineering prototypes.</p>
+                <h2 className="font-h2 text-on-background">{copy.projects.title}</h2>
+                <p className="mt-2 text-on-surface-variant">{copy.projects.description}</p>
               </div>
 
               <div className="flex rounded-lg bg-surface-container-high p-1">
                 <button className="rounded-md bg-primary-container px-6 py-2 text-sm font-bold text-on-primary-fixed" type="button">
-                  ARCHITECTURES
+                  {copy.projects.architectures}
                 </button>
                 <button className="rounded-md px-6 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white" type="button">
-                  COMPONENTS
+                  {copy.projects.components}
                 </button>
               </div>
             </div>
@@ -221,7 +427,7 @@ function App() {
               <div className="glass-card group flex flex-col overflow-hidden rounded-xl border border-white/5 transition-all duration-300 hover:border-primary-container/40">
                 <div className="relative aspect-video overflow-hidden bg-surface-container-highest">
                   <img
-                    alt="Cloud Infrastructure Project"
+                    alt={copy.projects.firstAlt}
                     className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCplPS6nzU5oLfjNJ28njKnphdNfdnQaAnC7EDwIbxAkUqQdCFhj21bY92lBySVlyHxu86ogLefM69wYikUhkcZRslKYCn_QddjVc8OoYVWP_DxWVfEJXKT5EXDajUtE4GENkJ5Lc0NqHjwfMo5WTCINk_zBbZzvFqb5VAyIbo0_SYCSCEuiapAZpxSJfE7upurbt__fWFn9X1QwadKfcdi0lBiIzY55QoperOrLsBxypQNZWX_NAomXPsyn0anrT93i6xJ2LFbP8M"
                   />
@@ -238,11 +444,8 @@ function App() {
                 </div>
 
                 <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 text-xl font-bold text-white">Zero-Trust Cloud Mesh</h4>
-                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">
-                    Automated multi-region infrastructure deployment with service mesh integration and strict
-                    identity-based security policies.
-                  </p>
+                  <h4 className="mb-2 text-xl font-bold text-white">{copy.projects.firstTitle}</h4>
+                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.firstDescription}</p>
 
                   <div className="flex items-center justify-between border-t border-white/5 pt-4">
                     <a
@@ -252,13 +455,13 @@ function App() {
                       <span className="material-symbols-outlined text-sm" data-icon="code">
                         code
                       </span>{' '}
-                      GITHUB
+                      {copy.projects.github}
                     </a>
                     <a className="flex items-center gap-2 font-label-caps text-xs text-primary-container hover:underline" href="#">
                       <span className="material-symbols-outlined text-sm" data-icon="launch">
                         launch
                       </span>{' '}
-                      DEMO
+                      {copy.projects.demo}
                     </a>
                   </div>
                 </div>
@@ -267,7 +470,7 @@ function App() {
               <div className="glass-card group flex flex-col overflow-hidden rounded-xl border border-white/5 transition-all duration-300 hover:border-primary-container/40">
                 <div className="relative aspect-video overflow-hidden bg-surface-container-highest">
                   <img
-                    alt="High Performance API"
+                    alt={copy.projects.secondAlt}
                     className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1tkvK4JCWX28yEqspgnVOzQDjyifUVetsdKOZk-D9fQc_XxT1F5UCaDTlIlHZMSdKLOzu-ND0YC71ISRmwo7JsdDdXhibyBgTkVyvu6tg8WrmVkMTfKk3UWZ__5IsTFz0-EyZIRbjFGc-Tq1uqPLXnY9TbG8S0AJxet5EpdL8rfM8KEAOVLUrpRXXbNV6BBdoHozJrEqZC_iEDtlVZi8NtWY6DmPc_dTF2-DvATOAz5FGKaeyVcNIe_LYIjUczEW5xpYrngSF7jA"
                   />
@@ -284,11 +487,8 @@ function App() {
                 </div>
 
                 <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 text-xl font-bold text-white">High-Throughput Gateway</h4>
-                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">
-                    A custom API gateway implementation optimized for low-latency gRPC to REST translation and
-                    dynamic request routing.
-                  </p>
+                  <h4 className="mb-2 text-xl font-bold text-white">{copy.projects.secondTitle}</h4>
+                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.secondDescription}</p>
 
                   <div className="flex items-center justify-between border-t border-white/5 pt-4">
                     <a
@@ -298,13 +498,13 @@ function App() {
                       <span className="material-symbols-outlined text-sm" data-icon="code">
                         code
                       </span>{' '}
-                      GITHUB
+                      {copy.projects.github}
                     </a>
                     <a className="flex items-center gap-2 font-label-caps text-xs text-primary-container hover:underline" href="#">
                       <span className="material-symbols-outlined text-sm" data-icon="launch">
                         launch
                       </span>{' '}
-                      DEMO
+                      {copy.projects.demo}
                     </a>
                   </div>
                 </div>
@@ -313,7 +513,7 @@ function App() {
               <div className="glass-card group flex flex-col overflow-hidden rounded-xl border border-white/5 transition-all duration-300 hover:border-primary-container/40">
                 <div className="relative aspect-video overflow-hidden bg-surface-container-highest">
                   <img
-                    alt="Realtime Data"
+                    alt={copy.projects.thirdAlt}
                     className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLLKkPEtPoPykuQsFy7gioItD2yLTHCxZytJC-T6miwiLcsQPxiiNTnh9H-n9caphP0s3tutr4qkYMjS57WIBTe_fqZGMCsn7YOlfcIrjQLyDDUfW_ybUhBaw4DiQ-Meoc37K37AOqWiYXbY66caH5Em0GUbHnw3VYclVbCmbAbXxhpHRKoxvplTbfpRHkcmCOoWenLZzg3wcsEE1jt1MeZjUDKB27luMoHriVItCq3sAYcjFCvKMUTN9SKFjg60Gztb4eTysdHmw"
                   />
@@ -330,11 +530,8 @@ function App() {
                 </div>
 
                 <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 text-xl font-bold text-white">Event Streaming Hub</h4>
-                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">
-                    Scalable pub/sub architecture handling 50k+ events/sec with guaranteed delivery and persistent
-                    audit trails.
-                  </p>
+                  <h4 className="mb-2 text-xl font-bold text-white">{copy.projects.thirdTitle}</h4>
+                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.thirdDescription}</p>
 
                   <div className="flex items-center justify-between border-t border-white/5 pt-4">
                     <a
@@ -344,13 +541,13 @@ function App() {
                       <span className="material-symbols-outlined text-sm" data-icon="code">
                         code
                       </span>{' '}
-                      GITHUB
+                      {copy.projects.github}
                     </a>
                     <a className="flex items-center gap-2 font-label-caps text-xs text-primary-container hover:underline" href="#">
                       <span className="material-symbols-outlined text-sm" data-icon="launch">
                         launch
                       </span>{' '}
-                      DEMO
+                      {copy.projects.demo}
                     </a>
                   </div>
                 </div>
@@ -362,8 +559,8 @@ function App() {
         <section className="py-section-padding" id="stack">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg text-center">
-              <h2 className="font-h2 text-on-background">Technical Arsenal</h2>
-              <p className="mt-2 font-body-md text-on-surface-variant">Engineered with modern standards and best practices.</p>
+              <h2 className="font-h2 text-on-background">{copy.stack.title}</h2>
+              <p className="mt-2 font-body-md text-on-surface-variant">{copy.stack.description}</p>
             </div>
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -372,12 +569,10 @@ function App() {
                   <div className="flex h-10 w-10 items-center justify-center rounded bg-primary-container/10">
                     <span className="material-symbols-outlined text-primary-container">dns</span>
                   </div>
-                  <h3 className="font-h2 text-2xl text-white">Backend Mastery</h3>
+                  <h3 className="font-h2 text-2xl text-white">{copy.stack.backendTitle}</h3>
                 </div>
 
-                <p className="mb-8 text-on-surface-variant">
-                  Architecting high-throughput services and robust data pipelines with enterprise-grade reliability.
-                </p>
+                <p className="mb-8 text-on-surface-variant">{copy.stack.backendDescription}</p>
 
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                   <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
@@ -412,12 +607,10 @@ function App() {
                   <div className="flex h-10 w-10 items-center justify-center rounded bg-cyan-400/10">
                     <span className="material-symbols-outlined text-cyan-400">layers</span>
                   </div>
-                  <h3 className="font-h2 text-2xl text-white">Frontend Excellence</h3>
+                  <h3 className="font-h2 text-2xl text-white">{copy.stack.frontendTitle}</h3>
                 </div>
 
-                <p className="mb-8 text-on-surface-variant">
-                  Crafting responsive, accessible, and performant user interfaces with modern web technologies.
-                </p>
+                <p className="mb-8 text-on-surface-variant">{copy.stack.frontendDescription}</p>
 
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                   <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
@@ -459,19 +652,15 @@ function App() {
                 </span>
               </div>
 
-              <h2 className="mb-6 font-h2 text-on-background">Academic Foundation</h2>
+              <h2 className="mb-6 font-h2 text-on-background">{copy.education.title}</h2>
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">Bachelor of Science in Software Engineering</h3>
-                  <p className="text-primary-container">Technical University of Architecture</p>
+                  <h3 className="text-xl font-bold text-white">{copy.education.degree}</h3>
+                  <p className="text-primary-container">{copy.education.university}</p>
                 </div>
 
-                <p className="font-body-md leading-relaxed text-on-surface-variant">
-                  Rigorous focus on algorithmic complexity, data structures, and software design patterns.
-                  Specialized in distributed systems and high-concurrency environments during the final thesis
-                  project.
-                </p>
+                <p className="font-body-md leading-relaxed text-on-surface-variant">{copy.education.description}</p>
               </div>
             </div>
           </div>
@@ -481,13 +670,11 @@ function App() {
           <div className="container-max mx-auto px-gutter text-center">
             <div className="ambient-glow glass-card mx-auto max-w-4xl rounded-2xl border border-white/10 p-12">
               <h2 className="mb-4 font-h1 text-white">
-                Let&apos;s build something <span className="text-primary-container">scalable</span> together
+                {copy.contact.titleStart} <span className="text-primary-container">{copy.contact.titleHighlight}</span>{' '}
+                {copy.contact.titleEnd}
               </h2>
 
-              <p className="mx-auto mb-8 max-w-2xl font-body-lg text-on-surface-variant">
-                Currently available for senior architectural roles or specialized consulting. Fluent in English (C1
-                Proficiency).
-              </p>
+              <p className="mx-auto mb-8 max-w-2xl font-body-lg text-on-surface-variant">{copy.contact.description}</p>
 
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <button
@@ -497,14 +684,14 @@ function App() {
                   <span className="material-symbols-outlined" data-icon="mail">
                     mail
                   </span>
-                  Contact Me
+                  {copy.contact.primaryButton}
                 </button>
 
                 <button
                   className="rounded-lg border border-primary-container px-8 py-4 font-bold text-primary-container transition-colors hover:bg-primary-container/10"
                   type="button"
                 >
-                  View Documentation
+                  {copy.contact.secondaryButton}
                 </button>
               </div>
 
@@ -513,13 +700,13 @@ function App() {
                   <span className="material-symbols-outlined text-primary-container" data-icon="translate">
                     translate
                   </span>
-                  <span className="font-code-snippet">ENGLISH: C1 ADVANCED</span>
+                  <span className="font-code-snippet">{copy.contact.languageLevel}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary-container" data-icon="location_on">
                     location_on
                   </span>
-                  <span className="font-code-snippet">REMOTE / GLOBAL</span>
+                  <span className="font-code-snippet">{copy.contact.availability}</span>
                 </div>
               </div>
             </div>
@@ -532,13 +719,13 @@ function App() {
 
         <div className="flex gap-6">
           <a className="font-mono text-[10px] uppercase text-slate-600 opacity-60 transition-colors hover:text-cyan-400" href="#">
-            System Status
+            {copy.footer.status}
           </a>
           <a className="font-mono text-[10px] uppercase text-slate-600 opacity-60 transition-colors hover:text-cyan-400" href="#">
-            Documentation
+            {copy.footer.documentation}
           </a>
           <a className="font-mono text-[10px] uppercase text-slate-600 opacity-60 transition-colors hover:text-cyan-400" href="#">
-            Privacy
+            {copy.footer.privacy}
           </a>
         </div>
       </footer>
