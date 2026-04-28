@@ -1,4 +1,5 @@
 import './App.css'
+import profilePhoto from './assets/profile-photo.png'
 
 const heroTextureUrl =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBN5x0omsxTH1DGIyaHqqMRoZ_JBzlueM1To7EguutK_rkE0GOaCdRl9fBblP87SV4pZgcgjsHCSju_ClTBnfrVxE8FDFhMNXGIYuFFwvi7bx-HmzitMsCiGkFqzNkwzl0T5_JkOzJQihn-YiRPUeBoZam1rLR3_9DnvOuOne5-h2cCtNBdKcflNap5pDqzxDTbR07eBDr3JQ-sK_pJx7kovi7bGq_Lw1ArE2xWF1gcgb1B5-oI6OXuH3fpu28b7VCQGVlB3DifVu8'
@@ -98,13 +99,11 @@ function App() {
                 <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary-container/50 to-transparent opacity-25 blur transition duration-1000 group-hover:opacity-50 group-hover:duration-200" />
 
                 <div className="ambient-glow glass-card relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur-xl">
-                  <div className="flex h-full w-full flex-col items-center justify-center bg-surface-container-high/30">
-                    <span className="material-symbols-outlined mb-4 text-9xl text-primary-container/20" style={{ fontSize: '140px' }}>
-                      account_circle
-                    </span>
-                    <div className="mb-2 h-2 w-1/2 rounded-full bg-primary-container/10" />
-                    <div className="h-2 w-1/3 rounded-full bg-primary-container/10" />
-                  </div>
+                  <img
+                    alt="Foto de perfil"
+                    className="h-full w-full object-cover"
+                    src={profilePhoto}
+                  />
                 </div>
               </div>
             </div>
