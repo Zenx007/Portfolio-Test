@@ -280,6 +280,21 @@ function App() {
                 backgroundSize: 'cover',
               }}
             />
+            <div aria-hidden="true" className="hero-wave-field">
+              <svg className="hero-wave-svg" preserveAspectRatio="none" shapeRendering="auto" viewBox="0 24 150 28">
+                <defs>
+                  <path
+                    d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"
+                    id="hero-gentle-wave"
+                  />
+                </defs>
+                <g className="hero-wave-parallax">
+                  <use className="hero-wave-layer hero-wave-layer-1" x="48" xlinkHref="#hero-gentle-wave" y="0" />
+                  <use className="hero-wave-layer hero-wave-layer-2" x="48" xlinkHref="#hero-gentle-wave" y="3" />
+                  <use className="hero-wave-layer hero-wave-layer-3" x="48" xlinkHref="#hero-gentle-wave" y="5" />
+                </g>
+              </svg>
+            </div>
           </div>
 
           <div className="container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
