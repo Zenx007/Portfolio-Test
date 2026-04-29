@@ -6,11 +6,13 @@ const heroTextureUrl =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBN5x0omsxTH1DGIyaHqqMRoZ_JBzlueM1To7EguutK_rkE0GOaCdRl9fBblP87SV4pZgcgjsHCSju_ClTBnfrVxE8FDFhMNXGIYuFFwvi7bx-HmzitMsCiGkFqzNkwzl0T5_JkOzJQihn-YiRPUeBoZam1rLR3_9DnvOuOne5-h2cCtNBdKcflNap5pDqzxDTbR07eBDr3JQ-sK_pJx7kovi7bGq_Lw1ArE2xWF1gcgb1B5-oI6OXuH3fpu28b7VCQGVlB3DifVu8'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
+const NAV_SECTION_IDS = ['top', 'experience', 'projects', 'stack', 'contact']
 
 const translations = {
   en: {
     nav: {
-      stack: 'Arsenal',
+      summary: 'Summary',
+      stack: 'Stack',
       projects: 'Projects',
       experience: 'Experience',
       contact: 'Contact',
@@ -18,7 +20,7 @@ const translations = {
     },
     language: {
       english: 'English',
-      portuguese: 'Portugues',
+      portuguese: 'Portuguese',
     },
     hero: {
       badge: 'SYSTEM ARCHITECT',
@@ -97,7 +99,8 @@ const translations = {
   },
   pt: {
     nav: {
-      stack: 'Arsenal',
+      summary: 'Resumo',
+      stack: 'Stack',
       projects: 'Projetos',
       experience: 'Experiencia',
       contact: 'Contato',
@@ -199,12 +202,45 @@ const resolveInitialLanguage = () => {
 
 function App() {
   const [language, setLanguage] = useState(resolveInitialLanguage)
+  const [activeSection, setActiveSection] = useState(NAV_SECTION_IDS[0])
   const copy = translations[language]
+  const navItems = [
+    { id: 'top', label: copy.nav.summary },
+    { id: 'experience', label: copy.nav.experience },
+    { id: 'projects', label: copy.nav.projects },
+    { id: 'stack', label: copy.nav.stack },
+    { id: 'contact', label: copy.nav.contact },
+  ]
 
   useEffect(() => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
     document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
   }, [language])
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const currentPosition = window.scrollY + window.innerHeight * 0.35
+      let nextSection = NAV_SECTION_IDS[0]
+
+      for (const sectionId of NAV_SECTION_IDS) {
+        const sectionElement = document.getElementById(sectionId)
+        if (sectionElement && sectionElement.offsetTop <= currentPosition) {
+          nextSection = sectionId
+        }
+      }
+
+      setActiveSection(nextSection)
+    }
+
+    updateActiveSection()
+    window.addEventListener('scroll', updateActiveSection, { passive: true })
+    window.addEventListener('resize', updateActiveSection)
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection)
+      window.removeEventListener('resize', updateActiveSection)
+    }
+  }, [])
 
   const getLanguageButtonClass = (targetLanguage) => {
     const baseClass =
@@ -220,21 +256,29 @@ function App() {
   return (
     <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-fixed">
       <nav className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-cyan-500/20 bg-slate-900/60 px-6 py-4 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl">
-        <div className="font-inter text-xl font-black uppercase tracking-tighter text-cyan-400">ENGINEER.OS</div>
+        <a className="font-inter text-xl font-black tracking-tighter text-cyan-400" href="#top">
+          Portfolio
+        </a>
 
         <div className="hidden items-center gap-8 font-inter tracking-tight md:flex">
-          <a className="text-slate-400 transition-colors hover:text-slate-100" href="#stack">
-            {copy.nav.stack}
-          </a>
-          <a className="border-b-2 border-cyan-400 pb-1 font-semibold text-cyan-400" href="#projects">
-            {copy.nav.projects}
-          </a>
-          <a className="text-slate-400 transition-colors hover:text-slate-100" href="#experience">
-            {copy.nav.experience}
-          </a>
-          <a className="text-slate-400 transition-colors hover:text-slate-100" href="#contact">
-            {copy.nav.contact}
-          </a>
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id
+
+            return (
+              <a
+                className={`border-b-2 pb-1 transition-colors ${
+                  isActive
+                    ? 'border-cyan-400 font-semibold text-cyan-400'
+                    : 'border-transparent text-slate-400 hover:text-slate-100'
+                }`}
+                href={`#${item.id}`}
+                key={item.id}
+                onClick={() => setActiveSection(item.id)}
+              >
+                {item.label}
+              </a>
+            )
+          })}
         </div>
 
         <div className="flex items-center gap-4">
@@ -269,7 +313,7 @@ function App() {
       </nav>
 
       <main>
-        <section className="relative flex min-h-screen items-center overflow-hidden pt-16">
+        <section className="relative flex min-h-screen items-center overflow-hidden pt-16" id="top">
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,229,255,0.1),transparent_70%)]" />
             <div
@@ -335,7 +379,7 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-surface-container-low py-section-padding" id="experience">
+        <section className="scroll-mt-28 bg-surface-container-low py-section-padding" id="experience">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg">
               <h2 className="font-h2 text-on-background">{copy.experience.title}</h2>
@@ -418,7 +462,7 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-surface py-section-padding" id="projects">
+        <section className="scroll-mt-28 bg-surface py-section-padding" id="projects">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg flex flex-col items-end justify-between gap-4 md:flex-row">
               <div>
@@ -569,7 +613,7 @@ function App() {
           </div>
         </section>
 
-        <section className="py-section-padding" id="stack">
+        <section className="scroll-mt-28 py-section-padding" id="stack">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg text-center">
               <h2 className="font-h2 text-on-background">{copy.stack.title}</h2>
@@ -679,7 +723,7 @@ function App() {
           </div>
         </section>
 
-        <section className="py-section-padding" id="contact">
+        <section className="scroll-mt-28 py-section-padding" id="contact">
           <div className="container-max mx-auto px-gutter text-center">
             <div className="ambient-glow glass-card mx-auto max-w-4xl rounded-2xl border border-white/10 p-12">
               <h2 className="mb-4 font-h1 text-white">
