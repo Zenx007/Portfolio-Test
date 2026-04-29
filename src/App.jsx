@@ -5,6 +5,8 @@ import profilePhoto from './assets/profile-photo.png'
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const NAV_SECTION_IDS = ['top', 'experience', 'projects', 'stack', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
+const SUMMARY_WAVE_SPLIT_DURATION_MS = 1100
+const SUMMARY_WAVE_LOCAL_RADIUS_PX = 130
 
 const translations = {
   en: {
@@ -201,9 +203,13 @@ const resolveInitialLanguage = () => {
 function App() {
   const [language, setLanguage] = useState(resolveInitialLanguage)
   const [activeSection, setActiveSection] = useState(NAV_SECTION_IDS[0])
+  const [isSummaryWaveSplitActive, setIsSummaryWaveSplitActive] = useState(false)
+  const [summaryWaveSplitPoint, setSummaryWaveSplitPoint] = useState({ x: '50%', y: '50%' })
   const pendingNavTargetRef = useRef(null)
   const isClickNavigatingRef = useRef(false)
   const clickScrollIdleTimeoutRef = useRef(null)
+  const summaryWaveSplitTimeoutRef = useRef(null)
+  const summaryWaveSplitFrameRef = useRef(null)
   const copy = translations[language]
   const navItems = [
     { id: 'top', label: copy.nav.summary },
@@ -219,6 +225,33 @@ function App() {
   }, [language])
 
   const getNavOffset = () => 24
+
+  const handleSummaryWaveClick = (event) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
+    const sectionBounds = event.currentTarget.getBoundingClientRect()
+    const clickX = event.clientX - sectionBounds.left
+    const clickY = event.clientY - sectionBounds.top
+
+    setSummaryWaveSplitPoint({ x: `${clickX}px`, y: `${clickY}px` })
+    setIsSummaryWaveSplitActive(false)
+    window.clearTimeout(summaryWaveSplitTimeoutRef.current)
+
+    if (summaryWaveSplitFrameRef.current !== null) {
+      window.cancelAnimationFrame(summaryWaveSplitFrameRef.current)
+    }
+
+    summaryWaveSplitFrameRef.current = window.requestAnimationFrame(() => {
+      setIsSummaryWaveSplitActive(true)
+      summaryWaveSplitTimeoutRef.current = window.setTimeout(() => {
+        setIsSummaryWaveSplitActive(false)
+        summaryWaveSplitTimeoutRef.current = null
+      }, SUMMARY_WAVE_SPLIT_DURATION_MS)
+      summaryWaveSplitFrameRef.current = null
+    })
+  }
 
   const handleNavItemClick = (event, sectionId) => {
     event.preventDefault()
@@ -339,6 +372,15 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(summaryWaveSplitTimeoutRef.current)
+      if (summaryWaveSplitFrameRef.current !== null) {
+        window.cancelAnimationFrame(summaryWaveSplitFrameRef.current)
+      }
+    }
+  }, [])
+
   const getLanguageButtonClass = (targetLanguage) => {
     const baseClass =
       'flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-slate-800 text-sm transition-all'
@@ -348,6 +390,12 @@ function App() {
     }
 
     return `${baseClass} border border-white/10 opacity-50 hover:opacity-100`
+  }
+
+  const summaryWaveSplitStyle = {
+    '--summary-wave-click-x': summaryWaveSplitPoint.x,
+    '--summary-wave-click-y': summaryWaveSplitPoint.y,
+    '--summary-wave-local-radius': `${SUMMARY_WAVE_LOCAL_RADIUS_PX}px`,
   }
 
   return (
@@ -422,14 +470,32 @@ function App() {
       <div aria-hidden="true" className="h-px w-full bg-cyan-500/35" />
 
       <main>
-        <section className="relative flex min-h-screen items-center overflow-hidden" id="top">
-          <div aria-hidden="true" className="summary-wave-background absolute inset-0 z-0">
+        <section className="relative flex min-h-screen items-center overflow-hidden" id="top" onClick={handleSummaryWaveClick}>
+          <div
+            aria-hidden="true"
+            className={`summary-wave-background absolute inset-0 z-0 ${
+              isSummaryWaveSplitActive ? 'summary-wave-background--split-active' : ''
+            }`}
+            style={summaryWaveSplitStyle}
+          >
             <div className="summary-wave-glow" />
             <div className="summary-wave-grid summary-wave-grid--far" />
             <div className="summary-wave-grid summary-wave-grid--near" />
             <div className="summary-wave-contours summary-wave-contours--primary" />
             <div className="summary-wave-contours summary-wave-contours--secondary" />
             <div className="summary-wave-contours summary-wave-contours--tertiary" />
+
+            <div
+              className={`summary-wave-local-expansion ${
+                isSummaryWaveSplitActive ? 'summary-wave-local-expansion--active' : ''
+              }`}
+            >
+              <div className="summary-wave-grid summary-wave-grid--far" />
+              <div className="summary-wave-grid summary-wave-grid--near" />
+              <div className="summary-wave-contours summary-wave-contours--primary" />
+              <div className="summary-wave-contours summary-wave-contours--secondary" />
+              <div className="summary-wave-contours summary-wave-contours--tertiary" />
+            </div>
           </div>
 
           <div className="container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
