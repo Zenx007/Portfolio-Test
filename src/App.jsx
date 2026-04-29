@@ -32,16 +32,25 @@ const translations = {
     },
     experience: {
       title: 'Professional Trajectory',
+      subtitle: 'A timeline of technical growth and architecture of complex systems.',
+      terminalPrimaryLabel: 'ANALYSIS_SYSTEMS.LOG',
+      terminalSecondaryLabel: 'CORE_DEV.LOG',
+      activeStatus: 'ACTIVE',
       primaryRole: 'Systems Analyst',
       primaryDate: 'FEB 2026 - PRESENT',
+      primaryCompany: 'Second Mind',
       primaryDescription:
-        'Leading technical architecture for high-scale distributed systems. Responsibility for system integrity, cloud migration strategies, and cross-team architectural alignment on AWS.',
+        'I worked on the development and maintenance of back-end systems, being responsible for implementing APIs and services that support web and mobile applications. I worked with C# (.NET), Node.js, and Python, focusing on building scalable, secure, and high-performance solutions. My main responsibilities included developing REST APIs, integrating with external services, and modeling data in PostgreSQL, as well as optimizing queries and continuously improving application performance. I also participate in deployment and maintenance routines in cloud environments such as Amazon Web Services and Railway, collaborating with the evolution of the architecture and ensuring system stability.',
       uptimeLabel: 'UPTIME ARCHITECTURE',
       latencyLabel: 'LATENCY REDUCTION',
+      microservicesLabel: 'MICROSERVICES',
       secondaryRole: 'Software Developer',
       secondaryDate: 'MAY 2025 - FEB 2026',
+      secondaryCompany: 'Second Mind',
       secondaryDescription:
-        'Developed core features for enterprise data pipelines using NestJS and .NET. Contributed to microservices scalability and performance monitoring improvements.',
+        'I worked on the development and maintenance of back-end systems, being responsible for implementing APIs and services that support web and mobile applications. I worked with C# (.NET), Node.js, and Python, focusing on building scalable, secure, and high-performance solutions. My main responsibilities included developing REST APIs, integrating with external services, and modeling data in PostgreSQL, as well as optimizing queries and continuously improving application performance. I also participate in deployment and maintenance routines in cloud environments such as Amazon Web Services and Railway, collaborating with the evolution of the architecture and ensuring system stability.',
+      secondaryTagOne: 'High-Volume Data Pipelines',
+      secondaryTagTwo: 'Observability Implementation',
     },
     projects: {
       title: 'Technical Labs',
@@ -119,17 +128,26 @@ const translations = {
       profileAlt: 'Foto de perfil',
     },
     experience: {
-      title: 'Trajetoria Profissional',
+      title: 'Trajetória Profissional',
+      subtitle: 'Uma linha do tempo de evolução técnica e arquitetura de sistemas complexos.',
+      terminalPrimaryLabel: 'ANALISE_SISTEMAS.LOG',
+      terminalSecondaryLabel: 'CORE_DEV.LOG',
+      activeStatus: 'ATIVO',
       primaryRole: 'Analista de Sistemas',
       primaryDate: 'FEV 2026 - ATUAL',
+      primaryCompany: 'Second Mind',
       primaryDescription:
-        'Liderando a arquitetura tecnica de sistemas distribuidos em larga escala. Responsavel pela integridade do sistema, estrategias de migracao para nuvem e alinhamento arquitetural entre equipes na AWS.',
+        'Atuei no desenvolvimento e manutenção de sistemas back-end, sendo responsável pela implementação de APIs e serviços que suportam aplicações web e mobile. Trabalhei com C# (.NET), Node.js e Python, focando na construção de soluções escaláveis, seguras e com alto desempenho. Minhas principais responsabilidades incluíam o desenvolvimento de APIs REST, integração com serviços externos e modelagem de dados em PostgreSQL, além da otimização de consultas e melhoria contínua da performance das aplicações. Também participo de rotinas de deploy e manutenção em ambientes cloud como Amazon Web Services e Railway, colaborando com a evolução da arquitetura e garantindo a estabilidade dos sistemas.',
       uptimeLabel: 'ARQUITETURA DE UPTIME',
       latencyLabel: 'REDUCAO DE LATENCIA',
+      microservicesLabel: 'MICROSSERVIÇOS',
       secondaryRole: 'Desenvolvedor de Software',
       secondaryDate: 'MAI 2025 - FEV 2026',
+      secondaryCompany: 'Second Mind',
       secondaryDescription:
-        'Desenvolvimento de funcionalidades centrais para pipelines de dados corporativos com NestJS e .NET. Contribuicao para escalabilidade de microservicos e melhoria de monitoramento de performance.',
+        'Atuei no desenvolvimento e manutenção de sistemas back-end, sendo responsável pela implementação de APIs e serviços que suportam aplicações web e mobile. Trabalhei com C# (.NET), Node.js e Python, focando na construção de soluções escaláveis, seguras e com alto desempenho. Minhas principais responsabilidades incluíam o desenvolvimento de APIs REST, integração com serviços externos e modelagem de dados em PostgreSQL, além da otimização de consultas e melhoria contínua da performance das aplicações. Também participo de rotinas de deploy e manutenção em ambientes cloud como Amazon Web Services e Railway, colaborando com a evolução da arquitetura e garantindo a estabilidade dos sistemas.',
+      secondaryTagOne: 'Pipelines de Dados de Alto Volume',
+      secondaryTagTwo: 'Implementacao de Observabilidade',
     },
     projects: {
       title: 'Laboratorios Tecnicos',
@@ -541,16 +559,27 @@ function App() {
         <section className="bg-surface-container-low py-section-padding" id="experience">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg">
-              <h2 className="font-h2 text-on-background">{copy.experience.title}</h2>
+              <h2 className="font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">
+                {copy.experience.title}
+              </h2>
+              <p className="mt-3 font-inter text-base text-[#b8c8da]">{copy.experience.subtitle}</p>
               <div className="mt-4 h-1 w-24 bg-primary-container" />
             </div>
 
             <div className="grid gap-stack-md">
               <div className="glass-card overflow-hidden rounded-xl">
-                <div className="terminal-header flex items-center gap-2 px-4 py-3">
-                  <div className="h-3 w-3 rounded-full border border-red-600 bg-red-500" />
-                  <div className="h-3 w-3 rounded-full border border-yellow-600 bg-yellow-500" />
-                  <div className="h-3 w-3 rounded-full border border-green-600 bg-green-500" />
+                <div className="terminal-header flex items-center justify-between px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                    <span className="font-code-snippet text-[11px] tracking-[0.2em] text-slate-500">
+                      {copy.experience.terminalPrimaryLabel}
+                    </span>
+                  </div>
+                  <span className="rounded-sm bg-primary-container/20 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
+                    {copy.experience.activeStatus}
+                  </span>
                 </div>
 
                 <div className="relative flex flex-col items-start gap-8 p-stack-lg md:flex-row">
@@ -566,24 +595,40 @@ function App() {
                     <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
                       <div>
                         <h3 className="text-2xl font-bold text-white">{copy.experience.primaryRole}</h3>
-                        <p className="font-medium text-primary-container">Second Mind</p>
+                        <p className="font-medium text-primary-container">{copy.experience.primaryCompany}</p>
                       </div>
                       <span className="rounded bg-primary-container/5 px-3 py-1 font-code-snippet text-primary-container">
                         {copy.experience.primaryDate}
                       </span>
                     </div>
 
+                    <div className="mb-5 flex flex-wrap gap-2">
+                      {['C#', '.NET', 'Node.js', 'Python', 'PostgreSQL', 'AWS', 'Railway'].map((tag) => (
+                        <span
+                          key={`primary-tag-${tag}`}
+                          className="rounded-sm border border-primary-container/15 bg-slate-900/60 px-2 py-1 font-code-snippet text-[10px] text-slate-400"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
                     <p className="mb-6 max-w-3xl font-body-md text-on-surface-variant">{copy.experience.primaryDescription}</p>
 
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="border-l-2 border-primary-container bg-surface-container p-4">
-                        <div className="mb-1 text-3xl font-bold text-white">99.99%</div>
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      <div className="border border-primary-container/10 bg-surface-container p-4">
+                        <div className="mb-1 text-4xl font-bold text-primary-container">99.99%</div>
                         <div className="font-label-caps text-sm text-slate-400">{copy.experience.uptimeLabel}</div>
                       </div>
 
-                      <div className="border-l-2 border-primary-container bg-surface-container p-4">
-                        <div className="mb-1 text-3xl font-bold text-white">50%</div>
+                      <div className="border border-primary-container/10 bg-surface-container p-4">
+                        <div className="mb-1 text-4xl font-bold text-primary-container">50%</div>
                         <div className="font-label-caps text-sm text-slate-400">{copy.experience.latencyLabel}</div>
+                      </div>
+
+                      <div className="border border-primary-container/10 bg-surface-container p-4">
+                        <div className="mb-1 text-4xl font-bold text-primary-container">20+</div>
+                        <div className="font-label-caps text-sm text-slate-400">{copy.experience.microservicesLabel}</div>
                       </div>
                     </div>
                   </div>
@@ -591,10 +636,13 @@ function App() {
               </div>
 
               <div className="glass-card overflow-hidden rounded-xl opacity-80 transition-opacity hover:opacity-100">
-                <div className="terminal-header flex items-center gap-2 px-4 py-3">
-                  <div className="h-3 w-3 rounded-full border border-red-600 bg-red-500" />
-                  <div className="h-3 w-3 rounded-full border border-yellow-600 bg-yellow-500" />
-                  <div className="h-3 w-3 rounded-full border border-green-600 bg-green-500" />
+                <div className="terminal-header flex items-center gap-3 px-4 py-3">
+                  <div className="h-2.5 w-2.5 rounded-full bg-slate-600" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-slate-600" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-slate-600" />
+                  <span className="font-code-snippet text-[11px] tracking-[0.2em] text-slate-600">
+                    {copy.experience.terminalSecondaryLabel}
+                  </span>
                 </div>
 
                 <div className="relative flex flex-col items-start gap-8 p-stack-lg md:flex-row">
@@ -608,12 +656,17 @@ function App() {
                     <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
                       <div>
                         <h3 className="text-xl font-bold text-white">{copy.experience.secondaryRole}</h3>
-                        <p className="font-medium text-slate-400">Second Mind</p>
+                        <p className="font-medium text-slate-400">{copy.experience.secondaryCompany}</p>
                       </div>
                       <span className="font-code-snippet text-slate-400">{copy.experience.secondaryDate}</span>
                     </div>
 
                     <p className="max-w-3xl font-body-md text-on-surface-variant">{copy.experience.secondaryDescription}</p>
+
+                    <div className="mt-6 flex flex-wrap gap-6 text-xs text-slate-500">
+                      <span>{copy.experience.secondaryTagOne}</span>
+                      <span>{copy.experience.secondaryTagTwo}</span>
+                    </div>
                   </div>
                 </div>
               </div>
