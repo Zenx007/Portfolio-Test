@@ -2,9 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
-const heroTextureUrl =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuBN5x0omsxTH1DGIyaHqqMRoZ_JBzlueM1To7EguutK_rkE0GOaCdRl9fBblP87SV4pZgcgjsHCSju_ClTBnfrVxE8FDFhMNXGIYuFFwvi7bx-HmzitMsCiGkFqzNkwzl0T5_JkOzJQihn-YiRPUeBoZam1rLR3_9DnvOuOne5-h2cCtNBdKcflNap5pDqzxDTbR07eBDr3JQ-sK_pJx7kovi7bGq_Lw1ArE2xWF1gcgb1B5-oI6OXuH3fpu28b7VCQGVlB3DifVu8'
-
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const NAV_SECTION_IDS = ['top', 'experience', 'projects', 'stack', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
@@ -426,14 +423,13 @@ function App() {
 
       <main>
         <section className="relative flex min-h-screen items-center overflow-hidden" id="top">
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,229,255,0.1),transparent_70%)]" />
-            <div
-              className="hero-mesh-layer absolute h-full w-full"
-              style={{
-                backgroundImage: `url('${heroTextureUrl}')`,
-              }}
-            />
+          <div aria-hidden="true" className="summary-wave-background absolute inset-0 z-0">
+            <div className="summary-wave-glow" />
+            <div className="summary-wave-grid summary-wave-grid--far" />
+            <div className="summary-wave-grid summary-wave-grid--near" />
+            <div className="summary-wave-contours summary-wave-contours--primary" />
+            <div className="summary-wave-contours summary-wave-contours--secondary" />
+            <div className="summary-wave-contours summary-wave-contours--tertiary" />
           </div>
 
           <div className="container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
