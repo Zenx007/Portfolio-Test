@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
@@ -7,6 +7,7 @@ const heroTextureUrl =
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const NAV_SECTION_IDS = ['top', 'experience', 'projects', 'stack', 'contact']
+const NAV_SCROLL_IDLE_MS = 140
 
 const translations = {
   en: {
@@ -203,6 +204,9 @@ const resolveInitialLanguage = () => {
 function App() {
   const [language, setLanguage] = useState(resolveInitialLanguage)
   const [activeSection, setActiveSection] = useState(NAV_SECTION_IDS[0])
+  const pendingNavTargetRef = useRef(null)
+  const isClickNavigatingRef = useRef(false)
+  const clickScrollIdleTimeoutRef = useRef(null)
   const copy = translations[language]
   const navItems = [
     { id: 'top', label: copy.nav.summary },
@@ -217,28 +221,124 @@ function App() {
     document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en'
   }, [language])
 
-  useEffect(() => {
-    const updateActiveSection = () => {
-      const currentPosition = window.scrollY + window.innerHeight * 0.35
-      let nextSection = NAV_SECTION_IDS[0]
+  const getNavOffset = () => 24
 
-      for (const sectionId of NAV_SECTION_IDS) {
-        const sectionElement = document.getElementById(sectionId)
-        if (sectionElement && sectionElement.offsetTop <= currentPosition) {
-          nextSection = sectionId
+  const handleNavItemClick = (event, sectionId) => {
+    event.preventDefault()
+
+    const sectionElement = document.getElementById(sectionId)
+    if (!sectionElement) {
+      return
+    }
+
+    const targetScrollTop = Math.max(
+      0,
+      sectionElement.getBoundingClientRect().top + window.scrollY - getNavOffset(),
+    )
+
+    const hasDistanceToScroll = Math.abs(window.scrollY - targetScrollTop) > 1
+    pendingNavTargetRef.current = sectionId
+    isClickNavigatingRef.current = hasDistanceToScroll
+    window.clearTimeout(clickScrollIdleTimeoutRef.current)
+    clickScrollIdleTimeoutRef.current = null
+
+    setActiveSection(sectionId)
+    window.scrollTo({ top: targetScrollTop, behavior: hasDistanceToScroll ? 'smooth' : 'auto' })
+  }
+
+  useEffect(() => {
+    let ticking = false
+
+    const finalizeClickNavigation = () => {
+      const pendingSectionId = pendingNavTargetRef.current
+      if (pendingSectionId) {
+        setActiveSection((previousSection) => (previousSection === pendingSectionId ? previousSection : pendingSectionId))
+      }
+
+      isClickNavigatingRef.current = false
+      pendingNavTargetRef.current = null
+      window.clearTimeout(clickScrollIdleTimeoutRef.current)
+      clickScrollIdleTimeoutRef.current = null
+    }
+
+    const resolveActiveSection = () => {
+      const sectionElements = NAV_SECTION_IDS.map((sectionId) => document.getElementById(sectionId)).filter(Boolean)
+      if (sectionElements.length === 0) {
+        return NAV_SECTION_IDS[0]
+      }
+
+      const currentScrollTop = window.scrollY
+      if (currentScrollTop <= 4) {
+        return NAV_SECTION_IDS[0]
+      }
+
+      const isAtBottom = window.innerHeight + currentScrollTop >= document.documentElement.scrollHeight - 2
+      if (isAtBottom) {
+        return sectionElements[sectionElements.length - 1].id
+      }
+
+      const trackingLine = currentScrollTop + getNavOffset()
+      for (let index = sectionElements.length - 1; index >= 0; index -= 1) {
+        const sectionTop = sectionElements[index].getBoundingClientRect().top + currentScrollTop
+        if (trackingLine >= sectionTop) {
+          return sectionElements[index].id
         }
       }
 
-      setActiveSection(nextSection)
+      return NAV_SECTION_IDS[0]
+    }
+
+    const updateActiveSection = () => {
+      if (isClickNavigatingRef.current) {
+        const pendingSectionId = pendingNavTargetRef.current
+        if (pendingSectionId) {
+          setActiveSection((previousSection) => (previousSection === pendingSectionId ? previousSection : pendingSectionId))
+        }
+        ticking = false
+        return
+      }
+
+      const nextSection = resolveActiveSection()
+      setActiveSection((previousSection) => (previousSection === nextSection ? previousSection : nextSection))
+      ticking = false
+    }
+
+    const onScrollOrResize = () => {
+      if (isClickNavigatingRef.current) {
+        window.clearTimeout(clickScrollIdleTimeoutRef.current)
+        clickScrollIdleTimeoutRef.current = window.setTimeout(() => {
+          finalizeClickNavigation()
+          window.requestAnimationFrame(updateActiveSection)
+        }, NAV_SCROLL_IDLE_MS)
+      }
+
+      if (ticking) {
+        return
+      }
+
+      ticking = true
+      window.requestAnimationFrame(updateActiveSection)
+    }
+
+    const onScrollEnd = () => {
+      if (!isClickNavigatingRef.current) {
+        return
+      }
+
+      finalizeClickNavigation()
+      window.requestAnimationFrame(updateActiveSection)
     }
 
     updateActiveSection()
-    window.addEventListener('scroll', updateActiveSection, { passive: true })
-    window.addEventListener('resize', updateActiveSection)
+    window.addEventListener('scroll', onScrollOrResize, { passive: true })
+    window.addEventListener('resize', onScrollOrResize)
+    window.addEventListener('scrollend', onScrollEnd)
 
     return () => {
-      window.removeEventListener('scroll', updateActiveSection)
-      window.removeEventListener('resize', updateActiveSection)
+      window.removeEventListener('scroll', onScrollOrResize)
+      window.removeEventListener('resize', onScrollOrResize)
+      window.removeEventListener('scrollend', onScrollEnd)
+      window.clearTimeout(clickScrollIdleTimeoutRef.current)
     }
   }, [])
 
@@ -255,8 +355,10 @@ function App() {
 
   return (
     <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-fixed">
-      <nav className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-cyan-500/20 bg-slate-900/60 px-6 py-4 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl">
-        <a className="font-inter text-xl font-black tracking-tighter text-cyan-400" href="#top">
+      <nav
+        className="relative z-20 flex w-full items-center justify-between bg-slate-900/60 px-6 py-4 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl"
+      >
+        <a className="font-inter text-xl font-black tracking-tighter text-cyan-400" href="#top" onClick={(event) => handleNavItemClick(event, 'top')}>
           Portfolio
         </a>
 
@@ -273,7 +375,7 @@ function App() {
                 }`}
                 href={`#${item.id}`}
                 key={item.id}
-                onClick={() => setActiveSection(item.id)}
+                onClick={(event) => handleNavItemClick(event, item.id)}
               >
                 {item.label}
               </a>
@@ -311,9 +413,10 @@ function App() {
           </button>
         </div>
       </nav>
+      <div aria-hidden="true" className="h-px w-full bg-cyan-500/35" />
 
       <main>
-        <section className="relative flex min-h-screen items-center overflow-hidden pt-16" id="top">
+        <section className="relative flex min-h-screen items-center overflow-hidden" id="top">
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,229,255,0.1),transparent_70%)]" />
             <div
@@ -322,21 +425,6 @@ function App() {
                 backgroundImage: `url('${heroTextureUrl}')`,
               }}
             />
-            <div aria-hidden="true" className="hero-wave-field">
-              <svg className="hero-wave-svg" preserveAspectRatio="none" shapeRendering="auto" viewBox="0 24 150 28">
-                <defs>
-                  <path
-                    d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"
-                    id="hero-gentle-wave"
-                  />
-                </defs>
-                <g className="hero-wave-parallax">
-                  <use className="hero-wave-layer hero-wave-layer-1" x="48" xlinkHref="#hero-gentle-wave" y="0" />
-                  <use className="hero-wave-layer hero-wave-layer-2" x="48" xlinkHref="#hero-gentle-wave" y="3" />
-                  <use className="hero-wave-layer hero-wave-layer-3" x="48" xlinkHref="#hero-gentle-wave" y="5" />
-                </g>
-              </svg>
-            </div>
           </div>
 
           <div className="container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
@@ -379,7 +467,7 @@ function App() {
           </div>
         </section>
 
-        <section className="scroll-mt-28 bg-surface-container-low py-section-padding" id="experience">
+        <section className="bg-surface-container-low py-section-padding" id="experience">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg">
               <h2 className="font-h2 text-on-background">{copy.experience.title}</h2>
@@ -462,7 +550,7 @@ function App() {
           </div>
         </section>
 
-        <section className="scroll-mt-28 bg-surface py-section-padding" id="projects">
+        <section className="bg-surface py-section-padding" id="projects">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg flex flex-col items-end justify-between gap-4 md:flex-row">
               <div>
@@ -613,7 +701,7 @@ function App() {
           </div>
         </section>
 
-        <section className="scroll-mt-28 py-section-padding" id="stack">
+        <section className="py-section-padding" id="stack">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg text-center">
               <h2 className="font-h2 text-on-background">{copy.stack.title}</h2>
@@ -723,7 +811,7 @@ function App() {
           </div>
         </section>
 
-        <section className="scroll-mt-28 py-section-padding" id="contact">
+        <section className="py-section-padding" id="contact">
           <div className="container-max mx-auto px-gutter text-center">
             <div className="ambient-glow glass-card mx-auto max-w-4xl rounded-2xl border border-white/10 p-12">
               <h2 className="mb-4 font-h1 text-white">
