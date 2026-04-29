@@ -358,8 +358,17 @@ function App() {
       <nav
         className="relative z-20 flex w-full items-center justify-between bg-slate-900/60 px-6 py-4 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl"
       >
-        <a className="font-inter text-xl font-black tracking-tighter text-cyan-400" href="#top" onClick={(event) => handleNavItemClick(event, 'top')}>
-          Portfolio
+        <a
+          className="flex items-center gap-3 font-inter text-cyan-400"
+          href="#top"
+          onClick={(event) => handleNavItemClick(event, 'top')}
+        >
+          <img
+            alt="Foto do desenvolvedor"
+            className="h-10 w-10 rounded-md border border-cyan-500/30 object-cover shadow-[0_0_14px_rgba(0,229,255,0.2)]"
+            src="/header-photo.png"
+          />
+          <span className="text-sm font-black tracking-tight sm:text-base">Desenvolvedor Fullstack</span>
         </a>
 
         <div className="hidden items-center gap-8 font-inter tracking-tight md:flex">
