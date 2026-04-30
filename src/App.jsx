@@ -522,7 +522,7 @@ function App() {
                 {copy.hero.badge}
               </span>
 
-              <h1 className="max-w-2xl font-h1 text-on-background">
+              <h1 className="max-w-2xl font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">
                 {copy.hero.titleStart} <span className="text-primary-container">{copy.hero.titleHighlight}</span>
               </h1>
 
@@ -594,7 +594,7 @@ function App() {
                   <div className="flex-grow">
                     <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
                       <div>
-                        <h3 className="text-2xl font-bold text-white">{copy.experience.primaryRole}</h3>
+                        <h3 className="font-inter text-2xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.experience.primaryRole}</h3>
                         <p className="font-medium text-primary-container">{copy.experience.primaryCompany}</p>
                       </div>
                       <span className="rounded bg-primary-container/5 px-3 py-1 font-code-snippet text-primary-container">
@@ -655,7 +655,7 @@ function App() {
                   <div className="flex-grow">
                     <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
                       <div>
-                        <h3 className="text-xl font-bold text-white">{copy.experience.secondaryRole}</h3>
+                        <h3 className="font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.experience.secondaryRole}</h3>
                         <p className="font-medium text-slate-400">{copy.experience.secondaryCompany}</p>
                       </div>
                       <span className="font-code-snippet text-slate-400">{copy.experience.secondaryDate}</span>
@@ -678,7 +678,7 @@ function App() {
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg flex flex-col items-end justify-between gap-4 md:flex-row">
               <div>
-                <h2 className="font-h2 text-on-background">{copy.projects.title}</h2>
+                <h2 className="font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">{copy.projects.title}</h2>
                 <p className="mt-2 text-on-surface-variant">{copy.projects.description}</p>
               </div>
 
@@ -713,7 +713,7 @@ function App() {
                 </div>
 
                 <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 text-xl font-bold text-white">{copy.projects.firstTitle}</h4>
+                  <h4 className="mb-2 font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.projects.firstTitle}</h4>
                   <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.firstDescription}</p>
 
                   <div className="flex items-center justify-between border-t border-white/5 pt-4">
@@ -756,7 +756,7 @@ function App() {
                 </div>
 
                 <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 text-xl font-bold text-white">{copy.projects.secondTitle}</h4>
+                  <h4 className="mb-2 font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.projects.secondTitle}</h4>
                   <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.secondDescription}</p>
 
                   <div className="flex items-center justify-between border-t border-white/5 pt-4">
@@ -799,7 +799,7 @@ function App() {
                 </div>
 
                 <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 text-xl font-bold text-white">{copy.projects.thirdTitle}</h4>
+                  <h4 className="mb-2 font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.projects.thirdTitle}</h4>
                   <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.thirdDescription}</p>
 
                   <div className="flex items-center justify-between border-t border-white/5 pt-4">
@@ -828,7 +828,7 @@ function App() {
         <section className="py-section-padding" id="stack">
           <div className="container-max mx-auto px-gutter">
             <div className="mb-stack-lg text-center">
-              <h2 className="font-h2 text-on-background">{copy.stack.title}</h2>
+              <h2 className="font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">{copy.stack.title}</h2>
               <p className="mt-2 font-body-md text-on-surface-variant">{copy.stack.description}</p>
             </div>
 
@@ -838,7 +838,7 @@ function App() {
                   <div className="flex h-10 w-10 items-center justify-center rounded bg-primary-container/10">
                     <span className="material-symbols-outlined text-primary-container">dns</span>
                   </div>
-                  <h3 className="font-h2 text-2xl text-white">{copy.stack.backendTitle}</h3>
+                  <h3 className="font-inter text-2xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.stack.backendTitle}</h3>
                 </div>
 
                 <p className="mb-8 text-on-surface-variant">{copy.stack.backendDescription}</p>
@@ -876,7 +876,7 @@ function App() {
                   <div className="flex h-10 w-10 items-center justify-center rounded bg-cyan-400/10">
                     <span className="material-symbols-outlined text-cyan-400">layers</span>
                   </div>
-                  <h3 className="font-h2 text-2xl text-white">{copy.stack.frontendTitle}</h3>
+                  <h3 className="font-inter text-2xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.stack.frontendTitle}</h3>
                 </div>
 
                 <p className="mb-8 text-on-surface-variant">{copy.stack.frontendDescription}</p>
@@ -921,11 +921,11 @@ function App() {
                 </span>
               </div>
 
-              <h2 className="mb-6 font-h2 text-on-background">{copy.education.title}</h2>
+              <h2 className="mb-6 font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">{copy.education.title}</h2>
 
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">{copy.education.degree}</h3>
+                  <h3 className="font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.education.degree}</h3>
                   <p className="text-primary-container">{copy.education.university}</p>
                 </div>
 
@@ -938,7 +938,7 @@ function App() {
         <section className="py-section-padding" id="contact">
           <div className="container-max mx-auto px-gutter text-center">
             <div className="ambient-glow glass-card mx-auto max-w-4xl rounded-2xl border border-white/10 p-12">
-              <h2 className="mb-4 font-h1 text-white">
+              <h2 className="mb-4 font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">
                 {copy.contact.titleStart} <span className="text-primary-container">{copy.contact.titleHighlight}</span>{' '}
                 {copy.contact.titleEnd}
               </h2>
