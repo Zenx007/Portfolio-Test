@@ -100,8 +100,7 @@ const translations = {
       titleStart: "Let's build something",
       titleHighlight: 'scalable',
       titleEnd: 'together',
-      description:
-        'Currently available for senior architectural roles or specialized consulting. Fluent in English (C1 Proficiency).',
+      description: 'Currently available for projects. Fluent in English (C1 Proficiency).',
       primaryButton: 'Contact Me',
       secondaryButton: 'View Documentation',
       languageLevel: 'ENGLISH: C1 ADVANCED',
@@ -195,8 +194,7 @@ const translations = {
       titleStart: 'Vamos construir algo',
       titleHighlight: 'escalavel',
       titleEnd: 'juntos',
-      description:
-        'Disponivel para posicoes seniores de arquitetura ou consultoria especializada. Ingles fluente (C1).',
+      description: 'Disponivel para projetos. Ingles fluente (C1).',
       primaryButton: 'Falar Comigo',
       secondaryButton: 'Ver Documentacao',
       languageLevel: 'INGLES: C1 AVANCADO',
@@ -851,10 +849,10 @@ function App() {
   return (
     <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-fixed">
       <nav
-        className="relative z-20 flex w-full items-center justify-between bg-slate-900/60 px-6 py-4 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl"
+        className="relative z-20 flex w-full flex-wrap items-center justify-between gap-3 bg-slate-900/60 px-4 py-3 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl sm:px-6 sm:py-4"
       >
         <a
-          className="flex items-center gap-3 font-inter text-cyan-400"
+          className="flex min-w-0 flex-1 items-center gap-3 font-inter text-cyan-400 lg:flex-none"
           href="#top"
           onClick={(event) => handleNavItemClick(event, 'top')}
         >
@@ -863,10 +861,10 @@ function App() {
             className="h-10 w-10 rounded-md border border-cyan-500/30 object-cover shadow-[0_0_14px_rgba(0,229,255,0.2)]"
             src="/header-photo.png"
           />
-          <span className="text-sm font-black tracking-tight sm:text-base">Desenvolvedor Fullstack</span>
+          <span className="truncate text-xs font-black tracking-normal sm:text-base">Desenvolvedor Fullstack</span>
         </a>
 
-        <div className="hidden items-center gap-8 font-inter tracking-tight md:flex">
+        <div className="hidden items-center gap-8 font-inter tracking-normal lg:flex">
           {navItems.map((item) => {
             const isActive = activeSection === item.id
 
@@ -887,8 +885,8 @@ function App() {
           })}
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="mr-4 flex items-center gap-2 rounded-full border border-white/5 bg-black/20 p-1.5">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 rounded-full border border-white/5 bg-black/20 p-1.5">
             <button
               aria-label={copy.language.portuguese}
               aria-pressed={language === 'pt'}
@@ -912,7 +910,7 @@ function App() {
           </div>
 
           <a
-            className="rounded bg-primary-container px-6 py-2 font-bold text-on-primary-fixed transition-all duration-300 hover:scale-95 hover:opacity-80"
+            className="rounded bg-primary-container px-4 py-2 text-sm font-bold text-on-primary-fixed transition-all duration-300 hover:scale-95 hover:opacity-80 sm:px-6 sm:text-base"
             href={RESUME_PATH}
             rel="noreferrer"
             target="_blank"
@@ -921,6 +919,28 @@ function App() {
           </a>
         </div>
       </nav>
+      <div className="border-t border-white/5 bg-slate-950/70 px-4 py-2 lg:hidden">
+        <div className="mobile-nav-scroll flex gap-2 overflow-x-auto pb-1">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id
+
+            return (
+              <a
+                className={`whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold transition-colors ${
+                  isActive
+                    ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
+                    : 'border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-100'
+                }`}
+                href={`#${item.id}`}
+                key={item.id}
+                onClick={(event) => handleNavItemClick(event, item.id)}
+              >
+                {item.label}
+              </a>
+            )
+          })}
+        </div>
+      </div>
       <div aria-hidden="true" className="h-px w-full bg-cyan-500/35" />
 
       <main>
@@ -934,13 +954,13 @@ function App() {
         >
           <SummaryWaveBackground pointerImpact={summaryTerrainPointer} />
 
-          <div className="summary-hero-content container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="summary-hero-content container-max relative z-10 mx-auto grid items-center gap-stack-lg px-0 sm:px-gutter lg:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-stack-md">
               <span className="rounded-full bg-primary-container/10 px-3 py-1 font-label-caps text-primary-container">
                 {copy.hero.badge}
               </span>
 
-              <h1 className="max-w-2xl font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">
+              <h1 className="max-w-2xl break-words font-inter text-4xl font-extrabold leading-tight tracking-normal text-[#c3d5eb] sm:text-5xl md:text-6xl lg:text-[66px]">
                 {copy.hero.titleStart} <span className="text-primary-container">{copy.hero.titleHighlight}</span>
               </h1>
 
@@ -974,8 +994,8 @@ function App() {
           </div>
         </section>
 
-        <section className="border-t border-white/5 bg-[#050a0e] py-20" id="projects">
-          <div className="container mx-auto max-w-6xl px-6">
+        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="projects">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12">
               <div>
                 <h2 className="mb-2 text-3xl font-bold text-white">{copy.projects.title}</h2>
@@ -1065,10 +1085,10 @@ function App() {
           </div>
         </section>
 
-        <section className="relative border-t border-white/5 bg-[#050a0e] py-20" id="experience">
+        <section className="relative overflow-hidden border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="experience">
           <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-primary-container/5 blur-[120px]" />
 
-          <div className="container mx-auto max-w-6xl px-6">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-16">
               <h2 className="mb-2 text-3xl font-bold text-white">{copy.experience.title}</h2>
               <p className="text-slate-400">{copy.experience.subtitle}</p>
@@ -1119,15 +1139,15 @@ function App() {
           </div>
         </section>
 
-        <section className="border-t border-white/5 bg-[#050a0e] py-20" id="stack">
-          <div className="container mx-auto max-w-6xl px-6">
+        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="stack">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12 text-center">
               <h2 className="mb-2 text-3xl font-bold text-white">{copy.stack.title}</h2>
               <p className="text-slate-400">{copy.stack.description}</p>
             </div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-8">
+              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
                     <span className="material-symbols-outlined text-primary-container">dns</span>
@@ -1137,35 +1157,35 @@ function App() {
 
                 <p className="mb-8 text-sm text-slate-400">{copy.stack.backendDescription}</p>
 
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">terminal</span>
                     <span className="text-xs font-medium text-slate-300">C#</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">data_object</span>
                     <span className="text-xs font-medium text-slate-300">Node.Js</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">database</span>
                     <span className="text-xs font-medium text-slate-300">SQL</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">code_blocks</span>
                     <span className="text-xs font-medium text-slate-300">Python</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">cloud</span>
                     <span className="text-xs font-medium text-slate-300">AWS</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">hub</span>
                     <span className="text-xs font-medium text-slate-300">Docker</span>
                   </div>
                 </div>
               </div>
 
-              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-8">
+              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
                     <span className="material-symbols-outlined text-cyan-400">layers</span>
@@ -1175,28 +1195,28 @@ function App() {
 
                 <p className="mb-8 text-sm text-slate-400">{copy.stack.frontendDescription}</p>
 
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">code</span>
                     <span className="text-xs font-medium text-slate-300">TypeScript</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">widgets</span>
                     <span className="text-xs font-medium text-slate-300">React</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">palette</span>
                     <span className="text-xs font-medium text-slate-300">Tailwind</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">api</span>
                     <span className="text-xs font-medium text-slate-300">Next.js</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">web</span>
                     <span className="text-xs font-medium text-slate-300">HTML/CSS</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">javascript</span>
                     <span className="text-xs font-medium text-slate-300">JavaScript</span>
                   </div>
@@ -1206,23 +1226,23 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-[#050a0e] py-20" id="contact">
-          <div className="container mx-auto max-w-6xl px-6">
-            <div className="glass-card relative overflow-hidden rounded-3xl border border-primary-container/30 p-10 text-center shadow-[0_0_40px_rgba(0,229,255,0.05)] md:p-16">
+        <section className="bg-[#050a0e] py-16 sm:py-20" id="contact">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="glass-card relative overflow-hidden rounded-2xl border border-primary-container/30 p-6 text-center shadow-[0_0_40px_rgba(0,229,255,0.05)] sm:rounded-3xl sm:p-10 md:p-16">
               <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
 
               <div className="relative z-10 mx-auto max-w-2xl">
-                <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
+                <h2 className="mb-6 break-words text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
                   {copy.contact.titleStart} <span className="text-primary-container">{copy.contact.titleHighlight}</span>{' '}
                   {copy.contact.titleEnd}
                 </h2>
 
-                <p className="mb-10 text-lg text-slate-400">{copy.contact.description}</p>
+                <p className="mb-10 text-base text-slate-400 sm:text-lg">{copy.contact.description}</p>
 
                 <div className="mb-8 flex flex-wrap justify-center gap-4">
                   <a
-                    className="flex items-center gap-2 rounded-lg bg-primary-container px-6 py-3 font-bold text-on-primary-fixed shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all hover:bg-primary-container/90"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary-container px-6 py-3 font-bold text-on-primary-fixed shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all hover:bg-primary-container/90 sm:w-auto"
                     href="mailto:joaovictordev0720@gmail.com"
                   >
                     <span className="material-symbols-outlined">mail</span>
@@ -1230,7 +1250,7 @@ function App() {
                   </a>
 
                   <a
-                    className="flex items-center gap-2 rounded-lg border border-primary-container/50 bg-transparent px-6 py-3 font-semibold text-primary-container transition-colors hover:bg-primary-container/10"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-primary-container/50 bg-transparent px-6 py-3 font-semibold text-primary-container transition-colors hover:bg-primary-container/10 sm:w-auto"
                     href="https://www.linkedin.com/in/joão-victor-218b26315"
                     rel="noreferrer"
                     target="_blank"
@@ -1240,7 +1260,7 @@ function App() {
                   </a>
 
                   <a
-                    className="flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-6 py-3 font-semibold text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-transparent px-6 py-3 font-semibold text-slate-300 transition-colors hover:bg-slate-800 hover:text-white sm:w-auto"
                     href="https://github.com/Zenx007"
                     rel="noreferrer"
                     target="_blank"
@@ -1250,7 +1270,7 @@ function App() {
                   </a>
 
                   <a
-                    className="flex items-center gap-2 rounded-lg border border-[#25D366]/50 bg-transparent px-6 py-3 font-semibold text-[#25D366] transition-colors hover:bg-[#25D366]/10"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-[#25D366]/50 bg-transparent px-6 py-3 font-semibold text-[#25D366] transition-colors hover:bg-[#25D366]/10 sm:w-auto"
                     href="https://wa.me/qr/23CQBEJM3JV4H1"
                     rel="noreferrer"
                     target="_blank"
@@ -1278,9 +1298,9 @@ function App() {
       </main>
 
       <footer className="mt-auto border-t border-white/5 bg-[#050a0e] py-8">
-        <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-xs text-slate-500 md:flex-row">
-          <p>© 2024 DEVPORTFOLIO. ALL RIGHTS RESERVED.</p>
-          <div className="flex items-center gap-4">
+        <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center text-xs text-slate-500 sm:px-6 md:flex-row md:text-left">
+          <p>© 2026 DEVPORTFOLIO. ALL RIGHTS RESERVED.</p>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <span>{copy.hero.badge}</span>
             <span>MODERN INFRASTRUCTURE</span>
           </div>
