@@ -4,7 +4,7 @@ import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
-const NAV_SECTION_IDS = ['top', 'experience', 'projects', 'stack', 'contact']
+const NAV_SECTION_IDS = ['top', 'projects', 'experience', 'stack', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#051424'
 const SUMMARY_TERRAIN_WIDTH = 110
@@ -20,9 +20,9 @@ const translations = {
   en: {
     nav: {
       summary: 'Summary',
-      stack: 'Stack',
       projects: 'Projects',
-      experience: 'Experience',
+      experience: 'Professional Trajectory',
+      stack: 'Arsenal',
       contact: 'Contact',
       resume: 'Resume.pdf',
     },
@@ -48,7 +48,7 @@ const translations = {
       primaryDate: 'FEB 2026 - PRESENT',
       primaryCompany: 'Second Mind',
       primaryDescription:
-        'I worked on the development and maintenance of back-end systems, being responsible for implementing APIs and services that support web and mobile applications. I worked with C# (.NET), Node.js, and Python, focusing on building scalable, secure, and high-performance solutions. My main responsibilities included developing REST APIs, integrating with external services, and modeling data in PostgreSQL, as well as optimizing queries and continuously improving application performance. I also participate in deployment and maintenance routines in cloud environments such as Amazon Web Services and Railway, collaborating with the evolution of the architecture and ensuring system stability.',
+        'I develop and maintain backend APIs and services for web and mobile products using C# (.NET), Node.js, Python, PostgreSQL, AWS, and Railway, focusing on scalable architecture, integrations, query optimization, and production stability.',
       uptimeLabel: 'UPTIME ARCHITECTURE',
       latencyLabel: 'LATENCY REDUCTION',
       microservicesLabel: 'MICROSERVICES',
@@ -56,12 +56,12 @@ const translations = {
       secondaryDate: 'MAY 2025 - FEB 2026',
       secondaryCompany: 'Second Mind',
       secondaryDescription:
-        'I worked on the development and maintenance of back-end systems, being responsible for implementing APIs and services that support web and mobile applications. I worked with C# (.NET), Node.js, and Python, focusing on building scalable, secure, and high-performance solutions. My main responsibilities included developing REST APIs, integrating with external services, and modeling data in PostgreSQL, as well as optimizing queries and continuously improving application performance. I also participate in deployment and maintenance routines in cloud environments such as Amazon Web Services and Railway, collaborating with the evolution of the architecture and ensuring system stability.',
+        'Built and maintained backend services, REST APIs, external integrations, and PostgreSQL data models while improving application performance and supporting cloud deployment routines.',
       secondaryTagOne: 'High-Volume Data Pipelines',
       secondaryTagTwo: 'Observability Implementation',
     },
     projects: {
-      title: 'Technical Labs',
+      title: 'Projects',
       description: 'Experimental architectures and core engineering prototypes.',
       architectures: 'ARCHITECTURES',
       components: 'COMPONENTS',
@@ -117,9 +117,9 @@ const translations = {
   pt: {
     nav: {
       summary: 'Resumo',
-      stack: 'Stack',
       projects: 'Projetos',
-      experience: 'Experiencia',
+      experience: 'Trajetória Profissional',
+      stack: 'Arsenal',
       contact: 'Contato',
       resume: 'Curriculo.pdf',
     },
@@ -145,7 +145,7 @@ const translations = {
       primaryDate: 'FEV 2026 - ATUAL',
       primaryCompany: 'Second Mind',
       primaryDescription:
-        'Atuei no desenvolvimento e manutenção de sistemas back-end, sendo responsável pela implementação de APIs e serviços que suportam aplicações web e mobile. Trabalhei com C# (.NET), Node.js e Python, focando na construção de soluções escaláveis, seguras e com alto desempenho. Minhas principais responsabilidades incluíam o desenvolvimento de APIs REST, integração com serviços externos e modelagem de dados em PostgreSQL, além da otimização de consultas e melhoria contínua da performance das aplicações. Também participo de rotinas de deploy e manutenção em ambientes cloud como Amazon Web Services e Railway, colaborando com a evolução da arquitetura e garantindo a estabilidade dos sistemas.',
+        'Atuo no desenvolvimento e manutenção de APIs e serviços back-end para produtos web e mobile com C# (.NET), Node.js, Python, PostgreSQL, AWS e Railway, com foco em arquitetura escalável, integrações, otimização de consultas e estabilidade em produção.',
       uptimeLabel: 'ARQUITETURA DE UPTIME',
       latencyLabel: 'REDUCAO DE LATENCIA',
       microservicesLabel: 'MICROSSERVIÇOS',
@@ -153,12 +153,12 @@ const translations = {
       secondaryDate: 'MAI 2025 - FEV 2026',
       secondaryCompany: 'Second Mind',
       secondaryDescription:
-        'Atuei no desenvolvimento e manutenção de sistemas back-end, sendo responsável pela implementação de APIs e serviços que suportam aplicações web e mobile. Trabalhei com C# (.NET), Node.js e Python, focando na construção de soluções escaláveis, seguras e com alto desempenho. Minhas principais responsabilidades incluíam o desenvolvimento de APIs REST, integração com serviços externos e modelagem de dados em PostgreSQL, além da otimização de consultas e melhoria contínua da performance das aplicações. Também participo de rotinas de deploy e manutenção em ambientes cloud como Amazon Web Services e Railway, colaborando com a evolução da arquitetura e garantindo a estabilidade dos sistemas.',
+        'Atuei na construção e manutenção de serviços back-end, APIs REST, integrações externas e modelos de dados em PostgreSQL, apoiando melhorias de performance e rotinas de deploy em cloud.',
       secondaryTagOne: 'Pipelines de Dados de Alto Volume',
       secondaryTagTwo: 'Implementacao de Observabilidade',
     },
     projects: {
-      title: 'Laboratorios Tecnicos',
+      title: 'Projetos',
       description: 'Arquiteturas experimentais e prototipos de engenharia de software.',
       architectures: 'ARQUITETURAS',
       components: 'COMPONENTES',
@@ -594,8 +594,8 @@ function App() {
   const copy = translations[language]
   const navItems = [
     { id: 'top', label: copy.nav.summary },
-    { id: 'experience', label: copy.nav.experience },
     { id: 'projects', label: copy.nav.projects },
+    { id: 'experience', label: copy.nav.experience },
     { id: 'stack', label: copy.nav.stack },
     { id: 'contact', label: copy.nav.contact },
   ]
@@ -973,355 +973,244 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-surface-container-low py-section-padding" id="experience">
-          <div className="container-max mx-auto px-gutter">
-            <div className="mb-stack-lg">
-              <h2 className="font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">
-                {copy.experience.title}
-              </h2>
-              <p className="mt-3 font-inter text-base text-[#b8c8da]">{copy.experience.subtitle}</p>
-              <div className="mt-4 h-1 w-24 bg-primary-container" />
-            </div>
-
-            <div className="grid gap-stack-md">
-              <div className="glass-card overflow-hidden rounded-xl">
-                <div className="terminal-header flex items-center justify-between px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                    <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                    <span className="font-code-snippet text-[11px] tracking-[0.2em] text-slate-500">
-                      {copy.experience.terminalPrimaryLabel}
-                    </span>
-                  </div>
-                  <span className="rounded-sm bg-primary-container/20 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
-                    {copy.experience.activeStatus}
-                  </span>
-                </div>
-
-                <div className="relative flex flex-col items-start gap-8 p-stack-lg md:flex-row">
-                  <div className="absolute right-0 top-0 h-full w-1 bg-primary-container" />
-
-                  <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg bg-primary-container/10">
-                    <span className="material-symbols-outlined text-4xl text-primary-container" data-icon="architecture">
-                      architecture
-                    </span>
-                  </div>
-
-                  <div className="flex-grow">
-                    <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
-                      <div>
-                        <h3 className="font-inter text-2xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.experience.primaryRole}</h3>
-                        <p className="font-medium text-primary-container">{copy.experience.primaryCompany}</p>
-                      </div>
-                      <span className="rounded bg-primary-container/5 px-3 py-1 font-code-snippet text-primary-container">
-                        {copy.experience.primaryDate}
-                      </span>
-                    </div>
-
-                    <div className="mb-5 flex flex-wrap gap-2">
-                      {['C#', '.NET', 'Node.js', 'Python', 'PostgreSQL', 'AWS', 'Railway'].map((tag) => (
-                        <span
-                          key={`primary-tag-${tag}`}
-                          className="rounded-sm border border-primary-container/15 bg-slate-900/60 px-2 py-1 font-code-snippet text-[10px] text-slate-400"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <p className="mb-6 max-w-3xl font-body-md text-on-surface-variant">{copy.experience.primaryDescription}</p>
-
-                    <div className="grid gap-4 sm:grid-cols-3">
-                      <div className="border border-primary-container/10 bg-surface-container p-4">
-                        <div className="mb-1 text-4xl font-bold text-primary-container">99.99%</div>
-                        <div className="font-label-caps text-sm text-slate-400">{copy.experience.uptimeLabel}</div>
-                      </div>
-
-                      <div className="border border-primary-container/10 bg-surface-container p-4">
-                        <div className="mb-1 text-4xl font-bold text-primary-container">50%</div>
-                        <div className="font-label-caps text-sm text-slate-400">{copy.experience.latencyLabel}</div>
-                      </div>
-
-                      <div className="border border-primary-container/10 bg-surface-container p-4">
-                        <div className="mb-1 text-4xl font-bold text-primary-container">20+</div>
-                        <div className="font-label-caps text-sm text-slate-400">{copy.experience.microservicesLabel}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="glass-card overflow-hidden rounded-xl opacity-80 transition-opacity hover:opacity-100">
-                <div className="terminal-header flex items-center gap-3 px-4 py-3">
-                  <div className="h-2.5 w-2.5 rounded-full bg-slate-600" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-slate-600" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-slate-600" />
-                  <span className="font-code-snippet text-[11px] tracking-[0.2em] text-slate-600">
-                    {copy.experience.terminalSecondaryLabel}
-                  </span>
-                </div>
-
-                <div className="relative flex flex-col items-start gap-8 p-stack-lg md:flex-row">
-                  <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg bg-slate-400/10">
-                    <span className="material-symbols-outlined text-4xl text-slate-400" data-icon="terminal">
-                      terminal
-                    </span>
-                  </div>
-
-                  <div className="flex-grow">
-                    <div className="mb-4 flex flex-col items-start justify-between md:flex-row md:items-center">
-                      <div>
-                        <h3 className="font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.experience.secondaryRole}</h3>
-                        <p className="font-medium text-slate-400">{copy.experience.secondaryCompany}</p>
-                      </div>
-                      <span className="font-code-snippet text-slate-400">{copy.experience.secondaryDate}</span>
-                    </div>
-
-                    <p className="max-w-3xl font-body-md text-on-surface-variant">{copy.experience.secondaryDescription}</p>
-
-                    <div className="mt-6 flex flex-wrap gap-6 text-xs text-slate-500">
-                      <span>{copy.experience.secondaryTagOne}</span>
-                      <span>{copy.experience.secondaryTagTwo}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-surface py-section-padding" id="projects">
-          <div className="container-max mx-auto px-gutter">
-            <div className="mb-stack-lg flex flex-col items-end justify-between gap-4 md:flex-row">
+        <section className="border-t border-white/5 bg-[#050a0e] py-20" id="projects">
+          <div className="container mx-auto max-w-6xl px-6">
+            <div className="mb-12 flex flex-col items-end justify-between gap-4 md:flex-row">
               <div>
-                <h2 className="font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">{copy.projects.title}</h2>
-                <p className="mt-2 text-on-surface-variant">{copy.projects.description}</p>
+                <h2 className="mb-2 text-3xl font-bold text-white">{copy.projects.title}</h2>
+                <p className="text-slate-400">{copy.projects.description}</p>
               </div>
 
-              <div className="flex rounded-lg bg-surface-container-high p-1">
-                <button className="rounded-md bg-primary-container px-6 py-2 text-sm font-bold text-on-primary-fixed" type="button">
+              <div className="flex rounded-lg border border-slate-800 bg-[#0f172a] p-1">
+                <button
+                  className="rounded-md border border-primary-container/30 bg-primary-container/20 px-4 py-1.5 text-xs font-semibold text-primary-container"
+                  type="button"
+                >
                   {copy.projects.architectures}
                 </button>
-                <button className="rounded-md px-6 py-2 text-sm font-medium text-slate-400 transition-colors hover:text-white" type="button">
+                <button
+                  className="rounded-md px-4 py-1.5 text-xs font-semibold text-slate-400 transition-colors hover:text-white"
+                  type="button"
+                >
                   {copy.projects.components}
                 </button>
               </div>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="glass-card group flex flex-col overflow-hidden rounded-xl border border-white/5 transition-all duration-300 hover:border-primary-container/40">
-                <div className="relative aspect-video overflow-hidden bg-surface-container-highest">
-                  <img
-                    alt={copy.projects.firstAlt}
-                    className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCplPS6nzU5oLfjNJ28njKnphdNfdnQaAnC7EDwIbxAkUqQdCFhj21bY92lBySVlyHxu86ogLefM69wYikUhkcZRslKYCn_QddjVc8OoYVWP_DxWVfEJXKT5EXDajUtE4GENkJ5Lc0NqHjwfMo5WTCINk_zBbZzvFqb5VAyIbo0_SYCSCEuiapAZpxSJfE7upurbt__fWFn9X1QwadKfcdi0lBiIzY55QoperOrLsBxypQNZWX_NAomXPsyn0anrT93i6xJ2LFbP8M"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />
-
-                  <div className="absolute bottom-4 left-4 flex gap-2">
-                    <span className="rounded border border-primary-container/20 bg-black/60 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
-                      TERRAFORM
-                    </span>
-                    <span className="rounded border border-primary-container/20 bg-black/60 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
-                      AWS
-                    </span>
-                  </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50">
+                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                <div className="relative z-10 mb-4 flex gap-2">
+                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                    TypeScript
+                  </span>
+                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                    AWS
+                  </span>
                 </div>
-
-                <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.projects.firstTitle}</h4>
-                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.firstDescription}</p>
-
-                  <div className="flex items-center justify-between border-t border-white/5 pt-4">
-                    <a
-                      className="flex items-center gap-2 font-label-caps text-xs text-slate-400 transition-colors hover:text-primary-container"
-                      href="#"
-                    >
-                      <span className="material-symbols-outlined text-sm" data-icon="code">
-                        code
-                      </span>{' '}
-                      {copy.projects.github}
-                    </a>
-                    <a className="flex items-center gap-2 font-label-caps text-xs text-primary-container hover:underline" href="#">
-                      <span className="material-symbols-outlined text-sm" data-icon="launch">
-                        launch
-                      </span>{' '}
-                      {copy.projects.demo}
-                    </a>
-                  </div>
+                <h3 className="relative z-10 mb-3 text-xl font-bold text-white transition-colors group-hover:text-primary-container">
+                  {copy.projects.firstTitle}
+                </h3>
+                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.firstDescription}</p>
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
+                  <a className="flex items-center gap-2 text-xs font-semibold text-slate-400 transition-colors hover:text-white" href="#">
+                    <span className="material-symbols-outlined text-base">code</span>
+                    {copy.projects.github}
+                  </a>
+                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#">
+                    <span className="material-symbols-outlined text-base">launch</span>
+                    {copy.projects.demo}
+                  </a>
                 </div>
               </div>
 
-              <div className="glass-card group flex flex-col overflow-hidden rounded-xl border border-white/5 transition-all duration-300 hover:border-primary-container/40">
-                <div className="relative aspect-video overflow-hidden bg-surface-container-highest">
-                  <img
-                    alt={copy.projects.secondAlt}
-                    className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1tkvK4JCWX28yEqspgnVOzQDjyifUVetsdKOZk-D9fQc_XxT1F5UCaDTlIlHZMSdKLOzu-ND0YC71ISRmwo7JsdDdXhibyBgTkVyvu6tg8WrmVkMTfKk3UWZ__5IsTFz0-EyZIRbjFGc-Tq1uqPLXnY9TbG8S0AJxet5EpdL8rfM8KEAOVLUrpRXXbNV6BBdoHozJrEqZC_iEDtlVZi8NtWY6DmPc_dTF2-DvATOAz5FGKaeyVcNIe_LYIjUczEW5xpYrngSF7jA"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />
-
-                  <div className="absolute bottom-4 left-4 flex gap-2">
-                    <span className="rounded border border-primary-container/20 bg-black/60 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
-                      .NET 8
-                    </span>
-                    <span className="rounded border border-primary-container/20 bg-black/60 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
-                      GRPC
-                    </span>
-                  </div>
+              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/40 p-6 shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all hover:border-primary-container">
+                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/10 to-transparent" />
+                <div className="relative z-10 mb-4 flex gap-2">
+                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                    .NET 8
+                  </span>
+                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                    gRPC
+                  </span>
                 </div>
-
-                <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.projects.secondTitle}</h4>
-                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.secondDescription}</p>
-
-                  <div className="flex items-center justify-between border-t border-white/5 pt-4">
-                    <a
-                      className="flex items-center gap-2 font-label-caps text-xs text-slate-400 transition-colors hover:text-primary-container"
-                      href="#"
-                    >
-                      <span className="material-symbols-outlined text-sm" data-icon="code">
-                        code
-                      </span>{' '}
-                      {copy.projects.github}
-                    </a>
-                    <a className="flex items-center gap-2 font-label-caps text-xs text-primary-container hover:underline" href="#">
-                      <span className="material-symbols-outlined text-sm" data-icon="launch">
-                        launch
-                      </span>{' '}
-                      {copy.projects.demo}
-                    </a>
-                  </div>
+                <h3 className="relative z-10 mb-3 text-xl font-bold text-primary-container">{copy.projects.secondTitle}</h3>
+                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.secondDescription}</p>
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
+                  <a className="flex items-center gap-2 text-xs font-semibold text-slate-400 transition-colors hover:text-white" href="#">
+                    <span className="material-symbols-outlined text-base">code</span>
+                    {copy.projects.github}
+                  </a>
+                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#">
+                    <span className="material-symbols-outlined text-base">launch</span>
+                    {copy.projects.demo}
+                  </a>
                 </div>
               </div>
 
-              <div className="glass-card group flex flex-col overflow-hidden rounded-xl border border-white/5 transition-all duration-300 hover:border-primary-container/40">
-                <div className="relative aspect-video overflow-hidden bg-surface-container-highest">
-                  <img
-                    alt={copy.projects.thirdAlt}
-                    className="h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLLKkPEtPoPykuQsFy7gioItD2yLTHCxZytJC-T6miwiLcsQPxiiNTnh9H-n9caphP0s3tutr4qkYMjS57WIBTe_fqZGMCsn7YOlfcIrjQLyDDUfW_ybUhBaw4DiQ-Meoc37K37AOqWiYXbY66caH5Em0GUbHnw3VYclVbCmbAbXxhpHRKoxvplTbfpRHkcmCOoWenLZzg3wcsEE1jt1MeZjUDKB27luMoHriVItCq3sAYcjFCvKMUTN9SKFjg60Gztb4eTysdHmw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />
-
-                  <div className="absolute bottom-4 left-4 flex gap-2">
-                    <span className="rounded border border-primary-container/20 bg-black/60 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
-                      NESTJS
-                    </span>
-                    <span className="rounded border border-primary-container/20 bg-black/60 px-2 py-0.5 font-code-snippet text-[10px] text-primary-container">
-                      REDIS
-                    </span>
-                  </div>
+              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50">
+                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                <div className="relative z-10 mb-4 flex gap-2">
+                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                    NestJS
+                  </span>
+                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                    Redis
+                  </span>
                 </div>
-
-                <div className="flex flex-grow flex-col p-6">
-                  <h4 className="mb-2 font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.projects.thirdTitle}</h4>
-                  <p className="mb-6 flex-grow text-sm text-on-surface-variant">{copy.projects.thirdDescription}</p>
-
-                  <div className="flex items-center justify-between border-t border-white/5 pt-4">
-                    <a
-                      className="flex items-center gap-2 font-label-caps text-xs text-slate-400 transition-colors hover:text-primary-container"
-                      href="#"
-                    >
-                      <span className="material-symbols-outlined text-sm" data-icon="code">
-                        code
-                      </span>{' '}
-                      {copy.projects.github}
-                    </a>
-                    <a className="flex items-center gap-2 font-label-caps text-xs text-primary-container hover:underline" href="#">
-                      <span className="material-symbols-outlined text-sm" data-icon="launch">
-                        launch
-                      </span>{' '}
-                      {copy.projects.demo}
-                    </a>
-                  </div>
+                <h3 className="relative z-10 mb-3 text-xl font-bold text-white transition-colors group-hover:text-primary-container">
+                  {copy.projects.thirdTitle}
+                </h3>
+                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.thirdDescription}</p>
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
+                  <a className="flex items-center gap-2 text-xs font-semibold text-slate-400 transition-colors hover:text-white" href="#">
+                    <span className="material-symbols-outlined text-base">code</span>
+                    {copy.projects.github}
+                  </a>
+                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#">
+                    <span className="material-symbols-outlined text-base">launch</span>
+                    {copy.projects.demo}
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-section-padding" id="stack">
-          <div className="container-max mx-auto px-gutter">
-            <div className="mb-stack-lg text-center">
-              <h2 className="font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">{copy.stack.title}</h2>
-              <p className="mt-2 font-body-md text-on-surface-variant">{copy.stack.description}</p>
+        <section className="relative border-t border-white/5 bg-[#050a0e] py-20" id="experience">
+          <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-primary-container/5 blur-[120px]" />
+
+          <div className="container mx-auto max-w-6xl px-6">
+            <div className="mb-16">
+              <h2 className="mb-2 text-3xl font-bold text-white">{copy.experience.title}</h2>
+              <p className="text-slate-400">{copy.experience.subtitle}</p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <div className="glass-card flex h-full flex-col rounded-xl border border-white/5 p-8 transition-colors hover:border-primary-container/30">
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-primary-container/10">
+            <div className="relative">
+              <div className="absolute bottom-0 left-[20px] top-0 w-px bg-slate-800 md:left-1/2 md:-translate-x-1/2">
+                <div className="absolute top-0 w-full bg-primary-container shadow-[0_0_10px_#00e5ff]" style={{ height: '58%' }} />
+              </div>
+
+              <div className="space-y-12">
+                <div className="relative flex w-full flex-col items-center justify-between md:flex-row">
+                  <div className="hidden md:block md:w-5/12" />
+
+                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2">
+                    <div className="absolute inset-1 rounded-full bg-primary-container" />
+                  </div>
+
+                  <div className="w-full pl-[50px] text-left md:w-5/12 md:pl-0">
+                    <div className="glass-card rounded-xl border border-primary-container/30 p-6 transition-colors hover:border-primary-container/60">
+                      <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row md:items-center">
+                        <h3 className="text-lg font-bold text-primary-container">{copy.experience.primaryRole}</h3>
+                        <span className="font-code-snippet text-xs text-slate-400">{copy.experience.primaryDate}</span>
+                      </div>
+                      <h4 className="mb-3 text-sm font-medium text-white">{copy.experience.primaryCompany}</h4>
+                      <p className="text-sm leading-relaxed text-slate-400">{copy.experience.primaryDescription}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative flex w-full flex-col items-center justify-between md:flex-row">
+                  <div className="w-full pl-[50px] text-left md:w-5/12 md:pl-0 md:text-right">
+                    <div className="glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/30">
+                      <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row-reverse md:items-center">
+                        <h3 className="text-lg font-bold text-primary-container">{copy.experience.secondaryRole}</h3>
+                        <span className="font-code-snippet text-xs text-slate-400">{copy.experience.secondaryDate}</span>
+                      </div>
+                      <h4 className="mb-3 text-sm font-medium text-white">{copy.experience.secondaryCompany}</h4>
+                      <p className="text-sm leading-relaxed text-slate-400">{copy.experience.secondaryDescription}</p>
+                    </div>
+                  </div>
+
+                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2" />
+                  <div className="hidden md:block md:w-5/12" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-white/5 bg-[#050a0e] py-20" id="stack">
+          <div className="container mx-auto max-w-6xl px-6">
+            <div className="mb-12 text-center">
+              <h2 className="mb-2 text-3xl font-bold text-white">{copy.stack.title}</h2>
+              <p className="text-slate-400">{copy.stack.description}</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
                     <span className="material-symbols-outlined text-primary-container">dns</span>
                   </div>
-                  <h3 className="font-inter text-2xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.stack.backendTitle}</h3>
+                  <h3 className="text-xl font-semibold text-white">{copy.stack.backendTitle}</h3>
                 </div>
 
-                <p className="mb-8 text-on-surface-variant">{copy.stack.backendDescription}</p>
+                <p className="mb-8 text-sm text-slate-400">{copy.stack.backendDescription}</p>
 
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">terminal</span>
-                    <span className="font-code-snippet text-sm font-semibold">C#</span>
+                    <span className="text-xs font-medium text-slate-300">C#</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">data_object</span>
-                    <span className="font-code-snippet text-sm font-semibold">Java</span>
+                    <span className="text-xs font-medium text-slate-300">Java</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">database</span>
-                    <span className="font-code-snippet text-sm font-semibold">SQL</span>
+                    <span className="text-xs font-medium text-slate-300">SQL</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">bolt</span>
-                    <span className="font-code-snippet text-sm font-semibold">Go</span>
+                    <span className="text-xs font-medium text-slate-300">Go</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">cloud</span>
-                    <span className="font-code-snippet text-sm font-semibold">AWS</span>
+                    <span className="text-xs font-medium text-slate-300">AWS</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">hub</span>
-                    <span className="font-code-snippet text-sm font-semibold">Docker</span>
+                    <span className="text-xs font-medium text-slate-300">Docker</span>
                   </div>
                 </div>
               </div>
 
-              <div className="glass-card flex h-full flex-col rounded-xl border border-white/5 p-8 transition-colors hover:border-primary-container/30">
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-cyan-400/10">
+              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
                     <span className="material-symbols-outlined text-cyan-400">layers</span>
                   </div>
-                  <h3 className="font-inter text-2xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.stack.frontendTitle}</h3>
+                  <h3 className="text-xl font-semibold text-white">{copy.stack.frontendTitle}</h3>
                 </div>
 
-                <p className="mb-8 text-on-surface-variant">{copy.stack.frontendDescription}</p>
+                <p className="mb-8 text-sm text-slate-400">{copy.stack.frontendDescription}</p>
 
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">code</span>
-                    <span className="font-code-snippet text-sm font-semibold">TypeScript</span>
+                    <span className="text-xs font-medium text-slate-300">TypeScript</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">widgets</span>
-                    <span className="font-code-snippet text-sm font-semibold">React</span>
+                    <span className="text-xs font-medium text-slate-300">React</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">palette</span>
-                    <span className="font-code-snippet text-sm font-semibold">Tailwind</span>
+                    <span className="text-xs font-medium text-slate-300">Tailwind</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">api</span>
-                    <span className="font-code-snippet text-sm font-semibold">Next.js</span>
+                    <span className="text-xs font-medium text-slate-300">Next.js</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">web</span>
-                    <span className="font-code-snippet text-sm font-semibold">HTML/CSS</span>
+                    <span className="text-xs font-medium text-slate-300">HTML/CSS</span>
                   </div>
-                  <div className="flex flex-col items-center justify-center rounded-lg border border-white/5 bg-surface-container-high p-4 transition-colors hover:bg-surface-container-highest">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">javascript</span>
-                    <span className="font-code-snippet text-sm font-semibold">JavaScript</span>
+                    <span className="text-xs font-medium text-slate-300">JavaScript</span>
                   </div>
                 </div>
               </div>
@@ -1329,70 +1218,64 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-surface-container-low py-section-padding">
-          <div className="container-max mx-auto px-gutter">
-            <div className="glass-card relative mx-auto max-w-3xl overflow-hidden rounded-xl p-stack-lg">
-              <div className="absolute right-0 top-0 p-8 opacity-10">
-                <span className="material-symbols-outlined text-9xl text-primary-container" data-icon="school">
-                  school
-                </span>
-              </div>
+        <section className="bg-[#050a0e] py-20" id="contact">
+          <div className="container mx-auto max-w-6xl px-6">
+            <div className="glass-card relative overflow-hidden rounded-3xl border border-primary-container/30 p-10 text-center shadow-[0_0_40px_rgba(0,229,255,0.05)] md:p-16">
+              <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
 
-              <h2 className="mb-6 font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">{copy.education.title}</h2>
+              <div className="relative z-10 mx-auto max-w-2xl">
+                <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
+                  {copy.contact.titleStart} <span className="text-primary-container">{copy.contact.titleHighlight}</span>{' '}
+                  {copy.contact.titleEnd}
+                </h2>
 
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-inter text-xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb]">{copy.education.degree}</h3>
-                  <p className="text-primary-container">{copy.education.university}</p>
+                <p className="mb-10 text-lg text-slate-400">{copy.contact.description}</p>
+
+                <div className="mb-8 flex flex-wrap justify-center gap-4">
+                  <a
+                    className="flex items-center gap-2 rounded-lg bg-primary-container px-6 py-3 font-bold text-on-primary-fixed shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all hover:bg-primary-container/90"
+                    href="#contact"
+                  >
+                    <span className="material-symbols-outlined">mail</span>
+                    {copy.contact.primaryButton}
+                  </a>
+
+                  <a
+                    className="flex items-center gap-2 rounded-lg border border-primary-container/50 bg-transparent px-6 py-3 font-semibold text-primary-container transition-colors hover:bg-primary-container/10"
+                    href="#"
+                  >
+                    <span className="material-symbols-outlined">badge</span>
+                    LinkedIn
+                  </a>
+
+                  <a
+                    className="flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-6 py-3 font-semibold text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
+                    href="#"
+                  >
+                    <span className="material-symbols-outlined">code</span>
+                    GitHub
+                  </a>
+
+                  <a
+                    className="flex items-center gap-2 rounded-lg border border-[#25D366]/50 bg-transparent px-6 py-3 font-semibold text-[#25D366] transition-colors hover:bg-[#25D366]/10"
+                    href="#"
+                  >
+                    <span className="material-symbols-outlined">call</span>
+                    WhatsApp
+                  </a>
                 </div>
 
-                <p className="font-body-md leading-relaxed text-on-surface-variant">{copy.education.description}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-section-padding" id="contact">
-          <div className="container-max mx-auto px-gutter text-center">
-            <div className="ambient-glow glass-card mx-auto max-w-4xl rounded-2xl border border-white/10 p-12">
-              <h2 className="mb-4 font-inter text-4xl font-extrabold leading-[0.95] tracking-[-0.03em] text-[#c3d5eb] sm:text-5xl md:text-[66px]">
-                {copy.contact.titleStart} <span className="text-primary-container">{copy.contact.titleHighlight}</span>{' '}
-                {copy.contact.titleEnd}
-              </h2>
-
-              <p className="mx-auto mb-8 max-w-2xl font-body-lg text-on-surface-variant">{copy.contact.description}</p>
-
-              <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                <button
-                  className="flex items-center justify-center gap-2 rounded-lg bg-primary-container px-8 py-4 font-bold text-on-primary-fixed transition-transform hover:scale-105"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined" data-icon="mail">
-                    mail
+                <div className="flex flex-col items-center justify-center gap-6 text-sm text-slate-500 md:flex-row">
+                  <span className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-base text-primary-container">translate</span>
+                    {copy.contact.languageLevel}
                   </span>
-                  {copy.contact.primaryButton}
-                </button>
-
-                <button
-                  className="rounded-lg border border-primary-container px-8 py-4 font-bold text-primary-container transition-colors hover:bg-primary-container/10"
-                  type="button"
-                >
-                  {copy.contact.secondaryButton}
-                </button>
-              </div>
-
-              <div className="mt-8 flex justify-center gap-8 text-slate-400">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary-container" data-icon="translate">
-                    translate
+                  <span className="hidden h-1 w-1 rounded-full bg-slate-700 md:inline-block" />
+                  <span className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-base text-primary-container">location_on</span>
+                    {copy.contact.availability}
                   </span>
-                  <span className="font-code-snippet">{copy.contact.languageLevel}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary-container" data-icon="location_on">
-                    location_on
-                  </span>
-                  <span className="font-code-snippet">{copy.contact.availability}</span>
                 </div>
               </div>
             </div>
@@ -1400,19 +1283,13 @@ function App() {
         </section>
       </main>
 
-      <footer className="flex w-full items-center justify-between border-t border-cyan-900/30 bg-slate-950 px-6 py-8">
-        <div className="font-mono text-[10px] uppercase text-cyan-500 opacity-60">© 2024 DEPLOYED_SUCCESSFULLY</div>
-
-        <div className="flex gap-6">
-          <a className="font-mono text-[10px] uppercase text-slate-600 opacity-60 transition-colors hover:text-cyan-400" href="#">
-            {copy.footer.status}
-          </a>
-          <a className="font-mono text-[10px] uppercase text-slate-600 opacity-60 transition-colors hover:text-cyan-400" href="#">
-            {copy.footer.documentation}
-          </a>
-          <a className="font-mono text-[10px] uppercase text-slate-600 opacity-60 transition-colors hover:text-cyan-400" href="#">
-            {copy.footer.privacy}
-          </a>
+      <footer className="mt-auto border-t border-white/5 bg-[#050a0e] py-8">
+        <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-xs text-slate-500 md:flex-row">
+          <p>© 2024 DEVPORTFOLIO. ALL RIGHTS RESERVED.</p>
+          <div className="flex items-center gap-4">
+            <span>{copy.hero.badge}</span>
+            <span>MODERN INFRASTRUCTURE</span>
+          </div>
         </div>
       </footer>
     </div>
