@@ -4,6 +4,7 @@ import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
+const RESUME_PATH = '/curriculo.pdf'
 const NAV_SECTION_IDS = ['top', 'projects', 'experience', 'stack', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#051424'
@@ -24,7 +25,7 @@ const translations = {
       experience: 'Professional Trajectory',
       stack: 'Arsenal',
       contact: 'Contact',
-      resume: 'Resume.pdf',
+      resume: 'Resume',
     },
     language: {
       english: 'English',
@@ -63,8 +64,6 @@ const translations = {
     projects: {
       title: 'Projects',
       description: 'Experimental architectures and core engineering prototypes.',
-      architectures: 'ARCHITECTURES',
-      components: 'COMPONENTS',
       github: 'GITHUB',
       demo: 'DEMO',
       firstAlt: 'Cloud Infrastructure Project',
@@ -121,7 +120,7 @@ const translations = {
       experience: 'Trajetória Profissional',
       stack: 'Arsenal',
       contact: 'Contato',
-      resume: 'Curriculo.pdf',
+      resume: 'Curriculo',
     },
     language: {
       english: 'Ingles',
@@ -160,8 +159,6 @@ const translations = {
     projects: {
       title: 'Projetos',
       description: 'Arquiteturas experimentais e prototipos de engenharia de software.',
-      architectures: 'ARQUITETURAS',
-      components: 'COMPONENTES',
       github: 'GITHUB',
       demo: 'DEMO',
       firstAlt: 'Projeto de Infraestrutura em Nuvem',
@@ -842,7 +839,7 @@ function App() {
 
   const getLanguageButtonClass = (targetLanguage) => {
     const baseClass =
-      'flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-slate-800 text-sm transition-all'
+      'flex h-7 min-w-9 items-center justify-center rounded-md bg-slate-800 px-2 text-[11px] font-bold transition-all'
 
     if (language === targetLanguage) {
       return `${baseClass} border border-white/20 opacity-100 ring-2 ring-primary-container/50`
@@ -893,31 +890,35 @@ function App() {
         <div className="flex items-center gap-4">
           <div className="mr-4 flex items-center gap-2 rounded-full border border-white/5 bg-black/20 p-1.5">
             <button
-              aria-pressed={language === 'en'}
-              className={getLanguageButtonClass('en')}
-              onClick={() => setLanguage('en')}
-              title={copy.language.english}
-              type="button"
-            >
-              🇺🇸
-            </button>
-            <button
+              aria-label={copy.language.portuguese}
               aria-pressed={language === 'pt'}
               className={getLanguageButtonClass('pt')}
               onClick={() => setLanguage('pt')}
               title={copy.language.portuguese}
               type="button"
             >
-              🇧🇷
+              PT
+            </button>
+            <button
+              aria-label={copy.language.english}
+              aria-pressed={language === 'en'}
+              className={getLanguageButtonClass('en')}
+              onClick={() => setLanguage('en')}
+              title={copy.language.english}
+              type="button"
+            >
+              EN
             </button>
           </div>
 
-          <button
+          <a
             className="rounded bg-primary-container px-6 py-2 font-bold text-on-primary-fixed transition-all duration-300 hover:scale-95 hover:opacity-80"
-            type="button"
+            href={RESUME_PATH}
+            rel="noreferrer"
+            target="_blank"
           >
             {copy.nav.resume}
-          </button>
+          </a>
         </div>
       </nav>
       <div aria-hidden="true" className="h-px w-full bg-cyan-500/35" />
@@ -975,25 +976,10 @@ function App() {
 
         <section className="border-t border-white/5 bg-[#050a0e] py-20" id="projects">
           <div className="container mx-auto max-w-6xl px-6">
-            <div className="mb-12 flex flex-col items-end justify-between gap-4 md:flex-row">
+            <div className="mb-12">
               <div>
                 <h2 className="mb-2 text-3xl font-bold text-white">{copy.projects.title}</h2>
                 <p className="text-slate-400">{copy.projects.description}</p>
-              </div>
-
-              <div className="flex rounded-lg border border-slate-800 bg-[#0f172a] p-1">
-                <button
-                  className="rounded-md border border-primary-container/30 bg-primary-container/20 px-4 py-1.5 text-xs font-semibold text-primary-container"
-                  type="button"
-                >
-                  {copy.projects.architectures}
-                </button>
-                <button
-                  className="rounded-md px-4 py-1.5 text-xs font-semibold text-slate-400 transition-colors hover:text-white"
-                  type="button"
-                >
-                  {copy.projects.components}
-                </button>
               </div>
             </div>
 
@@ -1024,8 +1010,8 @@ function App() {
                 </div>
               </div>
 
-              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/40 p-6 shadow-[0_0_20px_rgba(0,229,255,0.1)] transition-all hover:border-primary-container">
-                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/10 to-transparent" />
+              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50">
+                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="relative z-10 mb-4 flex gap-2">
                   <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
                     .NET 8
@@ -1034,7 +1020,9 @@ function App() {
                     gRPC
                   </span>
                 </div>
-                <h3 className="relative z-10 mb-3 text-xl font-bold text-primary-container">{copy.projects.secondTitle}</h3>
+                <h3 className="relative z-10 mb-3 text-xl font-bold text-white transition-colors group-hover:text-primary-container">
+                  {copy.projects.secondTitle}
+                </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.secondDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
                   <a className="flex items-center gap-2 text-xs font-semibold text-slate-400 transition-colors hover:text-white" href="#">
@@ -1100,7 +1088,7 @@ function App() {
                   </div>
 
                   <div className="w-full pl-[50px] text-left md:w-5/12 md:pl-0">
-                    <div className="glass-card rounded-xl border border-primary-container/30 p-6 transition-colors hover:border-primary-container/60">
+                    <div className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60">
                       <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row md:items-center">
                         <h3 className="text-lg font-bold text-primary-container">{copy.experience.primaryRole}</h3>
                         <span className="font-code-snippet text-xs text-slate-400">{copy.experience.primaryDate}</span>
@@ -1113,7 +1101,7 @@ function App() {
 
                 <div className="relative flex w-full flex-col items-center justify-between md:flex-row">
                   <div className="w-full pl-[50px] text-left md:w-5/12 md:pl-0 md:text-right">
-                    <div className="glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/30">
+                    <div className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60">
                       <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row-reverse md:items-center">
                         <h3 className="text-lg font-bold text-primary-container">{copy.experience.secondaryRole}</h3>
                         <span className="font-code-snippet text-xs text-slate-400">{copy.experience.secondaryDate}</span>
@@ -1156,15 +1144,15 @@ function App() {
                   </div>
                   <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">data_object</span>
-                    <span className="text-xs font-medium text-slate-300">Java</span>
+                    <span className="text-xs font-medium text-slate-300">Node.Js</span>
                   </div>
                   <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">database</span>
                     <span className="text-xs font-medium text-slate-300">SQL</span>
                   </div>
                   <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
-                    <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">bolt</span>
-                    <span className="text-xs font-medium text-slate-300">Go</span>
+                    <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">code_blocks</span>
+                    <span className="text-xs font-medium text-slate-300">Python</span>
                   </div>
                   <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-4 transition-colors hover:border-primary-container/50">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">cloud</span>
@@ -1235,7 +1223,7 @@ function App() {
                 <div className="mb-8 flex flex-wrap justify-center gap-4">
                   <a
                     className="flex items-center gap-2 rounded-lg bg-primary-container px-6 py-3 font-bold text-on-primary-fixed shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all hover:bg-primary-container/90"
-                    href="#contact"
+                    href="mailto:joaovictordev0720@gmail.com"
                   >
                     <span className="material-symbols-outlined">mail</span>
                     {copy.contact.primaryButton}
@@ -1243,7 +1231,9 @@ function App() {
 
                   <a
                     className="flex items-center gap-2 rounded-lg border border-primary-container/50 bg-transparent px-6 py-3 font-semibold text-primary-container transition-colors hover:bg-primary-container/10"
-                    href="#"
+                    href="https://www.linkedin.com/in/joão-victor-218b26315"
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     <span className="material-symbols-outlined">badge</span>
                     LinkedIn
@@ -1251,7 +1241,9 @@ function App() {
 
                   <a
                     className="flex items-center gap-2 rounded-lg border border-slate-700 bg-transparent px-6 py-3 font-semibold text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
-                    href="#"
+                    href="https://github.com/Zenx007"
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     <span className="material-symbols-outlined">code</span>
                     GitHub
@@ -1259,7 +1251,9 @@ function App() {
 
                   <a
                     className="flex items-center gap-2 rounded-lg border border-[#25D366]/50 bg-transparent px-6 py-3 font-semibold text-[#25D366] transition-colors hover:bg-[#25D366]/10"
-                    href="#"
+                    href="https://wa.me/qr/23CQBEJM3JV4H1"
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     <span className="material-symbols-outlined">call</span>
                     WhatsApp
