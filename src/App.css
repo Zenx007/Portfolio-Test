@@ -30,9 +30,18 @@
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
   margin: 0 auto;
   max-width: 1180px;
+  pointer-events: none;
   position: relative;
+  user-select: none;
   width: 100%;
+  -webkit-user-select: none;
   z-index: 10;
+}
+
+.summary-hero-content * {
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
 }
 
 .summary-wave-background {
