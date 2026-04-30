@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
+import * as THREE from 'three'
 import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const NAV_SECTION_IDS = ['top', 'experience', 'projects', 'stack', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
-const SUMMARY_WAVE_SPLIT_DURATION_MS = 1100
-const SUMMARY_WAVE_LOCAL_RADIUS_PX = 130
+const SUMMARY_TERRAIN_COLOR = '#051424'
+const SUMMARY_TERRAIN_WIDTH = 110
+const SUMMARY_TERRAIN_HEIGHT = 80
+const SUMMARY_TERRAIN_COLUMNS = 110
+const SUMMARY_TERRAIN_ROWS = 80
+const SUMMARY_TERRAIN_DOT_COUNT = 220
 
 const translations = {
   en: {
@@ -218,16 +223,298 @@ const resolveInitialLanguage = () => {
   return window.navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en'
 }
 
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+
+const createSummaryDotTexture = () => {
+  const canvas = document.createElement('canvas')
+  canvas.height = 64
+  canvas.width = 64
+
+  const context = canvas.getContext('2d')
+  const gradient = context.createRadialGradient(32, 32, 0, 32, 32, 32)
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
+  gradient.addColorStop(0.18, 'rgba(136, 245, 255, 0.95)')
+  gradient.addColorStop(0.42, 'rgba(0, 229, 255, 0.38)')
+  gradient.addColorStop(1, 'rgba(0, 229, 255, 0)')
+
+  context.fillStyle = gradient
+  context.fillRect(0, 0, 64, 64)
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+  return texture
+}
+
+const createSeededRandom = () => {
+  let seed = 24
+
+  return () => {
+    const nextValue = Math.sin(seed) * 10000
+    seed += 1
+    return nextValue - Math.floor(nextValue)
+  }
+}
+
+const getSummaryTerrainHeight = (x, y, time) => {
+  const centerEnvelope = 0.38 + Math.max(0, 1 - Math.abs(y) / (SUMMARY_TERRAIN_HEIGHT * 0.5)) * 0.62
+  const travelingWave = Math.sin(x * 0.18 + time * 0.72) * 1.42
+  const diagonalWave = Math.sin((x + y * 1.18) * 0.09 - time * 0.48) * 1.08
+  const longWave = Math.cos(y * 0.15 - time * 0.34 + x * 0.035) * 1.32
+  const centralRise = Math.exp(-(((x / 32) ** 2) + (((y - 2) / 24) ** 2))) * 2.55
+  const farRidge = Math.exp(-(((y - 23) / 19) ** 2)) * Math.sin(x * 0.12 + time * 0.28) * 1.45
+
+  return (travelingWave + diagonalWave + longWave) * centerEnvelope + centralRise + farRidge
+}
+
+const usePrefersReducedMotion = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  })
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
+
+    updatePreference()
+    mediaQuery.addEventListener('change', updatePreference)
+
+    return () => mediaQuery.removeEventListener('change', updatePreference)
+  }, [])
+
+  return prefersReducedMotion
+}
+
+function SummaryWaveBackground() {
+  const canvasRef = useRef(null)
+  const prefersReducedMotion = usePrefersReducedMotion()
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) {
+      return undefined
+    }
+
+    let renderer
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: false,
+        canvas,
+        powerPreference: 'high-performance',
+      })
+    } catch {
+      canvas.classList.add('summary-terrain-canvas--fallback')
+      return undefined
+    }
+
+    const backgroundColor = new THREE.Color(SUMMARY_TERRAIN_COLOR)
+    const scene = new THREE.Scene()
+    scene.background = backgroundColor
+    scene.fog = new THREE.Fog(SUMMARY_TERRAIN_COLOR, 22, 92)
+
+    renderer.outputColorSpace = THREE.SRGBColorSpace
+    renderer.setClearColor(backgroundColor, 1)
+
+    const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 160)
+    const terrainGroup = new THREE.Group()
+    terrainGroup.position.set(0, -5.2, -9)
+    terrainGroup.rotation.x = -Math.PI / 2
+    terrainGroup.scale.set(1.18, 1.18, 1.18)
+    scene.add(terrainGroup)
+
+    const terrainGeometry = new THREE.PlaneGeometry(
+      SUMMARY_TERRAIN_WIDTH,
+      SUMMARY_TERRAIN_HEIGHT,
+      SUMMARY_TERRAIN_COLUMNS,
+      SUMMARY_TERRAIN_ROWS,
+    )
+    const positionAttribute = terrainGeometry.attributes.position
+    const basePositions = positionAttribute.array.slice()
+    const terrainColors = new Float32Array(positionAttribute.count * 3)
+    const cyanColor = new THREE.Color('#00e5ff')
+    const nearColor = new THREE.Color('#7af7ff')
+    const edgeColor = new THREE.Color('#0a5260')
+    const colorMixer = new THREE.Color()
+
+    for (let index = 0; index < positionAttribute.count; index += 1) {
+      const x = basePositions[index * 3]
+      const y = basePositions[index * 3 + 1]
+      const centerGlow = clamp(1 - Math.abs(x) / (SUMMARY_TERRAIN_WIDTH * 0.5), 0, 1)
+      const nearGlow = clamp(1 - (y + SUMMARY_TERRAIN_HEIGHT * 0.5) / SUMMARY_TERRAIN_HEIGHT, 0, 1)
+      const colorIntensity = clamp(centerGlow ** 1.4 * 0.58 + nearGlow ** 1.12 * 0.52, 0, 1)
+      const fogFade = clamp((1 - nearGlow) * 0.34 + (1 - centerGlow) * 0.24, 0, 0.48)
+
+      colorMixer.copy(edgeColor).lerp(cyanColor, colorIntensity).lerp(nearColor, centerGlow * nearGlow * 0.24)
+      colorMixer.lerp(backgroundColor, fogFade)
+      terrainColors[index * 3] = colorMixer.r
+      terrainColors[index * 3 + 1] = colorMixer.g
+      terrainColors[index * 3 + 2] = colorMixer.b
+    }
+
+    terrainGeometry.setAttribute('color', new THREE.BufferAttribute(terrainColors, 3))
+
+    const terrainMaterial = new THREE.MeshBasicMaterial({
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      fog: true,
+      opacity: 0.58,
+      transparent: true,
+      vertexColors: true,
+      wireframe: true,
+    })
+    const terrainMesh = new THREE.Mesh(terrainGeometry, terrainMaterial)
+    terrainGroup.add(terrainMesh)
+
+    const dotTexture = createSummaryDotTexture()
+    const dotGeometry = new THREE.BufferGeometry()
+    const dotPositions = new Float32Array(SUMMARY_TERRAIN_DOT_COUNT * 3)
+    const dotColors = new Float32Array(SUMMARY_TERRAIN_DOT_COUNT * 3)
+    const dotVertexIndices = []
+    const random = createSeededRandom()
+
+    for (let index = 0; index < SUMMARY_TERRAIN_DOT_COUNT; index += 1) {
+      const vertexIndex = Math.floor(random() * positionAttribute.count)
+      const colorOffset = index * 3
+      const glowColor = colorMixer
+        .copy(cyanColor)
+        .lerp(nearColor, 0.28 + random() * 0.46)
+        .lerp(new THREE.Color('#ffffff'), random() * 0.16)
+
+      dotVertexIndices.push(vertexIndex)
+      dotColors[colorOffset] = glowColor.r
+      dotColors[colorOffset + 1] = glowColor.g
+      dotColors[colorOffset + 2] = glowColor.b
+    }
+
+    dotGeometry.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3))
+    dotGeometry.setAttribute('color', new THREE.BufferAttribute(dotColors, 3))
+
+    const dotMaterial = new THREE.PointsMaterial({
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      map: dotTexture,
+      opacity: 0.86,
+      size: 0.38,
+      sizeAttenuation: true,
+      transparent: true,
+      vertexColors: true,
+    })
+    const dotMesh = new THREE.Points(dotGeometry, dotMaterial)
+    terrainGroup.add(dotMesh)
+
+    let animationFrameId = null
+    let cameraBaseY = 13.2
+    let cameraBaseZ = 43
+    let lastRenderTime = prefersReducedMotion ? 9.4 : 0
+
+    const updateTerrain = (time) => {
+      const positionArray = positionAttribute.array
+      const dotPositionArray = dotGeometry.attributes.position.array
+
+      for (let index = 0; index < positionAttribute.count; index += 1) {
+        const offset = index * 3
+        const x = basePositions[offset]
+        const y = basePositions[offset + 1]
+        positionArray[offset + 2] = getSummaryTerrainHeight(x, y, time)
+      }
+
+      for (let index = 0; index < SUMMARY_TERRAIN_DOT_COUNT; index += 1) {
+        const vertexIndex = dotVertexIndices[index]
+        const vertexOffset = vertexIndex * 3
+        const dotOffset = index * 3
+        const x = basePositions[vertexOffset]
+        const y = basePositions[vertexOffset + 1]
+        const pulse = prefersReducedMotion ? 0 : Math.sin(time * 1.8 + index * 0.37) * 0.05
+
+        dotPositionArray[dotOffset] = x
+        dotPositionArray[dotOffset + 1] = y
+        dotPositionArray[dotOffset + 2] = getSummaryTerrainHeight(x, y, time) + 0.16 + pulse
+      }
+
+      positionAttribute.needsUpdate = true
+      dotGeometry.attributes.position.needsUpdate = true
+    }
+
+    const renderFrame = (time) => {
+      lastRenderTime = time
+      updateTerrain(time)
+      renderer.render(scene, camera)
+    }
+
+    const resizeRenderer = () => {
+      const width = Math.max(1, canvas.clientWidth || canvas.parentElement?.clientWidth || 1)
+      const height = Math.max(1, canvas.clientHeight || canvas.parentElement?.clientHeight || 1)
+      const isCompact = width < 760
+
+      cameraBaseY = isCompact ? 14.8 : 13.2
+      cameraBaseZ = isCompact ? 52 : 43
+      camera.fov = isCompact ? 54 : 48
+      camera.aspect = width / height
+      camera.position.set(0, cameraBaseY, cameraBaseZ)
+      camera.lookAt(0, -3.6, -16)
+      camera.updateProjectionMatrix()
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75))
+      renderer.setSize(width, height, false)
+      renderFrame(lastRenderTime)
+    }
+
+    const animate = () => {
+      const time = performance.now() * 0.001
+
+      camera.position.x = Math.sin(time * 0.16) * 1.15
+      camera.position.y = cameraBaseY + Math.cos(time * 0.19) * 0.54
+      camera.position.z = cameraBaseZ + Math.sin(time * 0.11) * 0.72
+      camera.lookAt(Math.sin(time * 0.12) * 1.4, -3.5 + Math.cos(time * 0.14) * 0.28, -16)
+      renderFrame(time)
+      animationFrameId = window.requestAnimationFrame(animate)
+    }
+
+    const resizeObserver = new ResizeObserver(resizeRenderer)
+    resizeObserver.observe(canvas)
+    resizeRenderer()
+
+    if (prefersReducedMotion) {
+      renderFrame(lastRenderTime)
+    } else {
+      animate()
+    }
+
+    return () => {
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId)
+      }
+
+      resizeObserver.disconnect()
+      terrainGeometry.dispose()
+      terrainMaterial.dispose()
+      dotGeometry.dispose()
+      dotMaterial.dispose()
+      dotTexture.dispose()
+      renderer.dispose()
+    }
+  }, [prefersReducedMotion])
+
+  return (
+    <div aria-hidden="true" className="summary-wave-background">
+      <canvas className="summary-terrain-canvas" ref={canvasRef} />
+      <div className="summary-wave-glow" />
+      <div className="summary-terrain-horizon" />
+      <div className="summary-terrain-vignette" />
+    </div>
+  )
+}
+
 function App() {
   const [language, setLanguage] = useState(resolveInitialLanguage)
   const [activeSection, setActiveSection] = useState(NAV_SECTION_IDS[0])
-  const [isSummaryWaveSplitActive, setIsSummaryWaveSplitActive] = useState(false)
-  const [summaryWaveSplitPoint, setSummaryWaveSplitPoint] = useState({ x: '50%', y: '50%' })
   const pendingNavTargetRef = useRef(null)
   const isClickNavigatingRef = useRef(false)
   const clickScrollIdleTimeoutRef = useRef(null)
-  const summaryWaveSplitTimeoutRef = useRef(null)
-  const summaryWaveSplitFrameRef = useRef(null)
   const copy = translations[language]
   const navItems = [
     { id: 'top', label: copy.nav.summary },
@@ -243,33 +530,6 @@ function App() {
   }, [language])
 
   const getNavOffset = () => 24
-
-  const handleSummaryWaveClick = (event) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return
-    }
-
-    const sectionBounds = event.currentTarget.getBoundingClientRect()
-    const clickX = event.clientX - sectionBounds.left
-    const clickY = event.clientY - sectionBounds.top
-
-    setSummaryWaveSplitPoint({ x: `${clickX}px`, y: `${clickY}px` })
-    setIsSummaryWaveSplitActive(false)
-    window.clearTimeout(summaryWaveSplitTimeoutRef.current)
-
-    if (summaryWaveSplitFrameRef.current !== null) {
-      window.cancelAnimationFrame(summaryWaveSplitFrameRef.current)
-    }
-
-    summaryWaveSplitFrameRef.current = window.requestAnimationFrame(() => {
-      setIsSummaryWaveSplitActive(true)
-      summaryWaveSplitTimeoutRef.current = window.setTimeout(() => {
-        setIsSummaryWaveSplitActive(false)
-        summaryWaveSplitTimeoutRef.current = null
-      }, SUMMARY_WAVE_SPLIT_DURATION_MS)
-      summaryWaveSplitFrameRef.current = null
-    })
-  }
 
   const handleNavItemClick = (event, sectionId) => {
     event.preventDefault()
@@ -390,15 +650,6 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    return () => {
-      window.clearTimeout(summaryWaveSplitTimeoutRef.current)
-      if (summaryWaveSplitFrameRef.current !== null) {
-        window.cancelAnimationFrame(summaryWaveSplitFrameRef.current)
-      }
-    }
-  }, [])
-
   const getLanguageButtonClass = (targetLanguage) => {
     const baseClass =
       'flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-slate-800 text-sm transition-all'
@@ -408,12 +659,6 @@ function App() {
     }
 
     return `${baseClass} border border-white/10 opacity-50 hover:opacity-100`
-  }
-
-  const summaryWaveSplitStyle = {
-    '--summary-wave-click-x': summaryWaveSplitPoint.x,
-    '--summary-wave-click-y': summaryWaveSplitPoint.y,
-    '--summary-wave-local-radius': `${SUMMARY_WAVE_LOCAL_RADIUS_PX}px`,
   }
 
   return (
@@ -488,35 +733,13 @@ function App() {
       <div aria-hidden="true" className="h-px w-full bg-cyan-500/35" />
 
       <main>
-        <section className="relative flex min-h-screen items-center overflow-hidden" id="top" onClick={handleSummaryWaveClick}>
-          <div
-            aria-hidden="true"
-            className={`summary-wave-background absolute inset-0 z-0 ${
-              isSummaryWaveSplitActive ? 'summary-wave-background--split-active' : ''
-            }`}
-            style={summaryWaveSplitStyle}
-          >
-            <div className="summary-wave-glow" />
-            <div className="summary-wave-grid summary-wave-grid--far" />
-            <div className="summary-wave-grid summary-wave-grid--near" />
-            <div className="summary-wave-contours summary-wave-contours--primary" />
-            <div className="summary-wave-contours summary-wave-contours--secondary" />
-            <div className="summary-wave-contours summary-wave-contours--tertiary" />
+        <section
+          className="summary-hero-section relative flex min-h-screen items-center overflow-hidden"
+          id="top"
+        >
+          <SummaryWaveBackground />
 
-            <div
-              className={`summary-wave-local-expansion ${
-                isSummaryWaveSplitActive ? 'summary-wave-local-expansion--active' : ''
-              }`}
-            >
-              <div className="summary-wave-grid summary-wave-grid--far" />
-              <div className="summary-wave-grid summary-wave-grid--near" />
-              <div className="summary-wave-contours summary-wave-contours--primary" />
-              <div className="summary-wave-contours summary-wave-contours--secondary" />
-              <div className="summary-wave-contours summary-wave-contours--tertiary" />
-            </div>
-          </div>
-
-          <div className="container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="summary-hero-content container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-stack-md">
               <span className="rounded-full bg-primary-container/10 px-3 py-1 font-label-caps text-primary-container">
                 {copy.hero.badge}
