@@ -9,10 +9,12 @@ const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#051424'
 const SUMMARY_TERRAIN_WIDTH = 110
 const SUMMARY_TERRAIN_HEIGHT = 80
-const SUMMARY_TERRAIN_COLUMNS = 110
-const SUMMARY_TERRAIN_ROWS = 80
-const SUMMARY_TERRAIN_DOT_COUNT = 220
-const SUMMARY_TERRAIN_CLICK_DURATION = 2.1
+const SUMMARY_TERRAIN_COLUMNS = 92
+const SUMMARY_TERRAIN_ROWS = 66
+const SUMMARY_TERRAIN_DOT_COUNT = 170
+const SUMMARY_TERRAIN_IMPACT_DURATION = 1.35
+const SUMMARY_TERRAIN_POINTER_SAMPLE_SECONDS = 0.068
+const SUMMARY_TERRAIN_POINTER_IMPACT_LIMIT = 18
 
 const translations = {
   en: {
@@ -258,32 +260,39 @@ const createSeededRandom = () => {
 
 const getSummaryTerrainHeight = (x, y, time) => {
   const centerEnvelope = 0.38 + Math.max(0, 1 - Math.abs(y) / (SUMMARY_TERRAIN_HEIGHT * 0.5)) * 0.62
-  const travelingWave = Math.sin(x * 0.18 + time * 0.72) * 1.42
-  const diagonalWave = Math.sin((x + y * 1.18) * 0.09 - time * 0.48) * 1.08
-  const longWave = Math.cos(y * 0.15 - time * 0.34 + x * 0.035) * 1.32
-  const centralRise = Math.exp(-(((x / 32) ** 2) + (((y - 2) / 24) ** 2))) * 2.55
-  const farRidge = Math.exp(-(((y - 23) / 19) ** 2)) * Math.sin(x * 0.12 + time * 0.28) * 1.45
+  const travelingWave = Math.sin(x * 0.18 + time * 0.58) * 1.12
+  const diagonalWave = Math.sin((x + y * 1.18) * 0.09 - time * 0.38) * 0.86
+  const longWave = Math.cos(y * 0.15 - time * 0.28 + x * 0.035) * 1.06
+  const centralRise = Math.exp(-(((x / 32) ** 2) + (((y - 2) / 24) ** 2))) * 2.08
+  const farRidge = Math.exp(-(((y - 23) / 19) ** 2)) * Math.sin(x * 0.12 + time * 0.22) * 1.04
 
   return (travelingWave + diagonalWave + longWave) * centerEnvelope + centralRise + farRidge
 }
 
-const getSummaryClickImpulseHeight = (x, y, time, impacts) => {
+const getSummaryPointerImpulseHeight = (x, y, time, impacts) => {
   let impulseHeight = 0
 
   for (const impact of impacts) {
     const age = time - impact.startedAt
-    if (age < 0 || age > SUMMARY_TERRAIN_CLICK_DURATION) {
+    if (age < 0 || age > SUMMARY_TERRAIN_IMPACT_DURATION) {
       continue
     }
 
     const dx = x - impact.x
     const dy = y - impact.y
-    const distance = Math.sqrt(dx * dx + dy * dy)
-    const ringPosition = age * 21
-    const ringFalloff = Math.exp(-Math.abs(distance - ringPosition) * 0.12)
-    const energy = (1 - age / SUMMARY_TERRAIN_CLICK_DURATION) ** 1.8
-    const ripple = Math.sin(distance * 0.74 - age * 13.2) * 2.1
-    const lift = Math.exp(-(distance * distance) / 190) * Math.sin(age * 10.5) * 1.25
+    const distanceSquared = dx * dx + dy * dy
+    const ringPosition = age * 16
+    const influenceRadius = ringPosition + 18
+
+    if (distanceSquared > influenceRadius * influenceRadius) {
+      continue
+    }
+
+    const distance = Math.sqrt(distanceSquared)
+    const ringFalloff = Math.exp(-Math.abs(distance - ringPosition) * 0.14)
+    const energy = (1 - age / SUMMARY_TERRAIN_IMPACT_DURATION) ** 2.2
+    const ripple = Math.sin(distance * 0.62 - age * 8.4) * 0.72
+    const lift = Math.exp(-distanceSquared / 260) * Math.sin(age * 6.8) * 0.42
 
     impulseHeight += (ripple * ringFalloff + lift) * energy
   }
@@ -313,25 +322,32 @@ const usePrefersReducedMotion = () => {
   return prefersReducedMotion
 }
 
-function SummaryWaveBackground({ clickImpact }) {
+function SummaryWaveBackground({ pointerImpact }) {
   const canvasRef = useRef(null)
-  const clickImpactsRef = useRef([])
+  const pointerImpactsRef = useRef([])
+  const lastPointerImpactAtRef = useRef(0)
   const prefersReducedMotion = usePrefersReducedMotion()
 
   useEffect(() => {
-    if (!clickImpact || prefersReducedMotion) {
+    if (!pointerImpact || prefersReducedMotion) {
       return
     }
 
-    clickImpactsRef.current = [
-      ...clickImpactsRef.current.slice(-3),
+    const now = performance.now() * 0.001
+    if (pointerImpact.isActive && now - lastPointerImpactAtRef.current < SUMMARY_TERRAIN_POINTER_SAMPLE_SECONDS) {
+      return
+    }
+
+    lastPointerImpactAtRef.current = now
+    pointerImpactsRef.current = [
+      ...pointerImpactsRef.current.slice(-(SUMMARY_TERRAIN_POINTER_IMPACT_LIMIT - 1)),
       {
-        startedAt: performance.now() * 0.001,
-        x: clickImpact.terrainX,
-        y: clickImpact.terrainY,
+        startedAt: now,
+        x: pointerImpact.terrainX,
+        y: pointerImpact.terrainY,
       },
     ]
-  }, [clickImpact, prefersReducedMotion])
+  }, [pointerImpact, prefersReducedMotion])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -375,6 +391,7 @@ function SummaryWaveBackground({ clickImpact }) {
     )
     const positionAttribute = terrainGeometry.attributes.position
     const basePositions = positionAttribute.array.slice()
+    const terrainHeights = new Float32Array(positionAttribute.count)
     const terrainColors = new Float32Array(positionAttribute.count * 3)
     const cyanColor = new THREE.Color('#00e5ff')
     const nearColor = new THREE.Color('#7af7ff')
@@ -455,34 +472,30 @@ function SummaryWaveBackground({ clickImpact }) {
     const updateTerrain = (time) => {
       const positionArray = positionAttribute.array
       const dotPositionArray = dotGeometry.attributes.position.array
-      const activeImpacts = clickImpactsRef.current.filter(
-        (impact) => time - impact.startedAt <= SUMMARY_TERRAIN_CLICK_DURATION,
+      const activeImpacts = pointerImpactsRef.current.filter(
+        (impact) => time - impact.startedAt <= SUMMARY_TERRAIN_IMPACT_DURATION,
       )
-      clickImpactsRef.current = activeImpacts
+      pointerImpactsRef.current = activeImpacts
 
       for (let index = 0; index < positionAttribute.count; index += 1) {
         const offset = index * 3
         const x = basePositions[offset]
         const y = basePositions[offset + 1]
-        positionArray[offset + 2] =
-          getSummaryTerrainHeight(x, y, time) + getSummaryClickImpulseHeight(x, y, time, activeImpacts)
+        const height = getSummaryTerrainHeight(x, y, time) + getSummaryPointerImpulseHeight(x, y, time, activeImpacts)
+
+        terrainHeights[index] = height
+        positionArray[offset + 2] = height
       }
 
       for (let index = 0; index < SUMMARY_TERRAIN_DOT_COUNT; index += 1) {
         const vertexIndex = dotVertexIndices[index]
         const vertexOffset = vertexIndex * 3
         const dotOffset = index * 3
-        const x = basePositions[vertexOffset]
-        const y = basePositions[vertexOffset + 1]
         const pulse = prefersReducedMotion ? 0 : Math.sin(time * 1.8 + index * 0.37) * 0.05
 
-        dotPositionArray[dotOffset] = x
-        dotPositionArray[dotOffset + 1] = y
-        dotPositionArray[dotOffset + 2] =
-          getSummaryTerrainHeight(x, y, time) +
-          getSummaryClickImpulseHeight(x, y, time, activeImpacts) +
-          0.16 +
-          pulse
+        dotPositionArray[dotOffset] = basePositions[vertexOffset]
+        dotPositionArray[dotOffset + 1] = basePositions[vertexOffset + 1]
+        dotPositionArray[dotOffset + 2] = terrainHeights[vertexIndex] + 0.14 + pulse
       }
 
       positionAttribute.needsUpdate = true
@@ -554,13 +567,12 @@ function SummaryWaveBackground({ clickImpact }) {
       <canvas className="summary-terrain-canvas" ref={canvasRef} />
       <div className="summary-wave-glow" />
       <div className="summary-terrain-horizon" />
-      {clickImpact ? (
+      {pointerImpact?.isActive ? (
         <div
-          className="summary-terrain-click-flash"
-          key={clickImpact.id}
+          className="summary-terrain-pointer-glow"
           style={{
-            '--summary-click-x': `${clickImpact.screenX}px`,
-            '--summary-click-y': `${clickImpact.screenY}px`,
+            '--summary-pointer-x': `${pointerImpact.screenX}px`,
+            '--summary-pointer-y': `${pointerImpact.screenY}px`,
           }}
         />
       ) : null}
@@ -572,7 +584,10 @@ function SummaryWaveBackground({ clickImpact }) {
 function App() {
   const [language, setLanguage] = useState(resolveInitialLanguage)
   const [activeSection, setActiveSection] = useState(NAV_SECTION_IDS[0])
-  const [summaryTerrainClick, setSummaryTerrainClick] = useState(null)
+  const [summaryTerrainPointer, setSummaryTerrainPointer] = useState(null)
+  const summaryTerrainPointerIdRef = useRef(null)
+  const queuedSummaryTerrainPointerRef = useRef(null)
+  const summaryTerrainPointerFrameRef = useRef(null)
   const pendingNavTargetRef = useRef(null)
   const isClickNavigatingRef = useRef(false)
   const clickScrollIdleTimeoutRef = useRef(null)
@@ -592,26 +607,107 @@ function App() {
 
   const getNavOffset = () => 24
 
-  const handleSummaryTerrainClick = (event) => {
+  const createSummaryTerrainPointer = (event, isActive) => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return
+      return null
     }
 
     const sectionBounds = event.currentTarget.getBoundingClientRect()
+    const sectionWidth = Math.max(sectionBounds.width, 1)
+    const sectionHeight = Math.max(sectionBounds.height, 1)
     const screenX = event.clientX - sectionBounds.left
     const screenY = event.clientY - sectionBounds.top
-    const normalizedX = screenX / sectionBounds.width
-    const normalizedY = screenY / sectionBounds.height
+    const normalizedX = clamp(screenX / sectionWidth, 0, 1)
+    const normalizedY = clamp(screenY / sectionHeight, 0, 1)
     const terrainX = (normalizedX - 0.5) * SUMMARY_TERRAIN_WIDTH * 1.12
     const terrainY = clamp((0.62 - normalizedY) * SUMMARY_TERRAIN_HEIGHT * 1.36, -39, 39)
 
-    setSummaryTerrainClick({
-      id: event.timeStamp,
+    return {
+      isActive,
       screenX,
       screenY,
       terrainX,
       terrainY,
+    }
+  }
+
+  const cancelQueuedSummaryTerrainPointer = () => {
+    if (summaryTerrainPointerFrameRef.current !== null) {
+      window.cancelAnimationFrame(summaryTerrainPointerFrameRef.current)
+      summaryTerrainPointerFrameRef.current = null
+    }
+
+    queuedSummaryTerrainPointerRef.current = null
+  }
+
+  const queueSummaryTerrainPointer = (pointer) => {
+    queuedSummaryTerrainPointerRef.current = pointer
+
+    if (summaryTerrainPointerFrameRef.current !== null) {
+      return
+    }
+
+    summaryTerrainPointerFrameRef.current = window.requestAnimationFrame(() => {
+      summaryTerrainPointerFrameRef.current = null
+      setSummaryTerrainPointer(queuedSummaryTerrainPointerRef.current)
+      queuedSummaryTerrainPointerRef.current = null
     })
+  }
+
+  const handleSummaryTerrainPointerDown = (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) {
+      return
+    }
+
+    const pointer = createSummaryTerrainPointer(event, true)
+    if (!pointer) {
+      return
+    }
+
+    if (event.pointerType === 'mouse') {
+      event.preventDefault()
+    }
+
+    summaryTerrainPointerIdRef.current = event.pointerId
+    cancelQueuedSummaryTerrainPointer()
+    event.currentTarget.setPointerCapture?.(event.pointerId)
+    setSummaryTerrainPointer(pointer)
+  }
+
+  const handleSummaryTerrainPointerMove = (event) => {
+    if (summaryTerrainPointerIdRef.current !== event.pointerId) {
+      return
+    }
+
+    if (event.pointerType === 'mouse' && event.buttons !== 1) {
+      handleSummaryTerrainPointerEnd(event)
+      return
+    }
+
+    const pointer = createSummaryTerrainPointer(event, true)
+    if (!pointer) {
+      return
+    }
+
+    queueSummaryTerrainPointer(pointer)
+  }
+
+  const handleSummaryTerrainPointerEnd = (event) => {
+    if (summaryTerrainPointerIdRef.current !== event.pointerId) {
+      return
+    }
+
+    const pointer = createSummaryTerrainPointer(event, false)
+    summaryTerrainPointerIdRef.current = null
+    cancelQueuedSummaryTerrainPointer()
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+
+    if (pointer) {
+      setSummaryTerrainPointer(pointer)
+    }
   }
 
   const handleNavItemClick = (event, sectionId) => {
@@ -733,6 +829,17 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    return () => {
+      if (summaryTerrainPointerFrameRef.current !== null) {
+        window.cancelAnimationFrame(summaryTerrainPointerFrameRef.current)
+        summaryTerrainPointerFrameRef.current = null
+      }
+
+      queuedSummaryTerrainPointerRef.current = null
+    }
+  }, [])
+
   const getLanguageButtonClass = (targetLanguage) => {
     const baseClass =
       'flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-slate-800 text-sm transition-all'
@@ -819,9 +926,12 @@ function App() {
         <section
           className="summary-hero-section relative flex min-h-screen items-center overflow-hidden"
           id="top"
-          onClick={handleSummaryTerrainClick}
+          onPointerCancel={handleSummaryTerrainPointerEnd}
+          onPointerDown={handleSummaryTerrainPointerDown}
+          onPointerMove={handleSummaryTerrainPointerMove}
+          onPointerUp={handleSummaryTerrainPointerEnd}
         >
-          <SummaryWaveBackground clickImpact={summaryTerrainClick} />
+          <SummaryWaveBackground pointerImpact={summaryTerrainPointer} />
 
           <div className="summary-hero-content container-max relative z-10 mx-auto grid items-center gap-stack-lg px-gutter lg:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-stack-md">
