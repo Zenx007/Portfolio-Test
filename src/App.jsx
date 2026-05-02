@@ -66,9 +66,9 @@ const translations = {
       title: 'Projects',
       description: 'Experimental architectures and core engineering prototypes.',
       github: 'GITHUB',
-      demo: 'DEMO',
+      demo: 'Visit Site',
       firstAlt: 'Recipe App Launch Page',
-      firstTitle: 'CulinaryArtisan Landing Page',
+      firstTitle: 'Culinary Artisan',
       firstDescription:
         'A beautiful, responsive landing page for the CulinaryArtisan app featuring elegant styling and modern UI components.',
     },
@@ -152,9 +152,9 @@ const translations = {
       title: 'Projetos',
       description: 'Arquiteturas experimentais e prototipos de engenharia de software.',
       github: 'GITHUB',
-      demo: 'DEMO',
+      demo: 'Visitar site',
       firstAlt: 'Recipe App Launch Page',
-      firstTitle: 'Landing Page CulinaryArtisan',
+      firstTitle: 'Culinary Artisan',
       firstDescription:
         'Uma landing page responsiva e elegante para o aplicativo CulinaryArtisan, criada com Tailwind CSS e design moderno.',
     },
@@ -999,22 +999,31 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="relative z-10 mb-4 flex gap-2">
-                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                <div 
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60"
+                  style={{ backgroundImage: "url('/culinary-artisan-bg.jpg')" }}
+                />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                
+                <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    React
+                  </span>
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     HTML
                   </span>
-                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     Tailwind CSS
                   </span>
                 </div>
-                <h3 className="relative z-10 mb-3 text-xl font-bold text-white transition-colors group-hover:text-primary-container">
+                <h3 className="relative z-10 mb-3 text-2xl font-bold text-white transition-colors group-hover:text-primary-container">
                   {copy.projects.firstTitle}
                 </h3>
-                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.firstDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
+                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.firstDescription}</p>
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
                   <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="/culinary-artisan.html" target="_blank" rel="noopener noreferrer">
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
