@@ -67,18 +67,10 @@ const translations = {
       description: 'Experimental architectures and core engineering prototypes.',
       github: 'GITHUB',
       demo: 'DEMO',
-      firstAlt: 'Cloud Infrastructure Project',
-      firstTitle: 'Zero-Trust Cloud Mesh',
+      firstAlt: 'Recipe App Launch Page',
+      firstTitle: 'CulinaryArtisan Landing Page',
       firstDescription:
-        'Automated multi-region infrastructure deployment with service mesh integration and strict identity-based security policies.',
-      secondAlt: 'High Performance API',
-      secondTitle: 'High-Throughput Gateway',
-      secondDescription:
-        'A custom API gateway implementation optimized for low-latency gRPC to REST translation and dynamic request routing.',
-      thirdAlt: 'Realtime Data',
-      thirdTitle: 'Event Streaming Hub',
-      thirdDescription:
-        'Scalable pub/sub architecture handling 50k+ events/sec with guaranteed delivery and persistent audit trails.',
+        'A beautiful, responsive landing page for the CulinaryArtisan app featuring elegant styling and modern UI components.',
     },
     stack: {
       title: 'Technical Arsenal',
@@ -161,18 +153,10 @@ const translations = {
       description: 'Arquiteturas experimentais e prototipos de engenharia de software.',
       github: 'GITHUB',
       demo: 'DEMO',
-      firstAlt: 'Projeto de Infraestrutura em Nuvem',
-      firstTitle: 'Malha Cloud Zero-Trust',
+      firstAlt: 'Recipe App Launch Page',
+      firstTitle: 'Landing Page CulinaryArtisan',
       firstDescription:
-        'Implantacao automatizada de infraestrutura multi-regiao com integracao de service mesh e politicas rigorosas de seguranca baseadas em identidade.',
-      secondAlt: 'API de Alta Performance',
-      secondTitle: 'Gateway de Alto Throughput',
-      secondDescription:
-        'Implementacao de gateway de API otimizada para traducao de gRPC para REST com baixa latencia e roteamento dinamico de requisicoes.',
-      thirdAlt: 'Dados em Tempo Real',
-      thirdTitle: 'Hub de Streaming de Eventos',
-      thirdDescription:
-        'Arquitetura pub/sub escalavel processando 50k+ eventos/seg com entrega garantida e trilhas de auditoria persistentes.',
+        'Uma landing page responsiva e elegante para o aplicativo CulinaryArtisan, criada com Tailwind CSS e design moderno.',
     },
     stack: {
       title: 'Arsenal Tecnico',
@@ -1009,7 +993,7 @@ function App() {
               </motion.div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 max-w-2xl">
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -1020,10 +1004,10 @@ function App() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="relative z-10 mb-4 flex gap-2">
                   <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
-                    TypeScript
+                    HTML
                   </span>
                   <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
-                    AWS
+                    Tailwind CSS
                   </span>
                 </div>
                 <h3 className="relative z-10 mb-3 text-xl font-bold text-white transition-colors group-hover:text-primary-container">
@@ -1031,75 +1015,7 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.firstDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
-                  <a className="flex items-center gap-2 text-xs font-semibold text-slate-400 transition-colors hover:text-white" href="#">
-                    <span className="material-symbols-outlined text-base">code</span>
-                    {copy.projects.github}
-                  </a>
-                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#">
-                    <span className="material-symbols-outlined text-base">launch</span>
-                    {copy.projects.demo}
-                  </a>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50"
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="relative z-10 mb-4 flex gap-2">
-                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
-                    .NET 8
-                  </span>
-                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
-                    gRPC
-                  </span>
-                </div>
-                <h3 className="relative z-10 mb-3 text-xl font-bold text-white transition-colors group-hover:text-primary-container">
-                  {copy.projects.secondTitle}
-                </h3>
-                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.secondDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
-                  <a className="flex items-center gap-2 text-xs font-semibold text-slate-400 transition-colors hover:text-white" href="#">
-                    <span className="material-symbols-outlined text-base">code</span>
-                    {copy.projects.github}
-                  </a>
-                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#">
-                    <span className="material-symbols-outlined text-base">launch</span>
-                    {copy.projects.demo}
-                  </a>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50"
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="relative z-10 mb-4 flex gap-2">
-                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
-                    NestJS
-                  </span>
-                  <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
-                    Redis
-                  </span>
-                </div>
-                <h3 className="relative z-10 mb-3 text-xl font-bold text-white transition-colors group-hover:text-primary-container">
-                  {copy.projects.thirdTitle}
-                </h3>
-                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-400">{copy.projects.thirdDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-800 pt-4">
-                  <a className="flex items-center gap-2 text-xs font-semibold text-slate-400 transition-colors hover:text-white" href="#">
-                    <span className="material-symbols-outlined text-base">code</span>
-                    {copy.projects.github}
-                  </a>
-                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#">
+                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="/culinary-artisan.html" target="_blank" rel="noopener noreferrer">
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
                   </a>

@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CulinaryArtisan - Elevando sua Culinária Caseira</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500;1,6..72,600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#154212",
+                        "on-secondary-container": "#632c00",
+                        "on-surface-variant": "#42493e",
+                        "on-tertiary-fixed-variant": "#444845",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-variant": "#d8e3fb",
+                        "on-surface": "#111c2d",
+                        "secondary-fixed": "#ffdbc8",
+                        "inverse-on-surface": "#ecf1ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#743400",
+                        "on-tertiary-fixed": "#191c1a",
+                        "primary-fixed": "#bcf0ae",
+                        "on-primary-fixed": "#002201",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#994700",
+                        "tertiary-fixed": "#e1e3df",
+                        "secondary-fixed-dim": "#ffb68b",
+                        "on-background": "#111c2d",
+                        "on-primary-fixed-variant": "#23501e",
+                        "outline-variant": "#c2c9bb",
+                        "on-tertiary-container": "#c1c4c0",
+                        "on-secondary-fixed": "#321300",
+                        "tertiary-fixed-dim": "#c5c7c3",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#e7eeff",
+                        "tertiary": "#373a38",
+                        "error": "#ba1a1a",
+                        "primary-container": "#2d5a27",
+                        "primary-fixed-dim": "#a1d494",
+                        "surface-dim": "#cfdaf2",
+                        "surface": "#f9f9ff",
+                        "on-primary-container": "#9dd090",
+                        "inverse-surface": "#263143",
+                        "secondary-container": "#ff8429",
+                        "outline": "#72796e",
+                        "background": "#f9f9ff",
+                        "tertiary-container": "#4e514e",
+                        "inverse-primary": "#a1d494",
+                        "surface-tint": "#3b6934",
+                        "surface-container-highest": "#d8e3fb",
+                        "surface-container-high": "#dee8ff",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-md": "48px",
+                        "gutter": "32px",
+                        "unit": "8px",
+                        "stack-lg": "80px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Be Vietnam Pro"],
+                        "display-lg": ["Newsreader"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-sm": ["Newsreader"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "headline-md": ["Newsreader"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-md": ["40px", {"lineHeight": "1.2", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 w-full z-50 bg-white/90 dark:bg-stone-950/90 backdrop-blur-md shadow-sm border-b border-stone-100 dark:border-stone-800">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<span class="text-2xl font-serif italic font-bold text-emerald-900 dark:text-emerald-50 cursor-default">CulinaryArtisan</span>
+<a class="hidden md:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-primary text-on-primary font-body-md hover:bg-stone-50/50 dark:hover:bg-stone-900/50 hover:text-primary transition-all duration-300" href="#download">
+                Lista de Espera
+            </a>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative w-full min-h-[819px] flex items-center justify-center px-gutter py-stack-lg overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="Hero Background" class="w-full h-full object-cover opacity-90" data-alt="A beautifully plated rustic dish on a wooden table, shot from overhead in a bright, natural light setting. Fresh herbs, vibrant green vegetables, and crusty bread surround the main plate. The aesthetic is high-end culinary minimalist, utilizing a color palette of deep forest greens, crisp whites, and warm earthy browns. The scene evokes a sense of calm competence in a modern, well-lit kitchen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuCGXxu8hkXgZMJc4V-aVomSruh2r_126i6Pj7lhyRzyUY25oK4RUvFXpZFQ3RzN8kCnb-cK1e4uSl35aEhBk_YTteZQbz3UHlzK2X5_6kNY23ulNvnqhZU9NF2Ck60V51uQ-IJFbY5NP6DbzBOmJ2T1nlgigYBItBvy_UG1Sh-z0EuTGMquN6ETyoNZscWIqlb7PQTz5c4900dfPGsudPg_RcWYD6NGNT8CX4XaHGmjTMzXRW0lEEP9YD7kF0V24wBb16TIbmp7nm">
+<!-- Subtle Overlay for text readability -->
+<div class="absolute inset-0 bg-gradient-to-r from-surface-bright/90 via-surface-bright/70 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<div class="space-y-unit flex flex-col items-start max-w-xl">
+<span class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase bg-primary-fixed/30 px-3 py-1 rounded-full mb-4">Arte Culinária em Casa</span>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6 leading-tight">Transforme refeições diárias em obras-primas.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-lg">Descubra um novo mundo de possibilidades culinárias. Um aplicativo desenhado para guiar, inspirar e organizar sua vida na cozinha de forma inteligente e intuitiva.</p>
+<div class="flex flex-col sm:flex-row gap-4 mt-8">
+<a class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-primary text-on-primary font-body-md hover:bg-primary/90 transition-all shadow-[0_8px_30px_rgb(21,66,18,0.12)]" href="#features">
+                            Explorar Funcionalidades
+                        </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-stack-lg px-gutter bg-surface" id="features">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-stack-md">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Conheça o CulinaryArtisan em Detalhes</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Mais do que um livro de receitas, uma plataforma completa para dominar a arte de cozinhar, desenhada com elegância e pensada para o seu dia a dia.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Feature 1 -->
+<div class="bg-surface-bright rounded-2xl p-8 border border-outline-variant shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(21,66,18,0.08)] transition-all duration-300">
+<div class="w-12 h-12 bg-primary-container rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="calendar_month">calendar_month</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Planejamento de Refeições</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Organize sua semana com um calendário visual elegante. Arraste e solte receitas para criar o menu perfeito.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-bright rounded-2xl p-8 border border-outline-variant shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(21,66,18,0.08)] transition-all duration-300">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="shopping_cart">shopping_cart</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Lista de Compras Inteligente</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Ingredientes são automaticamente agrupados por seção do supermercado, tornando suas compras rápidas e eficientes.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-bright rounded-2xl p-8 border border-outline-variant shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(21,66,18,0.08)] transition-all duration-300">
+<div class="w-12 h-12 bg-tertiary-container rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="menu_book">menu_book</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Receitas Guiadas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Siga o passo a passo com foco no momento. Instruções claras, timers integrados e belas imagens de apoio.</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-surface-bright rounded-2xl p-8 border border-outline-variant shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(21,66,18,0.08)] transition-all duration-300">
+<div class="w-12 h-12 bg-primary-container rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="set_meal">set_meal</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Personalização de Dieta</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">O aplicativo adapta-se de forma inteligente às suas restrições, alergias e preferências alimentares, garantindo que cada sugestão seja segura e alinhada ao seu estilo de vida.</p>
+</div>
+<!-- Feature 5 -->
+<div class="bg-surface-bright rounded-2xl p-8 border border-outline-variant shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(21,66,18,0.08)] transition-all duration-300">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="eco">eco</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Sazonalidade e Ingredientes</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Receba recomendações de receitas baseadas nos ingredientes que estão mais frescos e abundantes na estação atual, promovendo sabor máximo e economia.</p>
+</div>
+<!-- Feature 6 -->
+<div class="bg-surface-bright rounded-2xl p-8 border border-outline-variant shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(21,66,18,0.08)] transition-all duration-300">
+<div class="w-12 h-12 bg-tertiary-container rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-tertiary-container" data-icon="devices">devices</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Integração com Dispositivos</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Projetado para brilhar em qualquer tela. Totalmente otimizado para tablets e monitores inteligentes de cozinha, permitindo que você acompanhe receitas com as mãos livres.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Coming Soon / Download Section -->
+<section class="py-stack-lg px-gutter relative overflow-hidden" id="download">
+<div class="absolute inset-0 bg-primary-container opacity-10"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10 bg-surface-bright p-12 rounded-3xl shadow-[0_20px_60px_rgb(21,66,18,0.08)] border border-primary-fixed/20">
+<span class="inline-block bg-secondary text-on-secondary font-label-caps text-label-caps px-4 py-1.5 rounded-full mb-6">Em Breve</span>
+<h2 class="font-display-lg text-headline-md md:text-display-lg text-on-surface mb-6">O CulinaryArtisan está chegando!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">Estamos preparando as últimas especiarias. Em breve disponível para iOS e Android. Junte-se à lista de espera para ter acesso antecipado.</p>
+<form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+<input class="flex-grow px-6 py-4 rounded-full border border-outline-variant bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-body-md text-on-surface placeholder-on-surface-variant/50 shadow-inner" placeholder="Seu melhor e-mail" type="email">
+<button class="px-8 py-4 rounded-full bg-primary text-on-primary font-body-md hover:bg-primary/90 transition-all whitespace-nowrap" type="submit">
+                        Avisar-me
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 text-emerald-900 dark:text-emerald-50 font-sans text-sm tracking-wide">
+<div class="flex flex-col items-center justify-center max-w-7xl mx-auto px-8 py-16 text-center">
+<p class="text-xl font-serif italic text-emerald-900 dark:text-emerald-50 mb-4 cursor-default">CulinaryArtisan</p>
+<p class="text-stone-500 dark:text-stone-400">© 2026 CulinaryArtisan. Crafted for intentional living.</p>
+</div>
+</footer>
+
+
+</body></html>
