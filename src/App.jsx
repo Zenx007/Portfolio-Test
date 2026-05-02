@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { motion } from 'motion/react'
 import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
@@ -997,14 +998,25 @@ function App() {
         <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="projects">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true, margin: "-50px" }}
+              >
                 <h2 className="mb-2 text-3xl font-bold text-white">{copy.projects.title}</h2>
                 <p className="text-slate-400">{copy.projects.description}</p>
-              </div>
+              </motion.div>
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50"
+              >
                 <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="relative z-10 mb-4 flex gap-2">
                   <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
@@ -1028,9 +1040,15 @@ function App() {
                     {copy.projects.demo}
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50"
+              >
                 <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="relative z-10 mb-4 flex gap-2">
                   <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
@@ -1054,9 +1072,15 @@ function App() {
                     {copy.projects.demo}
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50"
+              >
                 <div className="absolute inset-0 bg-gradient-to-b from-primary-container/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="relative z-10 mb-4 flex gap-2">
                   <span className="rounded border border-slate-700 bg-slate-800 px-2 py-1 font-code-snippet text-[10px] text-slate-300">
@@ -1080,7 +1104,7 @@ function App() {
                     {copy.projects.demo}
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -1089,10 +1113,16 @@ function App() {
           <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-primary-container/5 blur-[120px]" />
 
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="mb-16">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="mb-16"
+            >
               <h2 className="mb-2 text-3xl font-bold text-white">{copy.experience.title}</h2>
               <p className="text-slate-400">{copy.experience.subtitle}</p>
-            </div>
+            </motion.div>
 
             <div className="relative">
               <div className="absolute bottom-0 left-[20px] top-0 w-px bg-slate-800 md:left-1/2 md:-translate-x-1/2">
@@ -1108,27 +1138,39 @@ function App() {
                   </div>
 
                   <div className="w-full pl-[50px] text-left md:w-5/12 md:pl-0">
-                    <div className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60"
+                    >
                       <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row md:items-center">
                         <h3 className="text-lg font-bold text-primary-container">{copy.experience.primaryRole}</h3>
                         <span className="font-code-snippet text-xs text-slate-400">{copy.experience.primaryDate}</span>
                       </div>
                       <h4 className="mb-3 text-sm font-medium text-white">{copy.experience.primaryCompany}</h4>
                       <p className="text-sm leading-relaxed text-slate-400">{copy.experience.primaryDescription}</p>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
 
                 <div className="relative flex w-full flex-col items-center justify-between md:flex-row">
                   <div className="w-full pl-[50px] text-left md:w-5/12 md:pl-0 md:text-right">
-                    <div className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60"
+                    >
                       <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row-reverse md:items-center">
                         <h3 className="text-lg font-bold text-primary-container">{copy.experience.secondaryRole}</h3>
                         <span className="font-code-snippet text-xs text-slate-400">{copy.experience.secondaryDate}</span>
                       </div>
                       <h4 className="mb-3 text-sm font-medium text-white">{copy.experience.secondaryCompany}</h4>
                       <p className="text-sm leading-relaxed text-slate-400">{copy.experience.secondaryDescription}</p>
-                    </div>
+                    </motion.div>
                   </div>
 
                   <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2" />
@@ -1141,13 +1183,25 @@ function App() {
 
         <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="stack">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="mb-12 text-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="mb-12 text-center"
+            >
               <h2 className="mb-2 text-3xl font-bold text-white">{copy.stack.title}</h2>
               <p className="text-slate-400">{copy.stack.description}</p>
-            </div>
+            </motion.div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8"
+              >
                 <div className="mb-4 flex items-center gap-3">
                   <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
                     <span className="material-symbols-outlined text-primary-container">dns</span>
@@ -1183,9 +1237,15 @@ function App() {
                     <span className="text-xs font-medium text-slate-300">Docker</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8"
+              >
                 <div className="mb-4 flex items-center gap-3">
                   <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
                     <span className="material-symbols-outlined text-cyan-400">layers</span>
@@ -1221,14 +1281,20 @@ function App() {
                     <span className="text-xs font-medium text-slate-300">JavaScript</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
         <section className="bg-[#050a0e] py-16 sm:py-20" id="contact">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-            <div className="glass-card relative overflow-hidden rounded-2xl border border-primary-container/30 p-6 text-center shadow-[0_0_40px_rgba(0,229,255,0.05)] sm:rounded-3xl sm:p-10 md:p-16">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="glass-card relative overflow-hidden rounded-2xl border border-primary-container/30 p-6 text-center shadow-[0_0_40px_rgba(0,229,255,0.05)] sm:rounded-3xl sm:p-10 md:p-16"
+            >
               <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
               <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
 
@@ -1292,7 +1358,7 @@ function App() {
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>
