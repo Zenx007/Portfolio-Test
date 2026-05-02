@@ -6,7 +6,7 @@ import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const RESUME_PATH = '/curriculo.pdf'
-const NAV_SECTION_IDS = ['top', 'projects', 'experience', 'stack', 'contact']
+const NAV_SECTION_IDS = ['top', 'projects', 'experience', 'stack', 'about', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#051424'
 const SUMMARY_TERRAIN_WIDTH = 110
@@ -25,12 +25,21 @@ const translations = {
       projects: 'Projects',
       experience: 'Professional Trajectory',
       stack: 'Arsenal',
+      about: 'About',
       contact: 'Contact',
       resume: 'Resume',
     },
     language: {
       english: 'English',
       portuguese: 'Portuguese',
+    },
+    about: {
+      title: 'About Me',
+      description: 'My trajectory and capabilities as a software engineer.',
+      cardTitle: 'João Victor',
+      cardSubtitle: 'Fullstack Developer & System Architect',
+      cardText: 'I am a passionate software engineer with a strong focus on building scalable, high-performance distributed systems. With expertise spanning robust backend infrastructures using .NET, Node.js, and Python, to crafting elegant frontend experiences with React and Tailwind CSS, I bring a comprehensive approach to software development. My trajectory includes working on mission-critical applications, optimizing database queries, and deploying cloud-native solutions on AWS, always aiming for extreme throughput and enterprise-grade reliability.',
+      tags: ['System Architecture', 'Fullstack Development', 'Cloud Computing'],
     },
     hero: {
       badge: 'SYSTEM ARCHITECT',
@@ -111,12 +120,21 @@ const translations = {
       projects: 'Projetos',
       experience: 'Trajetória Profissional',
       stack: 'Arsenal',
+      about: 'Sobre',
       contact: 'Contato',
       resume: 'Curriculo',
     },
     language: {
       english: 'Ingles',
       portuguese: 'Portugues',
+    },
+    about: {
+      title: 'Sobre Mim',
+      description: 'Minha trajetória e capacidades como engenheiro de software.',
+      cardTitle: 'João Victor',
+      cardSubtitle: 'Desenvolvedor Fullstack & Arquiteto de Sistemas',
+      cardText: 'Sou um engenheiro de software apaixonado, com forte foco na construção de sistemas distribuídos escaláveis e de alta performance. Com expertise que abrange desde infraestruturas robustas de backend usando .NET, Node.js e Python, até a criação de experiências frontend elegantes com React e Tailwind CSS, trago uma abordagem abrangente para o desenvolvimento de software. Minha trajetória inclui o trabalho em aplicações de missão crítica, otimização de consultas a bancos de dados e implantação de soluções nativas em nuvem na AWS, sempre visando alta vazão e confiabilidade de nível corporativo.',
+      tags: ['Arquitetura de Sistemas', 'Desenvolvimento Fullstack', 'Cloud Computing'],
     },
     hero: {
       badge: 'ARQUITETO DE SISTEMAS',
@@ -577,6 +595,7 @@ function App() {
     { id: 'projects', label: copy.nav.projects },
     { id: 'experience', label: copy.nav.experience },
     { id: 'stack', label: copy.nav.stack },
+    { id: 'about', label: copy.nav.about },
     { id: 'contact', label: copy.nav.contact },
   ]
 
@@ -1208,6 +1227,55 @@ function App() {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </section>
+
+        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="about">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mb-12">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                <h2 className="mb-2 text-3xl font-bold text-white">{copy.about.title}</h2>
+                <p className="text-slate-400">{copy.about.description}</p>
+              </motion.div>
+            </div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="glass-card flex flex-col md:flex-row overflow-hidden rounded-2xl border border-slate-700/50 transition-colors hover:border-primary-container/50 bg-slate-900/20"
+            >
+              <div className="md:w-2/5 lg:w-1/3 relative flex-shrink-0 bg-slate-900/50">
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#050a0e] via-[#050a0e]/20 to-transparent z-10" />
+                <img
+                  alt={copy.about.cardTitle}
+                  className="h-full w-full object-cover min-h-[300px] md:min-h-full"
+                  src={profilePhoto}
+                />
+              </div>
+              <div className="p-8 md:p-10 md:w-3/5 lg:w-2/3 flex flex-col justify-center relative z-20">
+                <div className="mb-4">
+                  <h3 className="text-3xl font-bold text-white mb-1">{copy.about.cardTitle}</h3>
+                  <p className="text-primary-container font-medium">{copy.about.cardSubtitle}</p>
+                </div>
+                <p className="text-slate-300 leading-relaxed text-base sm:text-lg mb-8">
+                  {copy.about.cardText}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {copy.about.tags.map(tag => (
+                    <span key={tag} className="rounded border border-primary-container/30 bg-primary-container/5 px-3 py-1.5 font-code-snippet text-xs font-semibold text-primary-container backdrop-blur-sm">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
