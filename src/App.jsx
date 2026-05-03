@@ -112,6 +112,15 @@ const translations = {
       firstTitle: 'Culinary Artisan',
       firstDescription:
         'A beautiful, responsive landing page for the CulinaryArtisan app featuring elegant styling and modern UI components.',
+      secondAlt: 'Hours Tracker Interface',
+      secondTitle: 'Hours Tracker',
+      secondDescription: 'A modern landing page and web application interface for tracking work hours, built with high performance and usability in mind.',
+      thirdAlt: 'Gym Landing Page',
+      thirdTitle: 'Iron Gym',
+      thirdDescription: 'A high-energy, conversion-optimized landing page for a fitness center. Features dynamic class schedules and membership plans.',
+      fourthAlt: 'Restaurant Landing Page',
+      fourthTitle: 'Gourmet Bistro',
+      fourthDescription: 'An elegant, mouth-watering landing page for a premium restaurant. Showcases the menu, ambiance, and online reservations.',
     },
     stack: {
       title: 'Technical Arsenal',
@@ -239,6 +248,15 @@ const translations = {
       firstTitle: 'Culinary Artisan',
       firstDescription:
         'Uma landing page responsiva e elegante para o aplicativo CulinaryArtisan, criada com Tailwind CSS e design moderno.',
+      secondAlt: 'Interface do Hours Tracker',
+      secondTitle: 'Hours Tracker',
+      secondDescription: 'Uma landing page e interface web moderna para rastreamento de horas de trabalho, construída com foco em alta performance e usabilidade.',
+      thirdAlt: 'Landing Page de Academia',
+      thirdTitle: 'Iron Gym',
+      thirdDescription: 'Uma landing page de alta conversão para uma academia de ginástica. Conta com agenda dinâmica de aulas e planos de assinatura.',
+      fourthAlt: 'Landing Page de Restaurante',
+      fourthTitle: 'Gourmet Bistro',
+      fourthDescription: 'Uma landing page elegante para um restaurante premium. Destaca o cardápio, o ambiente e um formulário de reservas online.',
     },
     stack: {
       title: 'Arsenal Tecnico',
@@ -1137,7 +1155,7 @@ function App() {
               </motion.div>
             </div>
 
-            <div className="grid grid-cols-1 max-w-2xl">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -1169,6 +1187,111 @@ function App() {
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.firstDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
                   <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="/culinary-artisan.html" target="_blank" rel="noopener noreferrer">
+                    <span className="material-symbols-outlined text-base">launch</span>
+                    {copy.projects.demo}
+                  </a>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
+              >
+                <div 
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                
+                <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    React
+                  </span>
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    Tailwind CSS
+                  </span>
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    Vercel
+                  </span>
+                </div>
+                <h3 className="relative z-10 mb-3 text-2xl font-bold text-white transition-colors group-hover:text-primary-container">
+                  {copy.projects.secondTitle}
+                </h3>
+                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.secondDescription}</p>
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="https://hours-tracker-front.vercel.app" target="_blank" rel="noopener noreferrer">
+                    <span className="material-symbols-outlined text-base">launch</span>
+                    {copy.projects.demo}
+                  </a>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
+              >
+                <div 
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                
+                <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    React
+                  </span>
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    Tailwind CSS
+                  </span>
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    Framer Motion
+                  </span>
+                </div>
+                <h3 className="relative z-10 mb-3 text-2xl font-bold text-white transition-colors group-hover:text-primary-container">
+                  {copy.projects.thirdTitle}
+                </h3>
+                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.thirdDescription}</p>
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#" target="_blank" rel="noopener noreferrer">
+                    <span className="material-symbols-outlined text-base">launch</span>
+                    {copy.projects.demo}
+                  </a>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
+              >
+                <div 
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                
+                <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    Next.js
+                  </span>
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    Tailwind CSS
+                  </span>
+                </div>
+                <h3 className="relative z-10 mb-3 text-2xl font-bold text-white transition-colors group-hover:text-primary-container">
+                  {copy.projects.fourthTitle}
+                </h3>
+                <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fourthDescription}</p>
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="#" target="_blank" rel="noopener noreferrer">
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
                   </a>
