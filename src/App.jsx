@@ -98,6 +98,10 @@ const translations = {
         'Built and maintained backend services, REST APIs, external integrations, and PostgreSQL data models while improving application performance and supporting cloud deployment routines.',
       secondaryTagOne: 'High-Volume Data Pipelines',
       secondaryTagTwo: 'Observability Implementation',
+      tertiaryRole: 'Web Developer / Freelancer',
+      tertiaryDate: 'MAR 2024 - PRESENT',
+      tertiaryCompany: 'Independent',
+      tertiaryDescription: 'Designing and developing high-quality, responsive websites and web applications tailored to clients needs, focusing on modern aesthetics, performance, and user experience.',
     },
     projects: {
       title: 'Projects',
@@ -221,6 +225,10 @@ const translations = {
         'Atuei na construção e manutenção de serviços back-end, APIs REST, integrações externas e modelos de dados em PostgreSQL, apoiando melhorias de performance e rotinas de deploy em cloud.',
       secondaryTagOne: 'Pipelines de Dados de Alto Volume',
       secondaryTagTwo: 'Implementacao de Observabilidade',
+      tertiaryRole: 'Desenvolvedor de Sites / Freelancer',
+      tertiaryDate: 'MAR 2024 - ATUAL',
+      tertiaryCompany: 'Autônomo',
+      tertiaryDescription: 'Desenvolvimento e design de sites e aplicações web responsivas sob demanda para clientes, focando em estética moderna, alta performance e experiência do usuário.',
     },
     projects: {
       title: 'Projetos',
@@ -1337,6 +1345,31 @@ function App() {
 
                   <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2" />
                   <div className="hidden md:block md:w-5/12" />
+                </div>
+
+                <div className="relative flex w-full flex-col items-center justify-between md:flex-row">
+                  <div className="hidden md:block md:w-5/12" />
+
+                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2">
+                    <div className="absolute inset-1 rounded-full bg-primary-container" />
+                  </div>
+
+                  <div className="w-full pl-[50px] text-left md:w-5/12 md:pl-0">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60"
+                    >
+                      <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row md:items-center">
+                        <h3 className="text-lg font-bold text-primary-container">{copy.experience.tertiaryRole}</h3>
+                        <span className="font-code-snippet text-xs text-slate-400">{copy.experience.tertiaryDate}</span>
+                      </div>
+                      <h4 className="mb-3 text-sm font-medium text-white">{copy.experience.tertiaryCompany}</h4>
+                      <p className="text-sm leading-relaxed text-slate-400">{copy.experience.tertiaryDescription}</p>
+                    </motion.div>
+                  </div>
                 </div>
               </div>
             </div>
