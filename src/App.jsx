@@ -6,7 +6,7 @@ import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const RESUME_PATH = '/curriculo.pdf'
-const NAV_SECTION_IDS = ['top', 'projects', 'experience', 'stack', 'about', 'contact']
+const NAV_SECTION_IDS = ['top', 'value', 'projects', 'expertise', 'experience', 'stack', 'about', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#051424'
 const SUMMARY_TERRAIN_WIDTH = 110
@@ -22,9 +22,11 @@ const translations = {
   en: {
     nav: {
       summary: 'Summary',
+      value: 'Why Choose Me',
       projects: 'Projects',
       experience: 'Professional Trajectory',
       stack: 'Arsenal',
+      expertise: 'Expertise',
       about: 'About',
       contact: 'Contact',
       resume: 'Resume',
@@ -32,6 +34,32 @@ const translations = {
     language: {
       english: 'English',
       portuguese: 'Portuguese',
+    },
+    value: {
+      title: 'Partnering for Success',
+      description: 'Beyond code: bringing business vision, reliability, and true ownership to your project.',
+      businessTitle: 'Business-Driven Mindset',
+      businessDesc: 'I do not just write code; I build solutions that solve real business problems. Every technical decision is made with your ROI, scalability, and market goals in mind.',
+      communicationTitle: 'Clear Communication',
+      communicationDesc: 'No confusing technical jargon. I believe in transparent updates, aligning expectations early, and working as a true partner to ensure you are always in the loop.',
+      ownershipTitle: 'Unwavering Ownership',
+      ownershipDesc: 'I treat your product as if it were my own. From proactive problem-solving to predictable and reliable deliveries, you can count on my full commitment to your success.',
+    },
+    expertise: {
+      title: 'Scalability & Security',
+      description: 'Architecting robust systems built for extreme throughput and uncompromising security.',
+      scalableTitle: 'Scalable Architecture',
+      scalableDesc: 'Designing distributed systems, microservices, and asynchronous communication patterns capable of horizontal scaling and handling high traffic loads effortlessly.',
+      securityTitle: 'Enterprise Security',
+      securityDesc: 'Implementing robust authentication, authorization, data encryption, and defensive programming practices to protect sensitive data and ensure compliance.',
+      availabilityTitle: 'High Availability & Cloud',
+      availabilityDesc: 'Leveraging cloud-native infrastructure, containerization, and automated deployments to guarantee maximum uptime and fault tolerance.',
+      performanceTitle: 'Performance Optimization',
+      performanceDesc: 'Profiling bottlenecks, optimizing complex queries, and implementing advanced caching strategies (Redis) to ensure sub-millisecond latency.',
+      cicdTitle: 'CI/CD & Automation',
+      cicdDesc: 'Building robust delivery pipelines with automated testing and zero-downtime deployments for fast and reliable release cycles.',
+      apiTitle: 'API Design & Integration',
+      apiDesc: 'Designing robust, versioned RESTful APIs with clean contracts, rate limiting, and seamless third-party enterprise integrations.',
     },
     about: {
       title: 'About Me',
@@ -117,9 +145,11 @@ const translations = {
   pt: {
     nav: {
       summary: 'Resumo',
+      value: 'Diferenciais',
       projects: 'Projetos',
       experience: 'Trajetória Profissional',
       stack: 'Arsenal',
+      expertise: 'Especialidades',
       about: 'Sobre',
       contact: 'Contato',
       resume: 'Curriculo',
@@ -127,6 +157,32 @@ const translations = {
     language: {
       english: 'Ingles',
       portuguese: 'Portugues',
+    },
+    value: {
+      title: 'Parceria para o Sucesso',
+      description: 'Muito além do código: visão de negócios, comunicação clara e total comprometimento com o seu projeto.',
+      businessTitle: 'Foco em Resultados',
+      businessDesc: 'Não escrevo apenas código; construo soluções que resolvem problemas reais de negócio. Cada decisão técnica é pensada no seu ROI e nos objetivos de mercado.',
+      communicationTitle: 'Comunicação Transparente',
+      communicationDesc: 'Sem jargões técnicos confusos. Acredito em atualizações constantes, alinhamento de expectativas e em atuar como um verdadeiro parceiro estratégico.',
+      ownershipTitle: 'Total Comprometimento',
+      ownershipDesc: 'Trato o seu produto como se fosse meu. Da resolução proativa de problemas às entregas previsíveis, você pode contar com minha total dedicação ao seu sucesso.',
+    },
+    expertise: {
+      title: 'Escalabilidade & Segurança',
+      description: 'Arquitetando sistemas robustos preparados para extrema vazão e segurança sem concessões.',
+      scalableTitle: 'Arquitetura Escalável',
+      scalableDesc: 'Design de sistemas distribuídos, microsserviços e padrões de comunicação assíncrona capazes de escalar horizontalmente e suportar grandes volumes de tráfego.',
+      securityTitle: 'Segurança Corporativa',
+      securityDesc: 'Implementação de autenticação robusta, autorização, criptografia de dados e práticas de programação defensiva para proteger dados sensíveis e garantir conformidade.',
+      availabilityTitle: 'Alta Disponibilidade e Cloud',
+      availabilityDesc: 'Utilização de infraestrutura nativa em nuvem, conteinerização e deploys automatizados para garantir o máximo de uptime e tolerância a falhas.',
+      performanceTitle: 'Otimização de Performance',
+      performanceDesc: 'Mapeamento de gargalos, otimização de consultas complexas e implementação de estratégias avançadas de cache (Redis) para garantir latência sub-milissegundo.',
+      cicdTitle: 'CI/CD & Automação',
+      cicdDesc: 'Construção de pipelines de entrega robustos com testes automatizados e deploys sem downtime para ciclos de lançamento rápidos e confiáveis.',
+      apiTitle: 'Design de APIs & Integrações',
+      apiDesc: 'Desenvolvimento de APIs RESTful robustas e versionadas, com contratos claros, rate limiting e integrações perfeitas com sistemas corporativos de terceiros.',
     },
     about: {
       title: 'Sobre Mim',
@@ -592,7 +648,9 @@ function App() {
   const copy = translations[language]
   const navItems = [
     { id: 'top', label: copy.nav.summary },
+    { id: 'value', label: copy.nav.value },
     { id: 'projects', label: copy.nav.projects },
+    { id: 'expertise', label: copy.nav.expertise },
     { id: 'experience', label: copy.nav.experience },
     { id: 'stack', label: copy.nav.stack },
     { id: 'about', label: copy.nav.about },
@@ -998,6 +1056,65 @@ function App() {
           </div>
         </section>
 
+        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="value">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="mb-12 text-center"
+            >
+              <h2 className="mb-2 text-3xl font-bold text-white">{copy.value.title}</h2>
+              <p className="text-slate-400">{copy.value.description}</p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">handshake</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.value.businessTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.value.businessDesc}</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">forum</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.value.communicationTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.value.communicationDesc}</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">verified_user</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.value.ownershipTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.value.ownershipDesc}</p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="projects">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12">
@@ -1048,6 +1165,107 @@ function App() {
                     {copy.projects.demo}
                   </a>
                 </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="expertise">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="mb-12 text-center"
+            >
+              <h2 className="mb-2 text-3xl font-bold text-white">{copy.expertise.title}</h2>
+              <p className="text-slate-400">{copy.expertise.description}</p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">account_tree</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.expertise.scalableTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.expertise.scalableDesc}</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">shield_locked</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.expertise.securityTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.expertise.securityDesc}</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">cloud_done</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.expertise.availabilityTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.expertise.availabilityDesc}</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">speed</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.expertise.performanceTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.expertise.performanceDesc}</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">autorenew</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.expertise.cicdTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.expertise.cicdDesc}</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+              >
+                <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
+                  <span className="material-symbols-outlined text-2xl">api</span>
+                </div>
+                <h3 className="mb-3 text-xl font-semibold text-white">{copy.expertise.apiTitle}</h3>
+                <p className="text-sm leading-relaxed text-slate-400">{copy.expertise.apiDesc}</p>
               </motion.div>
             </div>
           </div>
