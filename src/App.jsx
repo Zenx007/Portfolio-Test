@@ -6,7 +6,7 @@ import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const RESUME_PATH = '/curriculo.pdf'
-const NAV_SECTION_IDS = ['top', 'value', 'projects', 'expertise', 'experience', 'stack', 'about', 'contact']
+const NAV_SECTION_IDS = ['top', 'value', 'projects', 'expertise', /* 'experience', */ 'stack', 'about', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#051424'
 const SUMMARY_TERRAIN_WIDTH = 110
@@ -677,7 +677,7 @@ function App() {
     { id: 'value', label: copy.nav.value },
     { id: 'projects', label: copy.nav.projects },
     { id: 'expertise', label: copy.nav.expertise },
-    { id: 'experience', label: copy.nav.experience },
+    /* { id: 'experience', label: copy.nav.experience }, */
     { id: 'stack', label: copy.nav.stack },
     { id: 'about', label: copy.nav.about },
     { id: 'contact', label: copy.nav.contact },
@@ -997,14 +997,14 @@ function App() {
             </button>
           </div>
 
-          <a
+          {/* <a
             className="rounded bg-primary-container px-4 py-2 text-sm font-bold text-on-primary-fixed transition-all duration-300 hover:scale-95 hover:opacity-80 sm:px-6 sm:text-base"
             href={RESUME_PATH}
             rel="noreferrer"
             target="_blank"
           >
             {copy.nav.resume}
-          </a>
+          </a> */}
         </div>
       </nav>
       <div className="border-t border-white/5 bg-slate-950/70 px-4 py-2 lg:hidden">
@@ -1402,7 +1402,7 @@ function App() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="experience">
+        {/* <section className="relative overflow-hidden border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="experience">
           <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-primary-container/5 blur-[120px]" />
 
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
@@ -1497,7 +1497,7 @@ function App() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="stack">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
