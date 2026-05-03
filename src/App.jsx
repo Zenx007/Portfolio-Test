@@ -374,7 +374,11 @@ const getSummaryPointerImpulseHeight = (x, y, time, impacts) => {
     const ripple = Math.sin(distance * 0.62 - age * 8.4) * 0.72
     const lift = Math.exp(-distanceSquared / 260) * Math.sin(age * 6.8) * 0.42
 
-    impulseHeight += (ripple * ringFalloff + lift) * energy
+    let intensity = impact.isHover ? 0.35 : 1.0
+    const edgeMultiplier = 1 + (Math.abs(impact.x) / 55) * 1.2 + (Math.abs(impact.y) / 40) * 0.6
+    intensity *= edgeMultiplier
+
+    impulseHeight += (ripple * ringFalloff + lift) * energy * intensity
   }
 
   return impulseHeight
@@ -414,7 +418,7 @@ function SummaryWaveBackground({ pointerImpact }) {
     }
 
     const now = performance.now() * 0.001
-    if (pointerImpact.isActive && now - lastPointerImpactAtRef.current < SUMMARY_TERRAIN_POINTER_SAMPLE_SECONDS) {
+    if ((pointerImpact.isActive || pointerImpact.isHover) && now - lastPointerImpactAtRef.current < SUMMARY_TERRAIN_POINTER_SAMPLE_SECONDS) {
       return
     }
 
@@ -425,6 +429,7 @@ function SummaryWaveBackground({ pointerImpact }) {
         startedAt: now,
         x: pointerImpact.terrainX,
         y: pointerImpact.terrainY,
+        isHover: pointerImpact.isHover,
       },
     ]
   }, [pointerImpact, prefersReducedMotion])
@@ -690,7 +695,7 @@ function App() {
 
   const getNavOffset = () => 24
 
-  const createSummaryTerrainPointer = (event, isActive) => {
+  const createSummaryTerrainPointer = (event, isActive, isHover = false) => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return null
     }
@@ -702,11 +707,12 @@ function App() {
     const screenY = event.clientY - sectionBounds.top
     const normalizedX = clamp(screenX / sectionWidth, 0, 1)
     const normalizedY = clamp(screenY / sectionHeight, 0, 1)
-    const terrainX = (normalizedX - 0.5) * SUMMARY_TERRAIN_WIDTH * 1.12
+    const terrainX = clamp((normalizedX - 0.5) * SUMMARY_TERRAIN_WIDTH * 1.12, -54, 54)
     const terrainY = clamp((0.62 - normalizedY) * SUMMARY_TERRAIN_HEIGHT * 1.36, -39, 39)
 
     return {
       isActive,
+      isHover,
       screenX,
       screenY,
       terrainX,
@@ -758,16 +764,18 @@ function App() {
   }
 
   const handleSummaryTerrainPointerMove = (event) => {
-    if (summaryTerrainPointerIdRef.current !== event.pointerId) {
+    const isCaptured = summaryTerrainPointerIdRef.current === event.pointerId
+
+    if (summaryTerrainPointerIdRef.current !== null && !isCaptured) {
       return
     }
 
-    if (event.pointerType === 'mouse' && event.buttons !== 1) {
+    if (isCaptured && event.pointerType === 'mouse' && event.buttons !== 1) {
       handleSummaryTerrainPointerEnd(event)
       return
     }
 
-    const pointer = createSummaryTerrainPointer(event, true)
+    const pointer = createSummaryTerrainPointer(event, isCaptured, !isCaptured)
     if (!pointer) {
       return
     }
