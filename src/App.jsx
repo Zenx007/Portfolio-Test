@@ -1234,10 +1234,16 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.firstDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
+                  <a
+                    href="/culinary-artisan.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
+                  >
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </div>
+                  </a>
                 </div>
               </motion.div>
 
@@ -1247,7 +1253,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
-                onClick={() => setSelectedProjectUrl('https://hours-tracker-front.vercel.app')}
+                onClick={() => window.open('https://hours-tracker-front.vercel.app', '_blank', 'noopener,noreferrer')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1272,10 +1278,16 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.secondDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
+                  <a
+                    href="https://hours-tracker-front.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
+                  >
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </div>
+                  </a>
                 </div>
               </motion.div>
 
@@ -1313,10 +1325,16 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.thirdDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
+                  <a
+                    href="/pulse-fit.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
+                  >
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </div>
+                  </a>
                 </div>
               </motion.div>
 
@@ -1348,10 +1366,16 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fourthDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
+                  <a
+                    href="/gourmet-bistro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
+                  >
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </div>
+                  </a>
                 </div>
               </motion.div>
 
@@ -1361,7 +1385,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer md:col-span-2 lg:col-span-1"
-                onClick={() => setSelectedProjectUrl('https://duo-fin-landing-page.vercel.app')}
+                onClick={() => window.open('https://duo-fin-landing-page.vercel.app', '_blank', 'noopener,noreferrer')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1386,10 +1410,16 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fifthDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
+                  <a
+                    href="https://duo-fin-landing-page.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
+                  >
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </div>
+                  </a>
                 </div>
               </motion.div>
             </div>
@@ -1849,16 +1879,39 @@ function App() {
           >
             <div className="flex justify-between items-center p-3 sm:p-4 border-b border-white/10 bg-slate-900/80">
               <div className="flex gap-2">
-                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                 <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSelectedProjectUrl(null); }}
+                  className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors cursor-pointer"
+                  title="Fechar"
+                />
+                <button
+                  onClick={(e) => { e.stopPropagation(); setSelectedProjectUrl(null); }}
+                  className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors cursor-pointer"
+                  title="Voltar"
+                />
+                <button
+                  onClick={(e) => { e.stopPropagation(); window.open(selectedProjectUrl, '_blank', 'noopener,noreferrer'); }}
+                  className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors cursor-pointer"
+                  title="Abrir no navegador"
+                />
               </div>
-              <button 
-                onClick={(e) => { e.stopPropagation(); setSelectedProjectUrl(null); }}
-                className="text-slate-400 hover:text-white transition-colors p-1 rounded-md hover:bg-white/10 flex items-center justify-center"
-              >
-                <span className="material-symbols-outlined">close</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <a
+                  href={selectedProjectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-slate-400 hover:text-white transition-colors p-1 rounded-md hover:bg-white/10 flex items-center justify-center gap-1 text-xs"
+                >
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+                <button 
+                  onClick={(e) => { e.stopPropagation(); setSelectedProjectUrl(null); }}
+                  className="text-slate-400 hover:text-white transition-colors p-1 rounded-md hover:bg-white/10 flex items-center justify-center"
+                >
+                  <span className="material-symbols-outlined">close</span>
+                </button>
+              </div>
             </div>
             <div className="flex-1 w-full relative bg-white">
               <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-900">
