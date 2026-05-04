@@ -1061,7 +1061,7 @@ function App() {
           })}
         </div>
       </div>
-      <div aria-hidden="true" className="h-px w-full bg-cyan-500/35" />
+      <div aria-hidden="true" className="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
 
       <main>
         <section
@@ -1235,7 +1235,7 @@ function App() {
                   {copy.projects.firstTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.firstDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
+                <div className="card-action-divider relative z-10 mt-auto flex items-center justify-between border-t pt-4">
                   <a
                     href="/culinary-artisan.html"
                     target="_blank"
@@ -1279,7 +1279,7 @@ function App() {
                   {copy.projects.secondTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.secondDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
+                <div className="card-action-divider relative z-10 mt-auto flex items-center justify-between border-t pt-4">
                   <a
                     href="https://hours-tracker-front.vercel.app"
                     target="_blank"
@@ -1326,7 +1326,7 @@ function App() {
                   {copy.projects.thirdTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.thirdDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
+                <div className="card-action-divider relative z-10 mt-auto flex items-center justify-between border-t pt-4">
                   <a
                     href="/pulse-fit.html"
                     target="_blank"
@@ -1367,7 +1367,7 @@ function App() {
                   {copy.projects.fourthTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fourthDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
+                <div className="card-action-divider relative z-10 mt-auto flex items-center justify-between border-t pt-4">
                   <a
                     href="/gourmet-bistro"
                     target="_blank"
@@ -1411,7 +1411,7 @@ function App() {
                   {copy.projects.fifthTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fifthDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
+                <div className="card-action-divider relative z-10 mt-auto flex items-center justify-between border-t pt-4">
                   <a
                     href="https://duo-fin-landing-page.vercel.app"
                     target="_blank"
