@@ -104,7 +104,8 @@ const translations = {
     },
     projects: {
       title: 'Projects',
-      description: 'Experimental architectures and core engineering prototypes.',
+      cardSubtitle: 'Global Impact & Technical Excellence',
+      description: 'Throughout my career, I have worked on a wide variety of projects for both national and international clients. My experience spans the entire development lifecycle, crafting everything from high-conversion interfaces to resilient distributed systems. Every delivered solution reflects my focus on technical quality, scalability, and real business impact.',
       github: 'GITHUB',
       demo: 'Visit Site',
       firstAlt: 'Recipe App Launch Page',
@@ -240,7 +241,8 @@ const translations = {
     },
     projects: {
       title: 'Projetos',
-      description: 'Arquiteturas experimentais e prototipos de engenharia de software.',
+      cardSubtitle: 'Impacto Global & Excelência Técnica',
+      description: 'Ao longo da minha trajetória, atuei em uma ampla variedade de projetos para clientes nacionais e internacionais. Minha experiência abrange o ciclo de vida completo do desenvolvimento, criando desde interfaces de alta conversão até sistemas distribuídos resilientes. Cada solução entregue reflete meu foco em qualidade técnica, escalabilidade e impacto nos negócios.',
       github: 'GITHUB',
       demo: 'Visitar site',
       firstAlt: 'Recipe App Launch Page',
@@ -1157,8 +1159,25 @@ function App() {
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true, margin: "-50px" }}
               >
-                <h2 className="mb-2 text-3xl font-bold text-white">{copy.projects.title}</h2>
-                <p className="text-slate-400">{copy.projects.description}</p>
+                <h2 className="mb-6 text-3xl font-bold text-white">{copy.projects.title}</h2>
+                
+                <div className="glass-card relative flex flex-col overflow-hidden rounded-2xl border border-slate-700/50 bg-[#0a1118] p-6 sm:p-8 shadow-lg">
+                  <div className="absolute -right-6 -top-6 opacity-[0.03] pointer-events-none">
+                    <span className="material-symbols-outlined text-[160px]">public</span>
+                  </div>
+                  
+                  <div className="relative z-10 flex flex-col gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container flex items-center justify-center">
+                        <span className="material-symbols-outlined text-xl">rocket_launch</span>
+                      </div>
+                      <h3 className="text-xl font-semibold text-white">{copy.projects.cardSubtitle}</h3>
+                    </div>
+                    <p className="text-lg leading-relaxed text-slate-300">
+                      {copy.projects.description}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
 
@@ -1168,7 +1187,7 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60"
@@ -1205,7 +1224,7 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1242,7 +1261,7 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1282,7 +1301,7 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
