@@ -1248,9 +1248,12 @@ function App() {
                   style={{ backgroundImage: "url('/pulse-fit-hero.jpg')" }}
                 />
                 <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
-                <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#ff0054]/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 
                 <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
+                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                    React
+                  </span>
                   <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     HTML
                   </span>

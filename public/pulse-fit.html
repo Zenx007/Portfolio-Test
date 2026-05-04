@@ -123,31 +123,28 @@
       .brand {
         align-items: center;
         display: inline-flex;
-        gap: 10px;
+        gap: 8px;
         min-width: 120px;
       }
 
-      .brand-mark {
-        border: 1px solid rgba(255, 255, 255, 0.24);
-        clip-path: polygon(22% 0, 78% 0, 100% 50%, 78% 100%, 22% 100%, 0 50%);
-        display: grid;
-        height: 28px;
-        place-items: center;
-        width: 32px;
+      .brand-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--hot);
       }
 
-      .brand-mark::before {
-        background: var(--hot);
-        content: "";
-        height: 3px;
-        width: 15px;
-      }
-
-      .brand span:last-child {
+      .brand-text {
         font-family: var(--font-display);
-        font-size: 12px;
-        font-weight: 700;
+        font-size: 20px;
+        font-weight: 900;
         text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #fff;
+      }
+      
+      .brand-text span {
+        color: var(--hot);
       }
 
       .nav-links {
@@ -209,6 +206,17 @@
         border: 1px solid var(--hot);
         color: #fff;
         box-shadow: 0 16px 42px rgba(255, 0, 84, 0.23);
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .hero {
@@ -348,6 +356,29 @@
         gap: 12px;
       }
 
+      .hero-form {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .hero-input {
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 14px;
+        outline: none;
+        padding: 8px 0;
+        transition: border-color 0.2s;
+        width: 100%;
+        max-width: 240px;
+      }
+
+      .hero-input:focus {
+        border-bottom-color: var(--hot);
+      }
+
       .decor-stack {
         display: grid;
         gap: 34px;
@@ -372,7 +403,7 @@
       .feature-strip {
         display: grid;
         gap: 28px;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         margin-top: -90px;
         position: relative;
         z-index: 5;
@@ -461,14 +492,19 @@
         font-weight: 900;
         line-height: 0.95;
         margin-bottom: 28px;
-        max-width: 310px;
         text-transform: uppercase;
       }
 
-      .section-kicker strong {
+      .section-title {
         color: var(--ink);
         display: block;
-        font-size: clamp(2.1rem, 4vw, 4.5rem);
+        font-family: var(--font-display);
+        font-size: clamp(2.1rem, 4vw, 3.5rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1.1;
+        margin-bottom: 24px;
+        max-width: 600px;
       }
 
       .intro-copy {
@@ -488,10 +524,20 @@
         font-size: clamp(1.7rem, 3vw, 3rem);
         font-weight: 900;
         line-height: 1;
-        margin: 0 auto 42px;
+        margin: 0 auto 12px;
         max-width: 640px;
         text-align: center;
         text-transform: uppercase;
+      }
+
+      .center-subtitle {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 0 auto 42px;
+        letter-spacing: 1px;
       }
 
       .program-list {
@@ -712,14 +758,8 @@
         padding-left: 18px;
       }
 
-      .bar:nth-child(2) span {
-        background: linear-gradient(90deg, #ff0054, var(--violet-soft));
-      }
-
       .promo {
-        background:
-          linear-gradient(90deg, #202023 0 59%, transparent 59%),
-          linear-gradient(135deg, #ff0054, #8b4dff 66%, #a875ff);
+        background: #202023;
         border-radius: 8px;
         display: grid;
         grid-template-columns: 1.05fr 0.95fr;
@@ -735,6 +775,10 @@
         flex-direction: column;
         justify-content: center;
         padding: 36px;
+      }
+
+      .promo-offer {
+        background: var(--violet);
       }
 
       .promo-copy {
@@ -815,27 +859,27 @@
       }
 
       .footer-top {
-        align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-        color: #73737d;
-        display: flex;
-        font-size: 11px;
-        justify-content: space-between;
-        padding-bottom: 34px;
+        display: none;
       }
 
       .footer-links {
-        display: grid;
-        gap: 18px;
-        grid-template-columns: repeat(4, 1fr);
-        padding-top: 52px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
       }
 
       .footer-links a {
         font-family: var(--font-display);
-        font-size: clamp(1.1rem, 2vw, 1.6rem);
+        font-size: clamp(0.9rem, 1.5vw, 1.2rem);
         font-weight: 900;
         text-transform: uppercase;
+        color: rgba(255,255,255,0.7);
+        transition: color 0.2s;
+      }
+      
+      .footer-links a:hover {
+        color: #fff;
       }
 
       @media (max-width: 980px) {
@@ -885,9 +929,7 @@
         }
 
         .promo {
-          background:
-            linear-gradient(180deg, #202023 0 50%, transparent 50%),
-            linear-gradient(135deg, #ff0054, #8b4dff 66%, #a875ff);
+          background: #202023;
         }
       }
 
@@ -985,25 +1027,24 @@
   <body>
     <header class="page-shell topbar">
       <a class="brand" href="#top" aria-label="Pulse Fit home">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Pulse Fit</span>
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <span class="brand-text">PULSE<span>FIT</span></span>
       </a>
 
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#programs">Product</a>
-        <a href="#results">Resources</a>
-        <a href="#promo">Prices</a>
-        <a href="#contact">Contact</a>
+        <a href="#top">Home</a>
+        <a href="#programs">Classes</a>
+        <a href="#promo">Offers</a>
+        <a href="#results">About</a>
       </nav>
 
       <div class="nav-actions">
-        <a class="btn btn-outline" href="#promo">
-          <span class="material-symbols-outlined" aria-hidden="true">event_available</span>
-          View plans
-        </a>
-        <a class="btn btn-hot" href="#programs">
-          <span class="material-symbols-outlined" aria-hidden="true">fitness_center</span>
-          Get to know the academy
+        <a class="btn btn-hot" href="#promo">
+          JOIN NOW
         </a>
       </div>
     </header>
@@ -1011,15 +1052,15 @@
     <main id="top">
       <section class="hero">
         <div class="page-shell hero-grid">
-          <div class="hex-gallery" aria-label="Pulse Fit training atmosphere">
+          <div class="hex-gallery fade-up" aria-label="Pulse Fit training atmosphere">
             <figure class="hex hex-1">
               <img src="/pulse-fit-strength.jpg" alt="Athlete training with weights" />
             </figure>
             <figure class="hex hex-2">
               <img src="/pulse-fit-training.jpg" alt="Group training inside a gym" />
             </figure>
-            <figure class="hex hex-3 hex-logo">
-              <div>Pulse<br /><span>Fit</span></div>
+            <figure class="hex hex-3 hex-logo fade-up">
+              <div>PULSE<br /><span>FIT</span></div>
             </figure>
             <figure class="hex hex-4">
               <img src="/pulse-fit-equipment.jpg" alt="Modern cardio equipment inside Pulse Fit" />
@@ -1029,12 +1070,12 @@
             </figure>
           </div>
 
-          <div class="hero-copy">
-            <h1><span>Pulse Fit</span>Transform your body, transform your life</h1>
-            <p>Come to the most complete gym and train with programs designed for visible progress.</p>
-            <div class="hero-actions">
-              <a class="btn btn-outline" href="#promo">View plans</a>
-              <a class="btn btn-hot" href="#programs">Get to know the academy</a>
+          <div class="hero-copy fade-up">
+            <h1>TRANSFORM YOUR BODY, TRANSFORM YOUR LIFE</h1>
+            <p>There is no limit to what you can get.</p>
+            <div class="hero-form">
+              <input type="email" class="hero-input" placeholder="Enter your email address" />
+              <button class="btn btn-hot">START NOW</button>
             </div>
           </div>
         </div>
@@ -1047,22 +1088,14 @@
       </section>
 
       <div class="page-shell feature-strip" aria-label="Featured Pulse Fit highlights">
-        <article class="micro-card">
-          <h3>Your goals, our mission</h3>
+        <article class="micro-card fade-up">
+          <h3>Cardio Training</h3>
           <img src="/pulse-fit-strength.jpg" alt="Barbell training station" />
           <p>Ready to start? Let's make it happen.</p>
         </article>
 
-        <article class="micro-card play-card">
-          <h3>Your fitness journey starts here</h3>
-          <div class="play-button" aria-label="Training video preview">
-            <span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>
-          </div>
-          <p>Join thousands who activated their next level with us.</p>
-        </article>
-
-        <article class="micro-card">
-          <h3>Modern equipment</h3>
+        <article class="micro-card fade-up">
+          <h3>Personal Training</h3>
           <img src="/pulse-fit-equipment.jpg" alt="Modern training equipment" />
           <p>State of the art equipment with instructors to train the entire body.</p>
         </article>
@@ -1070,8 +1103,9 @@
 
       <section class="section-space">
         <div class="page-shell">
-          <span class="section-kicker">Come to the most complete <strong>Gym</strong></span>
-          <div class="intro-copy">
+          <span class="section-kicker fade-up">MORE THAN JUST A GYM</span>
+          <h2 class="section-title fade-up">ELEVATE YOUR WORKOUT WITH OUR UNIQUE EXPERIENCES</h2>
+          <div class="intro-copy fade-up">
             <p>
               Come train with us and reach your body's maximum potential, maximizing your health and self-esteem.
             </p>
@@ -1079,23 +1113,19 @@
               At our academy, we believe that each person has a unique journey. That is why we offer cutting edge
               equipment, varied classes, and professionals ready to guide you toward your goals at your own pace.
             </p>
-            <p>
-              Transform your health, improve your quality of life, and achieve the body you have always wanted. Our
-              team is ready to welcome you.
-            </p>
           </div>
         </div>
       </section>
 
       <section class="section-space" id="programs">
         <div class="page-shell">
-          <h2 class="center-title">Personalized training focused on your progress</h2>
+          <h2 class="center-title fade-up">Personalized training focused on your progress</h2>
 
           <div class="program-list">
-            <article class="program-card">
+            <article class="program-card fade-up">
               <div class="program-copy">
                 <span class="pill pill-violet">For classes</span>
-                <h3>Real stories. Real transformations.</h3>
+                <h3>The Ultimate HIIT Experience</h3>
                 <h4>Ready to start? Let's make it happen.</h4>
                 <p>
                   Discover the perfect blend of motivation, community, and results. Whether your focus is strength,
@@ -1113,10 +1143,10 @@
               </div>
             </article>
 
-            <article class="program-card">
+            <article class="program-card fade-up">
               <div class="program-copy">
                 <span class="pill pill-red">For athletes</span>
-                <h3>Personalized training</h3>
+                <h3>Functional Training</h3>
                 <h4>State of the art equipment, expert trainers.</h4>
                 <p>
                   Trainers guide your posture, intensity, and recovery, so each session is built around measurable
@@ -1139,39 +1169,40 @@
 
       <section class="results" id="results">
         <div class="page-shell">
-          <h2 class="center-title">The results speak for themselves just like our clients do</h2>
+          <h2 class="center-title fade-up">The results speak for themselves</h2>
+          <p class="center-subtitle fade-up">Our members' transformations</p>
 
           <div class="bento" aria-label="Pulse Fit testimonials and partners">
-            <div class="bento-tile">
+            <div class="bento-tile fade-up">
               <img src="/pulse-member-1.jpg" alt="Pulse Fit member Sofia" />
             </div>
-            <div class="bento-tile tile-logo">Nike</div>
-            <div class="bento-tile tile-quote quote-violet">
+            <div class="bento-tile tile-logo fade-up">Nike</div>
+            <div class="bento-tile tile-quote quote-violet fade-up">
               <p>
                 Training here changed the rhythm of my week. The trainers are direct, supportive, and obsessed with
                 progress that actually lasts.
               </p>
               <cite>Sarah Thompson, lawyer</cite>
             </div>
-            <div class="bento-tile tile-logo"><div>Gym<br /><small>Pass</small></div></div>
-            <div class="bento-tile">
+            <div class="bento-tile tile-logo fade-up"><div>Gym<br /><small>Pass</small></div></div>
+            <div class="bento-tile fade-up">
               <img src="/pulse-member-2.jpg" alt="Pulse Fit member Liam" />
             </div>
-            <div class="bento-tile">
+            <div class="bento-tile fade-up">
               <img src="/pulse-member-3.jpg" alt="Pulse Fit member Mia" />
             </div>
-            <div class="bento-tile tile-logo">Gymshark</div>
-            <div class="bento-tile tile-quote quote-red">
+            <div class="bento-tile tile-logo fade-up">Gymshark</div>
+            <div class="bento-tile tile-quote quote-red fade-up">
               <p>
                 After joining Pulse Fit, I finally found a routine that kept me consistent. The environment is intense,
                 but the coaches make every step feel personal.
               </p>
               <cite>Mia Johnson, creative director</cite>
             </div>
-            <div class="bento-tile">
+            <div class="bento-tile fade-up">
               <img src="/pulse-member-4.jpg" alt="Pulse Fit member Ethan" />
             </div>
-            <div class="bento-tile">
+            <div class="bento-tile fade-up">
               <img src="/pulse-member-1.jpg" alt="Pulse Fit member portrait" />
             </div>
           </div>
@@ -1179,7 +1210,7 @@
       </section>
 
       <section class="page-shell benefits">
-        <div>
+        <div class="fade-up">
           <h2>Take the first step towards a healthier you</h2>
           <p>
             Your fitness journey begins now. Join a gym that offers more than just equipment. Here, your goals are our
@@ -1187,34 +1218,34 @@
           </p>
         </div>
         <div class="bars" aria-label="Member progress indicators">
-          <div class="bar"><span style="width: 100%">Improved health</span></div>
-          <div class="bar"><span style="width: 86%">Increased energy</span></div>
-          <div class="bar"><span style="width: 78%">Stress relief</span></div>
-          <div class="bar"><span style="width: 68%">Weight management</span></div>
-          <div class="bar"><span style="width: 54%">Stronger muscles</span></div>
+          <div class="bar fade-up"><span style="width: 100%">Strength</span></div>
+          <div class="bar fade-up"><span style="width: 86%">Cardio</span></div>
+          <div class="bar fade-up"><span style="width: 78%">Speed</span></div>
+          <div class="bar fade-up"><span style="width: 68%">Flexibility</span></div>
+          <div class="bar fade-up"><span style="width: 54%">Weight Loss</span></div>
         </div>
       </section>
 
       <section class="page-shell" id="promo">
-        <div class="promo">
+        <div class="promo fade-up">
           <div class="promo-copy">
             <h2>Take advantage of our limited-time promotion!</h2>
             <p>The most complete gym experience, with an offer valid for the next <strong>14 days</strong>.</p>
           </div>
           <div class="promo-offer">
             <b>50% off</b>
-            <a href="#contact">Subscribe now</a>
+            <a href="#contact">CLAIM OFFER</a>
           </div>
         </div>
       </section>
 
       <section class="final-cta" id="contact">
-        <div class="page-shell">
+        <div class="page-shell fade-up">
           <h2>The new era of gym has arrived</h2>
-          <p>Come to the most complete gym</p>
+          <p>Don't be the next, come to gym</p>
           <div class="cta-actions">
-            <a class="btn btn-outline" href="#promo">View plans</a>
-            <a class="btn btn-hot" href="mailto:hello@pulsefit.example">Get to know the academy</a>
+            <a class="btn btn-outline" href="#promo">Explore</a>
+            <a class="btn btn-hot" href="#promo">JOIN NOW AND SAVE 50%</a>
           </div>
         </div>
       </section>
@@ -1222,16 +1253,6 @@
 
     <footer class="footer">
       <div class="page-shell">
-        <div class="footer-top">
-          <a class="brand" href="#top" aria-label="Pulse Fit home">
-            <span class="brand-mark" aria-hidden="true"></span>
-            <span>Pulse Fit</span>
-          </a>
-          <span>All rights reserved</span>
-          <span>Terms of use</span>
-          <span>Privacy policy</span>
-        </div>
-
         <nav class="footer-links" aria-label="Footer navigation">
           <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
           <a href="https://youtube.com" target="_blank" rel="noreferrer">Youtube</a>
@@ -1240,5 +1261,30 @@
         </nav>
       </div>
     </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px 0px -50px 0px',
+          threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach((el, index) => {
+          if (el.classList.contains('bento-tile') || el.classList.contains('bar') || el.classList.contains('micro-card')) {
+            el.style.transitionDelay = `${(index % 4) * 0.15}s`;
+          }
+          observer.observe(el);
+        });
+      });
+    </script>
   </body>
 </html>
