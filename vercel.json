@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/gourmet-bistro",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/gourmet-bistro/",
+      "destination": "/index.html"
+    }
+  ]
+}

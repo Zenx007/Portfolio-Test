@@ -679,17 +679,10 @@ function App() {
   const [selectedProjectUrl, setSelectedProjectUrl] = useState(null)
 
   const openProject = (url) => {
-    const isExternal = url.startsWith('http')
-    setSelectedProjectUrl(isExternal ? `/iframe-proxy?url=${encodeURIComponent(url)}` : url)
+    setSelectedProjectUrl(url)
   }
 
-  const getRawProjectUrl = (proxiedUrl) => {
-    if (!proxiedUrl) return null
-    if (proxiedUrl.startsWith('/iframe-proxy?url=')) {
-      return decodeURIComponent(proxiedUrl.replace('/iframe-proxy?url=', ''))
-    }
-    return proxiedUrl
-  }
+  const getRawProjectUrl = (projectUrl) => projectUrl
   const [summaryTerrainPointer, setSummaryTerrainPointer] = useState(null)
   const summaryTerrainPointerIdRef = useRef(null)
   const queuedSummaryTerrainPointerRef = useRef(null)
