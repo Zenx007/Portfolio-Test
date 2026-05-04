@@ -2,22 +2,27 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00B8D4;stop-opacity:1" />
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#00B8D4"/>
     </linearGradient>
   </defs>
 
   <!-- Background -->
   <rect width="512" height="512" fill="#081826"/>
 
-  <!-- JV Monogram -->
-  <text x="50%" y="55%" text-anchor="middle" fill="url(#grad)" font-size="200"
-        font-family="Arial, Helvetica, sans-serif" font-weight="bold">
+  <!-- JV -->
+  <text x="50%" y="52%" text-anchor="middle"
+        fill="url(#grad)"
+        font-size="200"
+        font-family="Arial, Helvetica, sans-serif"
+        font-weight="bold">
     JV
   </text>
 
-  <!-- Code Symbol -->
-  <text x="50%" y="75%" text-anchor="middle" fill="url(#grad)" font-size="80"
+  <!-- Code symbol -->
+  <text x="50%" y="75%" text-anchor="middle"
+        fill="url(#grad)"
+        font-size="80"
         font-family="Arial, Helvetica, sans-serif">
     &lt;/&gt;
   </text>
