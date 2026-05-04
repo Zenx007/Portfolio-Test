@@ -123,7 +123,7 @@ const translations = {
       fourthDescription: 'An elegant, mouth-watering landing page for a premium restaurant. Showcases the menu, ambiance, and online reservations.',
       fifthAlt: 'Duo Fin Landing Page',
       fifthTitle: 'Duo Fin',
-      fifthDescription: 'A complete financial management landing page and app solution, built with high performance and cross-platform capabilities.',
+      fifthDescription: 'A complete financial management solution for couples, featuring shared tracking, budget synchronization, and high-performance cross-platform capabilities.',
     },
     stack: {
       title: 'Technical Arsenal',
@@ -263,7 +263,7 @@ const translations = {
       fourthDescription: 'Uma landing page elegante para um restaurante premium. Destaca o cardápio, o ambiente e um formulário de reservas online.',
       fifthAlt: 'Landing Page Duo Fin',
       fifthTitle: 'Duo Fin',
-      fifthDescription: 'Uma landing page e aplicativo completo para gestão financeira, construído com alta performance e recursos multiplataforma.',
+      fifthDescription: 'Uma plataforma completa de gestão financeira para casais, com sincronização de gastos, planejamento conjunto e alta performance multiplataforma.',
     },
     stack: {
       title: 'Arsenal Tecnico',
@@ -1365,7 +1365,7 @@ function App() {
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
-                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop')" }}
+                  style={{ backgroundImage: "url('/duo-fin-bg.png')" }}
                 />
                 <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
                 <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
