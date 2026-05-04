@@ -5,6 +5,8 @@ import './App.css'
 import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
+const CONTACT_EMAIL = 'joaovictordev0720@gmail.com'
+const WHATSAPP_URL = 'https://w.app/nwcv1h'
 const NAV_SECTION_IDS = ['top', 'value', 'projects', 'expertise', /* 'experience', */ 'stack', 'about', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#051424'
@@ -143,14 +145,11 @@ const translations = {
         'Rigorous focus on algorithmic complexity, data structures, and software design patterns. Specialized in distributed systems and high-concurrency environments during the final thesis project.',
     },
     contact: {
-      titleStart: "Let's build something",
-      titleHighlight: 'scalable',
-      titleEnd: 'together',
-      description: 'Currently available for projects. Fluent in English (C1 Proficiency).',
-      primaryButton: 'Contact Me',
-      secondaryButton: 'View Documentation',
-      languageLevel: 'ENGLISH: C1 ADVANCED',
-      availability: 'REMOTE / GLOBAL',
+      eyebrow: "LET'S TALK",
+      headline: 'Let’s turn your idea into a fast, reliable web product.',
+      description: 'Send the project goal and I will reply with the next steps.',
+      primaryButton: 'Email',
+      whatsappButton: 'Message on WhatsApp',
     },
     footer: {
       status: 'System Status',
@@ -283,14 +282,11 @@ const translations = {
         'Foco rigoroso em complexidade algoritmica, estruturas de dados e padroes de design de software. Especializacao em sistemas distribuidos e ambientes de alta concorrencia no projeto final de tese.',
     },
     contact: {
-      titleStart: 'Vamos construir algo',
-      titleHighlight: 'escalavel',
-      titleEnd: 'juntos',
-      description: 'Disponivel para projetos. Ingles fluente (C1).',
-      primaryButton: 'Falar Comigo',
-      secondaryButton: 'Ver Documentacao',
-      languageLevel: 'INGLES: C1 AVANCADO',
-      availability: 'REMOTO / GLOBAL',
+      eyebrow: 'VAMOS CONVERSAR',
+      headline: 'Vamos tirar sua ideia do papel com clareza e performance.',
+      description: 'Me envie o objetivo do projeto e eu retorno com os proximos passos.',
+      primaryButton: 'Email',
+      whatsappButton: 'Falar no WhatsApp',
     },
     footer: {
       status: 'Status do Sistema',
@@ -1785,75 +1781,106 @@ function App() {
         </section>
 
         <section className="bg-[#050a0e] py-16 sm:py-20" id="contact">
-          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true, margin: "-50px" }}
-              className="glass-card relative overflow-hidden rounded-2xl border border-primary-container/30 p-6 text-center shadow-[0_0_40px_rgba(0,229,255,0.05)] sm:rounded-3xl sm:p-10 md:p-16"
+              className="relative overflow-hidden rounded-2xl border border-primary-container/25 bg-[#080d1a] px-6 py-10 text-left shadow-[0_0_40px_rgba(0,229,255,0.05)] sm:rounded-3xl sm:px-10 sm:py-12 md:p-16"
             >
-              <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-primary-container/10 blur-3xl" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_14%,rgba(0,229,255,0.16),transparent_30%),radial-gradient(circle_at_10%_92%,rgba(124,58,237,0.22),transparent_28%)]" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-container/60 to-transparent" />
 
-              <div className="relative z-10 mx-auto max-w-2xl">
-                <h2 className="mb-6 break-words text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-                  {copy.contact.titleStart} <span className="text-primary-container">{copy.contact.titleHighlight}</span>{' '}
-                  {copy.contact.titleEnd}
-                </h2>
+              <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,0.8fr)] lg:items-center">
+                <div>
+                  <p className="mb-7 font-label-caps text-primary-container">{copy.contact.eyebrow}</p>
+                  <h2 className="max-w-2xl break-words text-3xl font-bold leading-[1.08] text-white sm:text-4xl lg:text-5xl">
+                    {copy.contact.headline}
+                  </h2>
+                  <p className="mt-6 max-w-xl text-sm leading-relaxed text-slate-400 sm:text-base">
+                    {copy.contact.description}
+                  </p>
 
-                <p className="mb-10 text-base text-slate-400 sm:text-lg">{copy.contact.description}</p>
+                  <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                    <a
+                      className="flex items-center justify-center gap-2 rounded-full bg-primary-container px-7 py-3 text-sm font-bold text-on-primary-fixed transition-all hover:scale-[0.98] hover:bg-primary-container/90"
+                      href={WHATSAPP_URL}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {copy.contact.whatsappButton}
+                      <span className="material-symbols-outlined text-base">arrow_outward</span>
+                    </a>
+                  </div>
+                </div>
 
-                <div className="mb-8 flex flex-wrap justify-center gap-4">
+                <div className="space-y-3 lg:pt-10">
                   <a
-                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary-container px-6 py-3 font-bold text-on-primary-fixed shadow-[0_0_15px_rgba(0,229,255,0.4)] transition-all hover:bg-primary-container/90 sm:w-auto"
-                    href="mailto:joaovictordev0720@gmail.com"
+                    className="group flex min-h-[70px] items-center justify-between gap-4 rounded-xl border border-slate-700/80 bg-white/[0.03] px-5 py-4 text-white transition-colors hover:border-[#25D366]/60 hover:bg-[#25D366]/10"
+                    href={WHATSAPP_URL}
+                    rel="noreferrer"
+                    target="_blank"
                   >
-                    <span className="material-symbols-outlined">mail</span>
-                    {copy.contact.primaryButton}
+                    <span className="flex items-center gap-4">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300">
+                        <span className="material-symbols-outlined text-xl">call</span>
+                      </span>
+                      <span className="font-semibold">WhatsApp</span>
+                    </span>
+                    <span className="material-symbols-outlined text-lg text-slate-500 transition-colors group-hover:text-[#25D366]">
+                      arrow_outward
+                    </span>
                   </a>
 
                   <a
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-primary-container/50 bg-transparent px-6 py-3 font-semibold text-primary-container transition-colors hover:bg-primary-container/10 sm:w-auto"
+                    className="group flex min-h-[70px] items-center justify-between gap-4 rounded-xl border border-slate-700/80 bg-white/[0.03] px-5 py-4 text-white transition-colors hover:border-primary-container/60 hover:bg-primary-container/10 hover:text-primary-container"
+                    href={`mailto:${CONTACT_EMAIL}`}
+                  >
+                    <span className="flex items-center gap-4">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300 transition-colors group-hover:border-primary-container/30 group-hover:bg-primary-container/10 group-hover:text-primary-container">
+                        <span className="material-symbols-outlined text-xl">mail</span>
+                      </span>
+                      <span className="font-semibold">{copy.contact.primaryButton}</span>
+                    </span>
+                    <span className="material-symbols-outlined text-lg text-slate-500 transition-colors group-hover:text-primary-container">
+                      arrow_outward
+                    </span>
+                  </a>
+
+                  <a
+                    className="group flex min-h-[70px] items-center justify-between gap-4 rounded-xl border border-slate-700/80 bg-white/[0.03] px-5 py-4 text-white transition-colors hover:border-primary-container/60 hover:bg-primary-container/10"
                     href="https://www.linkedin.com/in/joão-victor-218b26315"
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <span className="material-symbols-outlined">badge</span>
-                    LinkedIn
+                    <span className="flex items-center gap-4">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300">
+                        <span className="material-symbols-outlined text-xl">badge</span>
+                      </span>
+                      <span className="font-semibold">LinkedIn</span>
+                    </span>
+                    <span className="material-symbols-outlined text-lg text-slate-500 transition-colors group-hover:text-primary-container">
+                      arrow_outward
+                    </span>
                   </a>
 
                   <a
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-transparent px-6 py-3 font-semibold text-slate-300 transition-colors hover:bg-slate-800 hover:text-white sm:w-auto"
+                    className="group flex min-h-[70px] items-center justify-between gap-4 rounded-xl border border-slate-700/80 bg-white/[0.03] px-5 py-4 text-white transition-colors hover:border-primary-container/60 hover:bg-primary-container/10"
                     href="https://github.com/Zenx007"
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <span className="material-symbols-outlined">code</span>
-                    GitHub
+                    <span className="flex items-center gap-4">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300">
+                        <span className="material-symbols-outlined text-xl">code</span>
+                      </span>
+                      <span className="font-semibold">GitHub</span>
+                    </span>
+                    <span className="material-symbols-outlined text-lg text-slate-500 transition-colors group-hover:text-primary-container">
+                      arrow_outward
+                    </span>
                   </a>
-
-                  <a
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-[#25D366]/50 bg-transparent px-6 py-3 font-semibold text-[#25D366] transition-colors hover:bg-[#25D366]/10 sm:w-auto"
-                    href="https://wa.me/qr/23CQBEJM3JV4H1"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <span className="material-symbols-outlined">call</span>
-                    WhatsApp
-                  </a>
-                </div>
-
-                <div className="flex flex-col items-center justify-center gap-6 text-sm text-slate-500 md:flex-row">
-                  <span className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base text-primary-container">translate</span>
-                    {copy.contact.languageLevel}
-                  </span>
-                  <span className="hidden h-1 w-1 rounded-full bg-slate-700 md:inline-block" />
-                  <span className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-base text-primary-container">location_on</span>
-                    {copy.contact.availability}
-                  </span>
                 </div>
               </div>
             </motion.div>
