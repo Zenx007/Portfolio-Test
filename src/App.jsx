@@ -1208,7 +1208,8 @@ function App() {
                 className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-all hover:border-primary-container/50 min-h-[320px]"
               >
                 <div 
-                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                  className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                  style={{ backgroundImage: "url('/hours-tracker-bg.png')" }}
                 />
                 <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
                 <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
