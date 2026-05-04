@@ -8,10 +8,9 @@ const GourmetBistro = () => {
         <a href="#" className="brand">GOLDEN BISTRO</a>
         <ul className="nav-links">
           <li><a href="#">Home</a></li>
-          <li><a href="#">Our Menu</a></li>
-          <li><a href="#">Chefs</a></li>
+          <li><a href="#menu">Our Menu</a></li>
         </ul>
-        <button className="btn-book">Book a Table</button>
+        <button className="btn-book" onClick={() => document.getElementById('location').scrollIntoView({ behavior: 'smooth' })}>Book a Table</button>
       </header>
 
       <section className="hero">
@@ -59,7 +58,7 @@ const GourmetBistro = () => {
       <section className="banner">
         <div className="banner-text">
           <h2>Lavors That<br/>Delight, Moments<br/>That Last</h2>
-          <button className="btn-book" style={{ marginTop: '1rem' }}>Book a Table</button>
+          <button className="btn-book" style={{ marginTop: '1rem' }} onClick={() => document.getElementById('location').scrollIntoView({ behavior: 'smooth' })}>Book a Table</button>
         </div>
         <div className="banner-images">
           <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&q=80&w=800" alt="Couple dining" />
@@ -67,15 +66,11 @@ const GourmetBistro = () => {
         </div>
       </section>
 
-      <section className="dishes-section">
+      <section className="dishes-section" id="menu">
         <div className="dishes-header">
           <h2>Our dishes</h2>
           <div className="dishes-nav">
-            <span className="active">Main Courses</span>
-            <span>Appetizers</span>
-            <span>Desserts</span>
-            <span>Drinks</span>
-            <span>Specials</span>
+            <span className="active">MAIN COURSES</span>
           </div>
         </div>
 
@@ -137,7 +132,7 @@ const GourmetBistro = () => {
         </div>
       </section>
 
-      <section className="location-section">
+      <section className="location-section" id="location">
         <h2>Find One of Our Restaurants Near You</h2>
         
         <div className="location-content" style={{ display: 'flex', gap: '4rem', alignItems: 'flex-start' }}>
@@ -151,7 +146,8 @@ const GourmetBistro = () => {
             <div className="input-group">
               <input type="text" placeholder="Country" />
             </div>
-            
+            <button className="btn-book" disabled style={{ marginTop: '1rem', width: '100%', marginBottom: '2rem', cursor: 'not-allowed', opacity: 0.6 }}>Shortly</button>
+
             <div className="footer-links">
               <a href="#">Terms &amp; Conditions</a>
               <a href="#">Privacy Policy</a>
