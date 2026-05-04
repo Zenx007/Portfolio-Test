@@ -1048,7 +1048,7 @@ function App() {
           </a> */}
         </div>
       </nav>
-      <div className="nav-surface border-t border-white/5 px-4 py-2 lg:hidden">
+      <div className="nav-surface mobile-nav-surface px-4 py-2 lg:hidden">
         <div className="mobile-nav-scroll flex gap-2 overflow-x-auto pb-1">
           {navItems.map((item) => {
             const isActive = activeSection === item.id
@@ -1070,7 +1070,7 @@ function App() {
           })}
         </div>
       </div>
-      <div aria-hidden="true" className="h-px w-full bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
+      <div aria-hidden="true" className="section-glow-divider" />
 
       <main>
         <section
@@ -1123,7 +1123,7 @@ function App() {
           </div>
         </section>
 
-        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="value">
+        <section className="landing-section py-16 sm:py-20" id="value">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
@@ -1182,7 +1182,7 @@ function App() {
           </div>
         </section>
 
-        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="projects">
+        <section className="landing-section py-16 sm:py-20" id="projects">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12">
               <motion.div
@@ -1437,7 +1437,7 @@ function App() {
           </div>
         </section>
 
-        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="expertise">
+        <section className="landing-section py-16 sm:py-20" id="expertise">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
@@ -1635,7 +1635,7 @@ function App() {
           </div>
         </section> */}
 
-        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="stack">
+        <section className="landing-section py-16 sm:py-20" id="stack">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
@@ -1740,7 +1740,7 @@ function App() {
           </div>
         </section>
 
-        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="about">
+        <section className="landing-section py-16 sm:py-20" id="about">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12">
               <motion.div
