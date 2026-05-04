@@ -670,6 +670,7 @@ function SummaryWaveBackground({ pointerImpact }) {
 function App() {
   const [language, setLanguage] = useState(resolveInitialLanguage)
   const [activeSection, setActiveSection] = useState(NAV_SECTION_IDS[0])
+  const [selectedProjectUrl, setSelectedProjectUrl] = useState(null)
   const [summaryTerrainPointer, setSummaryTerrainPointer] = useState(null)
   const summaryTerrainPointerIdRef = useRef(null)
   const queuedSummaryTerrainPointerRef = useRef(null)
@@ -932,6 +933,20 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (selectedProjectUrl) {
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+      document.documentElement.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+      document.documentElement.style.overflow = 'unset'
+    }
+  }, [selectedProjectUrl])
+
   const getLanguageButtonClass = (targetLanguage) => {
     const baseClass =
       'flex h-7 min-w-9 items-center justify-center rounded-md bg-slate-800 px-2 text-[11px] font-bold transition-all'
@@ -1187,7 +1202,8 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                onClick={() => setSelectedProjectUrl('/culinary-artisan.html')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60"
@@ -1212,10 +1228,10 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.firstDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="/culinary-artisan.html" target="_blank" rel="noopener noreferrer">
+                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </a>
+                  </div>
                 </div>
               </motion.div>
 
@@ -1224,7 +1240,8 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                onClick={() => setSelectedProjectUrl('https://hours-tracker-front.vercel.app')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1241,7 +1258,7 @@ function App() {
                     Tailwind CSS
                   </span>
                   <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
-                    Vercel
+                    Node.JS
                   </span>
                 </div>
                 <h3 className="relative z-10 mb-3 text-2xl font-bold text-white transition-colors group-hover:text-primary-container">
@@ -1249,10 +1266,10 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.secondDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="https://hours-tracker-front.vercel.app" target="_blank" rel="noopener noreferrer">
+                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </a>
+                  </div>
                 </div>
               </motion.div>
 
@@ -1261,7 +1278,8 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                onClick={() => setSelectedProjectUrl('/pulse-fit.html')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1289,10 +1307,10 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.thirdDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="/pulse-fit.html" target="_blank" rel="noopener noreferrer">
+                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </a>
+                  </div>
                 </div>
               </motion.div>
 
@@ -1301,7 +1319,8 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px]"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                onClick={() => setSelectedProjectUrl('/gourmet-bistro')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1323,10 +1342,10 @@ function App() {
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fourthDescription}</p>
                 <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
-                  <a className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white" href="/gourmet-bistro" target="_blank" rel="noopener noreferrer">
+                  <div className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white">
                     <span className="material-symbols-outlined text-base">launch</span>
                     {copy.projects.demo}
-                  </a>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -1771,6 +1790,45 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {selectedProjectUrl && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 sm:p-8"
+          onClick={() => setSelectedProjectUrl(null)}
+        >
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            className="relative w-full h-full max-w-7xl max-h-[90vh] bg-[#050a0e] rounded-2xl overflow-hidden border border-slate-700/50 shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center p-3 sm:p-4 border-b border-white/10 bg-slate-900/80">
+              <div className="flex gap-2">
+                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                 <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+              </div>
+              <button 
+                onClick={(e) => { e.stopPropagation(); setSelectedProjectUrl(null); }}
+                className="text-slate-400 hover:text-white transition-colors p-1 rounded-md hover:bg-white/10 flex items-center justify-center"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div className="flex-1 w-full relative bg-white">
+              <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-900">
+                 <span className="material-symbols-outlined animate-spin text-4xl">progress_activity</span>
+              </div>
+              <iframe 
+                src={selectedProjectUrl} 
+                className="relative z-10 w-full h-full border-0"
+                title="Project Preview"
+              />
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   )
 }
