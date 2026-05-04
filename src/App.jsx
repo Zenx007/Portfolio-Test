@@ -677,6 +677,19 @@ function App() {
   const [language, setLanguage] = useState(resolveInitialLanguage)
   const [activeSection, setActiveSection] = useState(NAV_SECTION_IDS[0])
   const [selectedProjectUrl, setSelectedProjectUrl] = useState(null)
+
+  const openProject = (url) => {
+    const isExternal = url.startsWith('http')
+    setSelectedProjectUrl(isExternal ? `/iframe-proxy?url=${encodeURIComponent(url)}` : url)
+  }
+
+  const getRawProjectUrl = (proxiedUrl) => {
+    if (!proxiedUrl) return null
+    if (proxiedUrl.startsWith('/iframe-proxy?url=')) {
+      return decodeURIComponent(proxiedUrl.replace('/iframe-proxy?url=', ''))
+    }
+    return proxiedUrl
+  }
   const [summaryTerrainPointer, setSummaryTerrainPointer] = useState(null)
   const summaryTerrainPointerIdRef = useRef(null)
   const queuedSummaryTerrainPointerRef = useRef(null)
@@ -1253,7 +1266,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
-                onClick={() => window.open('https://hours-tracker-front.vercel.app', '_blank', 'noopener,noreferrer')}
+                onClick={() => openProject('https://hours-tracker-front.vercel.app')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1282,7 +1295,7 @@ function App() {
                     href="https://hours-tracker-front.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => { e.stopPropagation(); openProject('https://hours-tracker-front.vercel.app'); e.preventDefault(); }}
                     className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
                   >
                     <span className="material-symbols-outlined text-base">launch</span>
@@ -1385,7 +1398,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer md:col-span-2 lg:col-span-1"
-                onClick={() => window.open('https://duo-fin-landing-page.vercel.app', '_blank', 'noopener,noreferrer')}
+                onClick={() => openProject('https://duo-fin-landing-page.vercel.app')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
@@ -1414,7 +1427,7 @@ function App() {
                     href="https://duo-fin-landing-page.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => { e.stopPropagation(); openProject('https://duo-fin-landing-page.vercel.app'); e.preventDefault(); }}
                     className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
                   >
                     <span className="material-symbols-outlined text-base">launch</span>
@@ -1890,14 +1903,14 @@ function App() {
                   title="Voltar"
                 />
                 <button
-                  onClick={(e) => { e.stopPropagation(); window.open(selectedProjectUrl, '_blank', 'noopener,noreferrer'); }}
+                  onClick={(e) => { e.stopPropagation(); window.open(getRawProjectUrl(selectedProjectUrl), '_blank', 'noopener,noreferrer'); }}
                   className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors cursor-pointer"
                   title="Abrir no navegador"
                 />
               </div>
               <div className="flex items-center gap-2">
                 <a
-                  href={selectedProjectUrl}
+                  href={getRawProjectUrl(selectedProjectUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
