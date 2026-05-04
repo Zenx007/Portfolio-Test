@@ -9,7 +9,7 @@ const CONTACT_EMAIL = 'joaovictordev0720@gmail.com'
 const WHATSAPP_URL = 'https://w.app/nwcv1h'
 const NAV_SECTION_IDS = ['top', 'value', 'projects', 'expertise', /* 'experience', */ 'stack', 'about', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
-const SUMMARY_TERRAIN_COLOR = '#051424'
+const SUMMARY_TERRAIN_COLOR = '#071827'
 const SUMMARY_TERRAIN_WIDTH = 110
 const SUMMARY_TERRAIN_HEIGHT = 80
 const SUMMARY_TERRAIN_COLUMNS = 92
@@ -319,8 +319,9 @@ const createSummaryDotTexture = () => {
   const context = canvas.getContext('2d')
   const gradient = context.createRadialGradient(32, 32, 0, 32, 32, 32)
   gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
-  gradient.addColorStop(0.18, 'rgba(136, 245, 255, 0.95)')
-  gradient.addColorStop(0.42, 'rgba(0, 229, 255, 0.38)')
+  gradient.addColorStop(0.18, 'rgba(186, 244, 255, 0.95)')
+  gradient.addColorStop(0.44, 'rgba(0, 229, 255, 0.38)')
+  gradient.addColorStop(0.72, 'rgba(139, 92, 246, 0.12)')
   gradient.addColorStop(1, 'rgba(0, 229, 255, 0)')
 
   context.fillStyle = gradient
@@ -482,8 +483,10 @@ function SummaryWaveBackground({ pointerImpact }) {
     const terrainHeights = new Float32Array(positionAttribute.count)
     const terrainColors = new Float32Array(positionAttribute.count * 3)
     const cyanColor = new THREE.Color('#00e5ff')
-    const nearColor = new THREE.Color('#7af7ff')
-    const edgeColor = new THREE.Color('#0a5260')
+    const nearBlueColor = new THREE.Color('#bff7ff')
+    const blueColor = new THREE.Color('#38bdf8')
+    const purpleColor = new THREE.Color('#8b5cf6')
+    const edgeColor = new THREE.Color('#073140')
     const colorMixer = new THREE.Color()
 
     for (let index = 0; index < positionAttribute.count; index += 1) {
@@ -494,7 +497,12 @@ function SummaryWaveBackground({ pointerImpact }) {
       const colorIntensity = clamp(centerGlow ** 1.4 * 0.58 + nearGlow ** 1.12 * 0.52, 0, 1)
       const fogFade = clamp((1 - nearGlow) * 0.34 + (1 - centerGlow) * 0.24, 0, 0.48)
 
-      colorMixer.copy(edgeColor).lerp(cyanColor, colorIntensity).lerp(nearColor, centerGlow * nearGlow * 0.24)
+      colorMixer
+        .copy(edgeColor)
+        .lerp(blueColor, (1 - centerGlow) * 0.14)
+        .lerp(cyanColor, colorIntensity)
+        .lerp(nearBlueColor, centerGlow * nearGlow * 0.22)
+        .lerp(purpleColor, (1 - nearGlow) * 0.05 + (1 - centerGlow) * 0.035)
       colorMixer.lerp(backgroundColor, fogFade)
       terrainColors[index * 3] = colorMixer.r
       terrainColors[index * 3 + 1] = colorMixer.g
@@ -527,7 +535,8 @@ function SummaryWaveBackground({ pointerImpact }) {
       const colorOffset = index * 3
       const glowColor = colorMixer
         .copy(cyanColor)
-        .lerp(nearColor, 0.28 + random() * 0.46)
+        .lerp(nearBlueColor, 0.28 + random() * 0.46)
+        .lerp(purpleColor, random() * 0.1)
         .lerp(new THREE.Color('#ffffff'), random() * 0.16)
 
       dotVertexIndices.push(vertexIndex)
@@ -960,7 +969,7 @@ function App() {
       'flex h-7 min-w-9 items-center justify-center rounded-md bg-[#10182a] px-2 text-[11px] font-bold transition-all'
 
     if (language === targetLanguage) {
-      return `${baseClass} border border-white/20 opacity-100 ring-2 ring-primary-container/50`
+      return `${baseClass} language-button-active border border-white/20 opacity-100 ring-2 ring-primary-container/50`
     }
 
     return `${baseClass} border border-white/10 opacity-50 hover:opacity-100`
@@ -972,14 +981,14 @@ function App() {
         className="nav-surface relative z-20 flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl sm:px-6 sm:py-4"
       >
         <a
-          className="flex min-w-0 flex-1 items-center gap-3 font-inter text-cyan-400 lg:flex-none"
+          className="nav-brand flex min-w-0 flex-1 items-center gap-3 font-inter lg:flex-none"
           href="#top"
           onClick={(event) => handleNavItemClick(event, 'top')}
         >
           <img
-            alt="Foto do desenvolvedor"
-            className="h-10 w-10 rounded-md border border-cyan-500/30 object-cover shadow-[0_0_14px_rgba(0,229,255,0.2)]"
-            src="/header-photo.png"
+            alt="Logo JV"
+            className="nav-logo h-10 w-10 rounded-md border object-cover"
+            src="/site-icon.svg"
           />
           <span className="truncate text-xs font-black tracking-normal sm:text-base">Desenvolvedor Fullstack</span>
         </a>
@@ -992,8 +1001,8 @@ function App() {
               <a
                 className={`border-b-2 pb-1 transition-colors ${
                   isActive
-                    ? 'border-cyan-400 font-semibold text-cyan-400'
-                    : 'border-transparent text-slate-400 hover:text-slate-100'
+                    ? 'nav-link-active font-semibold'
+                    : 'nav-link-idle border-transparent text-slate-400 hover:text-slate-100'
                 }`}
                 href={`#${item.id}`}
                 key={item.id}
@@ -1006,7 +1015,7 @@ function App() {
         </div>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
-          <div className="flex items-center gap-2 rounded-full border border-white/5 bg-black/20 p-1.5">
+          <div className="language-switcher flex items-center gap-2 rounded-full border border-white/5 bg-black/20 p-1.5">
             <button
               aria-label={copy.language.portuguese}
               aria-pressed={language === 'pt'}
@@ -1048,7 +1057,7 @@ function App() {
               <a
                 className={`whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold transition-colors ${
                   isActive
-                    ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
+                    ? 'mobile-nav-active'
                     : 'border-white/10 text-slate-400 hover:border-white/20 hover:text-slate-100'
                 }`}
                 href={`#${item.id}`}
@@ -1061,7 +1070,7 @@ function App() {
           })}
         </div>
       </div>
-      <div aria-hidden="true" className="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+      <div aria-hidden="true" className="h-px w-full bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
 
       <main>
         <section
@@ -1076,12 +1085,12 @@ function App() {
 
           <div className="summary-hero-content container-max relative z-10 mx-auto grid items-center gap-stack-lg px-0 sm:px-gutter lg:grid-cols-[1.2fr_0.8fr]">
             <div className="space-y-stack-md">
-              <span className="rounded-full bg-primary-container/10 px-3 py-1 font-label-caps text-primary-container">
-                {copy.hero.badge}
+              <span className="summary-accent-badge rounded-full px-3 py-1 font-label-caps">
+                <span className="accent-gradient-text">{copy.hero.badge}</span>
               </span>
 
               <h1 className="max-w-2xl break-words font-inter text-4xl font-extrabold leading-tight tracking-normal text-[#c3d5eb] sm:text-5xl md:text-6xl lg:text-[66px]">
-                {copy.hero.titleStart} <span className="text-primary-container">{copy.hero.titleHighlight}</span>
+                {copy.hero.titleStart} <span className="accent-gradient-text">{copy.hero.titleHighlight}</span>
               </h1>
 
               <p className="max-w-xl font-body-lg leading-relaxed text-on-surface-variant">{copy.hero.description}</p>
@@ -1100,7 +1109,7 @@ function App() {
 
             <div className="hidden w-full justify-end lg:flex">
               <div className="group relative w-full max-w-md">
-                <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary-container/50 to-transparent opacity-25 blur transition duration-1000 group-hover:opacity-50 group-hover:duration-200" />
+                <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-cyan-400/45 via-sky-400/25 to-violet-500/20 opacity-25 blur transition duration-1000 group-hover:opacity-50 group-hover:duration-200" />
 
                 <div className="ambient-glow glass-card relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#080d1a]/90 shadow-2xl backdrop-blur-xl">
                   <img
