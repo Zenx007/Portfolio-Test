@@ -73,7 +73,7 @@ const translations = {
       titleStart: 'Building High-Performance',
       titleHighlight: 'Distributed Systems',
       description:
-        'Seasoned systems architect specialized in crafting robust backend infrastructures and high-performance APIs. I architect scalable cloud solutions across the .NET, NestJS, and AWS ecosystems, focusing on mission-critical stability and extreme throughput for enterprise platforms.',
+        'Seasoned systems architect specialized in crafting robust backend infrastructures and high-performance APIs. I architect scalable cloud solutions across the .NET, React, and AWS ecosystems, focusing on mission-critical stability and extreme throughput for enterprise platforms.',
       profileAlt: 'Profile photo',
     },
     experience: {
@@ -210,7 +210,7 @@ const translations = {
       titleStart: 'Construindo',
       titleHighlight: 'Sistemas Distribuidos de Alta Performance',
       description:
-        'Arquiteto de sistemas com experiencia na construcao de infraestruturas de backend robustas e APIs de alta performance. Projeto solucoes em nuvem escalaveis nos ecossistemas .NET, NestJS e AWS, com foco em estabilidade critica e alta vazao para plataformas corporativas.',
+        'Arquiteto de sistemas com experiencia na construcao de infraestruturas de backend robustas e APIs de alta performance. Projeto solucoes em nuvem escalaveis nos ecossistemas .NET, React e AWS, com foco em estabilidade critica e alta vazao para plataformas corporativas.',
       profileAlt: 'Foto de perfil',
     },
     experience: {
@@ -1066,11 +1066,11 @@ function App() {
               <div className="flex flex-wrap gap-stack-sm pt-stack-sm">
                 <span className="glass-card rounded-full px-4 py-1.5 font-code-snippet text-primary-container">.NET</span>
                 <span className="glass-card rounded-full px-4 py-1.5 font-code-snippet text-primary-container">
-                  NestJS
+                  React
                 </span>
                 <span className="glass-card rounded-full px-4 py-1.5 font-code-snippet text-primary-container">AWS</span>
                 <span className="glass-card rounded-full px-4 py-1.5 font-code-snippet text-primary-container">
-                  Kubernetes
+                  Docker
                 </span>
               </div>
             </div>
