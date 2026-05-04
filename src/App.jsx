@@ -957,7 +957,7 @@ function App() {
 
   const getLanguageButtonClass = (targetLanguage) => {
     const baseClass =
-      'flex h-7 min-w-9 items-center justify-center rounded-md bg-slate-800 px-2 text-[11px] font-bold transition-all'
+      'flex h-7 min-w-9 items-center justify-center rounded-md bg-[#10182a] px-2 text-[11px] font-bold transition-all'
 
     if (language === targetLanguage) {
       return `${baseClass} border border-white/20 opacity-100 ring-2 ring-primary-container/50`
@@ -967,9 +967,9 @@ function App() {
   }
 
   return (
-    <div className="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-fixed">
+    <div className="landing-page-shell text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-fixed">
       <nav
-        className="relative z-20 flex w-full flex-wrap items-center justify-between gap-3 bg-slate-900/60 px-4 py-3 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl sm:px-6 sm:py-4"
+        className="nav-surface relative z-20 flex w-full flex-wrap items-center justify-between gap-3 px-4 py-3 shadow-[0_4px_20px_rgba(0,229,255,0.05)] backdrop-blur-xl sm:px-6 sm:py-4"
       >
         <a
           className="flex min-w-0 flex-1 items-center gap-3 font-inter text-cyan-400 lg:flex-none"
@@ -1039,7 +1039,7 @@ function App() {
           </a> */}
         </div>
       </nav>
-      <div className="border-t border-white/5 bg-slate-950/70 px-4 py-2 lg:hidden">
+      <div className="nav-surface border-t border-white/5 px-4 py-2 lg:hidden">
         <div className="mobile-nav-scroll flex gap-2 overflow-x-auto pb-1">
           {navItems.map((item) => {
             const isActive = activeSection === item.id
@@ -1102,7 +1102,7 @@ function App() {
               <div className="group relative w-full max-w-md">
                 <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-primary-container/50 to-transparent opacity-25 blur transition duration-1000 group-hover:opacity-50 group-hover:duration-200" />
 
-                <div className="ambient-glow glass-card relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-slate-900/80 shadow-2xl backdrop-blur-xl">
+                <div className="ambient-glow glass-card relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#080d1a]/90 shadow-2xl backdrop-blur-xl">
                   <img
                     alt={copy.hero.profileAlt}
                     className="h-full w-full object-cover"
@@ -1114,7 +1114,7 @@ function App() {
           </div>
         </section>
 
-        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="value">
+        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="value">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
@@ -1133,7 +1133,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">handshake</span>
@@ -1147,7 +1147,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">forum</span>
@@ -1161,7 +1161,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">verified_user</span>
@@ -1173,7 +1173,7 @@ function App() {
           </div>
         </section>
 
-        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="projects">
+        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="projects">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12">
               <motion.div
@@ -1184,7 +1184,7 @@ function App() {
               >
                 <h2 className="mb-6 text-3xl font-bold text-white">{copy.projects.title}</h2>
                 
-                <div className="glass-card relative flex flex-col overflow-hidden rounded-2xl border border-slate-700/50 bg-[#0a1118] p-6 sm:p-8 shadow-lg">
+                <div className="glass-card relative flex flex-col overflow-hidden rounded-2xl border border-primary-container/15 p-6 sm:p-8 shadow-lg">
                   <div className="absolute -right-6 -top-6 opacity-[0.03] pointer-events-none">
                     <span className="material-symbols-outlined text-[160px]">public</span>
                   </div>
@@ -1210,24 +1210,24 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
                 onClick={() => setSelectedProjectUrl('/culinary-artisan.html')}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60"
                   style={{ backgroundImage: "url('/culinary-artisan-bg.jpg')" }}
                 />
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050816] via-[#080d1a]/85 to-transparent" />
                 <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 
                 <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     React
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     HTML
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     Tailwind CSS
                   </span>
                 </div>
@@ -1235,7 +1235,7 @@ function App() {
                   {copy.projects.firstTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.firstDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
                   <a
                     href="/culinary-artisan.html"
                     target="_blank"
@@ -1254,24 +1254,24 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
                 onClick={() => openProject('https://hours-tracker-front.vercel.app')}
               >
                 <div 
-                  className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                  className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-[#10182a]"
                   style={{ backgroundImage: "url('/hours-tracker-bg.png')" }}
                 />
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050816] via-[#080d1a]/85 to-transparent" />
                 <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 
                 <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     React
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     Tailwind CSS
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     Node.JS
                   </span>
                 </div>
@@ -1279,7 +1279,7 @@ function App() {
                   {copy.projects.secondTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.secondDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
                   <a
                     href="https://hours-tracker-front.vercel.app"
                     target="_blank"
@@ -1298,27 +1298,27 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
                 onClick={() => setSelectedProjectUrl('/pulse-fit.html')}
               >
                 <div 
-                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-[#10182a]"
                   style={{ backgroundImage: "url('/pulse-fit-hero.jpg')" }}
                 />
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050816] via-[#080d1a]/85 to-transparent" />
                 <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 
                 <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     React
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     HTML
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     CSS
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     Responsive UI
                   </span>
                 </div>
@@ -1326,7 +1326,7 @@ function App() {
                   {copy.projects.thirdTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.thirdDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
                   <a
                     href="/pulse-fit.html"
                     target="_blank"
@@ -1345,21 +1345,21 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
                 onClick={() => setSelectedProjectUrl('/gourmet-bistro')}
               >
                 <div 
-                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-[#10182a]"
                   style={{ backgroundImage: "url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop')" }}
                 />
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050816] via-[#080d1a]/85 to-transparent" />
                 <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 
                 <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     React
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     Vanilla CSS
                   </span>
                 </div>
@@ -1367,7 +1367,7 @@ function App() {
                   {copy.projects.fourthTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fourthDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
                   <a
                     href="/gourmet-bistro"
                     target="_blank"
@@ -1386,24 +1386,24 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer md:col-span-2 lg:col-span-1"
+                className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer md:col-span-2 lg:col-span-1"
                 onClick={() => openProject('https://duo-fin-landing-page.vercel.app')}
               >
                 <div 
-                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-slate-800"
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-[#10182a]"
                   style={{ backgroundImage: "url('/duo-fin-bg.png')" }}
                 />
-                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050a0e] via-[#050a0e]/80 to-transparent" />
+                <div className="absolute inset-0 z-0 bg-gradient-to-t from-[#050816] via-[#080d1a]/85 to-transparent" />
                 <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 
                 <div className="relative z-10 mt-auto pt-16 mb-4 flex flex-wrap gap-2">
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     .NET
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     Flutter
                   </span>
-                  <span className="rounded border border-primary-container/50 bg-slate-800/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
+                  <span className="rounded border border-primary-container/50 bg-[#10182a]/80 px-2 py-1 font-code-snippet text-[10px] text-slate-300 shadow-sm backdrop-blur-sm">
                     React
                   </span>
                 </div>
@@ -1411,7 +1411,7 @@ function App() {
                   {copy.projects.fifthTitle}
                 </h3>
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.fifthDescription}</p>
-                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-slate-700/60 pt-4">
+                <div className="relative z-10 mt-auto flex items-center justify-between border-t border-primary-container/15 pt-4">
                   <a
                     href="https://duo-fin-landing-page.vercel.app"
                     target="_blank"
@@ -1428,7 +1428,7 @@ function App() {
           </div>
         </section>
 
-        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="expertise">
+        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="expertise">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
@@ -1447,7 +1447,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">account_tree</span>
@@ -1461,7 +1461,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">shield_locked</span>
@@ -1475,7 +1475,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">cloud_done</span>
@@ -1489,7 +1489,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">speed</span>
@@ -1503,7 +1503,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">autorenew</span>
@@ -1517,7 +1517,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8 transition-colors hover:border-cyan-400/50 bg-[#0a1118]"
+                className="glass-card flex flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8 transition-colors hover:border-primary-container/50"
               >
                 <div className="mb-4 rounded-lg bg-primary-container/10 p-3 w-fit text-primary-container">
                   <span className="material-symbols-outlined text-2xl">api</span>
@@ -1529,7 +1529,7 @@ function App() {
           </div>
         </section>
 
-        {/* <section className="relative overflow-hidden border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="experience">
+        {/* <section className="relative overflow-hidden border-t border-white/5 bg-[#050816] py-16 sm:py-20" id="experience">
           <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-primary-container/5 blur-[120px]" />
 
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
@@ -1545,7 +1545,7 @@ function App() {
             </motion.div>
 
             <div className="relative">
-              <div className="absolute bottom-0 left-[20px] top-0 w-px bg-slate-800 md:left-1/2 md:-translate-x-1/2">
+              <div className="absolute bottom-0 left-[20px] top-0 w-px bg-[#10182a] md:left-1/2 md:-translate-x-1/2">
                 <div className="absolute top-0 w-full bg-primary-container shadow-[0_0_10px_#00e5ff]" style={{ height: '58%' }} />
               </div>
 
@@ -1553,7 +1553,7 @@ function App() {
                 <div className="relative flex w-full flex-col items-center justify-between md:flex-row">
                   <div className="hidden md:block md:w-5/12" />
 
-                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2">
+                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050816] shadow-[0_0_10px_#00e5ff] md:left-1/2">
                     <div className="absolute inset-1 rounded-full bg-primary-container" />
                   </div>
 
@@ -1563,7 +1563,7 @@ function App() {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.1 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60"
+                      className="selectable-card glass-card rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/60"
                     >
                       <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row md:items-center">
                         <h3 className="text-lg font-bold text-primary-container">{copy.experience.primaryRole}</h3>
@@ -1582,7 +1582,7 @@ function App() {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.2 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60"
+                      className="selectable-card glass-card rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/60"
                     >
                       <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row-reverse md:items-center">
                         <h3 className="text-lg font-bold text-primary-container">{copy.experience.secondaryRole}</h3>
@@ -1593,14 +1593,14 @@ function App() {
                     </motion.div>
                   </div>
 
-                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2" />
+                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050816] shadow-[0_0_10px_#00e5ff] md:left-1/2" />
                   <div className="hidden md:block md:w-5/12" />
                 </div>
 
                 <div className="relative flex w-full flex-col items-center justify-between md:flex-row">
                   <div className="hidden md:block md:w-5/12" />
 
-                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050a0e] shadow-[0_0_10px_#00e5ff] md:left-1/2">
+                  <div className="absolute left-[20px] z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-primary-container bg-[#050816] shadow-[0_0_10px_#00e5ff] md:left-1/2">
                     <div className="absolute inset-1 rounded-full bg-primary-container" />
                   </div>
 
@@ -1610,7 +1610,7 @@ function App() {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.3 }}
                       viewport={{ once: true, margin: "-50px" }}
-                      className="selectable-card glass-card rounded-xl border border-slate-700/50 p-6 transition-colors hover:border-cyan-200/60"
+                      className="selectable-card glass-card rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/60"
                     >
                       <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row md:items-center">
                         <h3 className="text-lg font-bold text-primary-container">{copy.experience.tertiaryRole}</h3>
@@ -1626,7 +1626,7 @@ function App() {
           </div>
         </section> */}
 
-        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="stack">
+        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="stack">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
@@ -1645,7 +1645,7 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8"
+                className="glass-card flex h-full flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8"
               >
                 <div className="mb-4 flex items-center gap-3">
                   <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
@@ -1657,27 +1657,27 @@ function App() {
                 <p className="mb-8 text-sm text-slate-400">{copy.stack.backendDescription}</p>
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">terminal</span>
                     <span className="text-xs font-medium text-slate-300">C#</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">data_object</span>
                     <span className="text-xs font-medium text-slate-300">Node.Js</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">database</span>
                     <span className="text-xs font-medium text-slate-300">SQL</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">code_blocks</span>
                     <span className="text-xs font-medium text-slate-300">Python</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">cloud</span>
                     <span className="text-xs font-medium text-slate-300">AWS</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-primary-container">hub</span>
                     <span className="text-xs font-medium text-slate-300">Docker</span>
                   </div>
@@ -1689,7 +1689,7 @@ function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="glass-card flex h-full flex-col rounded-2xl border border-slate-700/50 p-6 sm:p-8"
+                className="glass-card flex h-full flex-col rounded-2xl border border-primary-container/15 p-6 sm:p-8"
               >
                 <div className="mb-4 flex items-center gap-3">
                   <div className="rounded-lg bg-primary-container/10 p-2 text-primary-container">
@@ -1701,27 +1701,27 @@ function App() {
                 <p className="mb-8 text-sm text-slate-400">{copy.stack.frontendDescription}</p>
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">code</span>
                     <span className="text-xs font-medium text-slate-300">TypeScript</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">widgets</span>
                     <span className="text-xs font-medium text-slate-300">React</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">palette</span>
                     <span className="text-xs font-medium text-slate-300">Tailwind</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">api</span>
                     <span className="text-xs font-medium text-slate-300">Next.js</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">web</span>
                     <span className="text-xs font-medium text-slate-300">HTML/CSS</span>
                   </div>
-                  <div className="group flex flex-col items-center justify-center rounded-xl border border-slate-800 bg-[#0a1118] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
+                  <div className="group flex flex-col items-center justify-center rounded-xl border border-primary-container/10 bg-white/[0.03] p-3 transition-colors hover:border-primary-container/50 sm:p-4">
                     <span className="material-symbols-outlined mb-2 text-3xl text-cyan-400">javascript</span>
                     <span className="text-xs font-medium text-slate-300">JavaScript</span>
                   </div>
@@ -1731,7 +1731,7 @@ function App() {
           </div>
         </section>
 
-        <section className="border-t border-white/5 bg-[#050a0e] py-16 sm:py-20" id="about">
+        <section className="landing-section border-t border-white/5 py-16 sm:py-20" id="about">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mb-12">
               <motion.div
@@ -1750,10 +1750,10 @@ function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true, margin: "-50px" }}
-              className="glass-card flex flex-col md:flex-row overflow-hidden rounded-2xl border border-slate-700/50 transition-colors hover:border-primary-container/50 bg-slate-900/20"
+              className="glass-card flex flex-col md:flex-row overflow-hidden rounded-2xl border border-primary-container/15 transition-colors hover:border-primary-container/50"
             >
-              <div className="md:w-2/5 lg:w-1/3 relative flex-shrink-0 bg-slate-900/50">
-                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#050a0e] via-[#050a0e]/20 to-transparent z-10" />
+              <div className="md:w-2/5 lg:w-1/3 relative flex-shrink-0 bg-white/[0.03]">
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#050816] via-[#080d1a]/20 to-transparent z-10" />
                 <img
                   alt={copy.about.cardTitle}
                   className="h-full w-full object-cover min-h-[300px] md:min-h-full"
@@ -1780,14 +1780,14 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-[#050a0e] py-16 sm:py-20" id="contact">
+        <section className="landing-section py-16 sm:py-20" id="contact">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true, margin: "-50px" }}
-              className="relative overflow-hidden rounded-2xl border border-primary-container/25 bg-[#080d1a] px-6 py-10 text-left shadow-[0_0_40px_rgba(0,229,255,0.05)] sm:rounded-3xl sm:px-10 sm:py-12 md:p-16"
+              className="tone-card relative overflow-hidden rounded-2xl border border-primary-container/25 px-6 py-10 text-left shadow-[0_0_40px_rgba(0,229,255,0.05)] sm:rounded-3xl sm:px-10 sm:py-12 md:p-16"
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_14%,rgba(0,229,255,0.16),transparent_30%),radial-gradient(circle_at_10%_92%,rgba(124,58,237,0.22),transparent_28%)]" />
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-container/60 to-transparent" />
@@ -1888,7 +1888,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="mt-auto border-t border-white/5 bg-[#050a0e] py-8">
+      <footer className="mt-auto border-t border-primary-container/10 bg-[#050816] py-8">
         <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center text-xs text-slate-500 sm:px-6 md:flex-row md:text-left">
           <p>© 2026 DEVPORTFOLIO. ALL RIGHTS RESERVED.</p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
@@ -1907,10 +1907,10 @@ function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
-            className="relative w-full h-full max-w-7xl max-h-[90vh] bg-[#050a0e] rounded-2xl overflow-hidden border border-slate-700/50 shadow-2xl flex flex-col"
+            className="relative w-full h-full max-w-7xl max-h-[90vh] bg-[#050816] rounded-2xl overflow-hidden border border-primary-container/15 shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center p-3 sm:p-4 border-b border-white/10 bg-slate-900/80">
+            <div className="flex justify-between items-center p-3 sm:p-4 border-b border-white/10 bg-[#080d1a]/90">
               <div className="flex gap-2">
                 <button
                   onClick={(e) => { e.stopPropagation(); setSelectedProjectUrl(null); }}
@@ -1947,7 +1947,7 @@ function App() {
               </div>
             </div>
             <div className="flex-1 w-full relative bg-white">
-              <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-900">
+              <div className="absolute inset-0 flex items-center justify-center text-slate-400 bg-[#080d1a]">
                  <span className="material-symbols-outlined animate-spin text-4xl">progress_activity</span>
               </div>
               <iframe 
