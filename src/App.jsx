@@ -988,7 +988,7 @@ function App() {
           <img
             alt="Logo JV"
             className="nav-logo h-10 w-10 rounded-md border object-cover"
-            src="/site-icon.svg"
+            src="/logo-jv-cyan.svg"
           />
           <span className="truncate text-xs font-black tracking-normal sm:text-base">Desenvolvedor Fullstack</span>
         </a>
