@@ -1293,7 +1293,7 @@ function App() {
                     href="https://hours-tracker-front.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => { e.stopPropagation(); openProject('https://hours-tracker-front.vercel.app'); e.preventDefault(); }}
+                    onClick={(e) => e.stopPropagation()}
                     className="flex items-center gap-1 text-xs font-semibold text-primary-container transition-colors hover:text-white"
                   >
                     <span className="material-symbols-outlined text-base">launch</span>
