@@ -7,6 +7,7 @@ import profilePhoto from './assets/profile-photo.png'
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const CONTACT_EMAIL = 'joaovictordev0720@gmail.com'
 const WHATSAPP_URL = 'https://w.app/nwcv1h'
+const HOURS_TRACKER_URL = 'https://hours-tracker-front.vercel.app'
 const NAV_SECTION_IDS = ['top', 'value', 'projects', 'expertise', /* 'experience', */ 'stack', 'about', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
 const SUMMARY_TERRAIN_COLOR = '#071827'
@@ -687,6 +688,10 @@ function App() {
     setSelectedProjectUrl(url)
   }
 
+  const openExternalProject = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
   const getRawProjectUrl = (projectUrl) => projectUrl
   const [summaryTerrainPointer, setSummaryTerrainPointer] = useState(null)
   const summaryTerrainPointerIdRef = useRef(null)
@@ -1264,7 +1269,7 @@ function App() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true, margin: "-50px" }}
                 className="glass-card group relative flex flex-col overflow-hidden rounded-xl border border-primary-container/15 p-6 transition-colors hover:border-primary-container/50 min-h-[320px] cursor-pointer"
-                onClick={() => openProject('https://hours-tracker-front.vercel.app')}
+                onClick={() => openExternalProject(HOURS_TRACKER_URL)}
               >
                 <div 
                   className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-60 bg-[#10182a]"
@@ -1290,7 +1295,7 @@ function App() {
                 <p className="relative z-10 mb-6 flex-grow text-sm text-slate-300 drop-shadow-md">{copy.projects.secondDescription}</p>
                 <div className="card-action-divider relative z-10 mt-auto flex items-center justify-between border-t pt-4">
                   <a
-                    href="https://hours-tracker-front.vercel.app"
+                    href={HOURS_TRACKER_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
