@@ -6,7 +6,7 @@ import profilePhoto from './assets/profile-photo.png'
 
 const LANGUAGE_STORAGE_KEY = 'portfolio-language'
 const CONTACT_EMAIL = 'joaovictordev0720@gmail.com'
-const WHATSAPP_URL = 'https://w.app/nwcv1h'
+const WHATSAPP_URL = 'https://wa.me/5531973542794?text=Ol%C3%A1%2C%20quero%20desenvolver%20um%20sistema!'
 const HOURS_TRACKER_URL = 'https://hours-tracker-front.vercel.app'
 const NAV_SECTION_IDS = ['top', 'value', 'projects', 'expertise', /* 'experience', */ 'stack', 'about', 'contact']
 const NAV_SCROLL_IDLE_MS = 140
